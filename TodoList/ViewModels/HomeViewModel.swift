@@ -20,6 +20,7 @@ class HomeViewModel: ObservableObject {
         print("Error loading core data: \(error)")
       }
     }
+    fetchTodos()
   } // END: init
   
   func fetchTodos() {
