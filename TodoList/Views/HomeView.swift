@@ -24,7 +24,7 @@ struct HomeView: View {
             .font(.headline)
             .padding(.leading)
             .frame(height: 55)
-            .background(.gray)
+            .background(Color.theme.textFieldBackground)
             .cornerRadius(10)
           
           Button {
@@ -39,6 +39,8 @@ struct HomeView: View {
 
         }
       } // END: Vstack
+      .padding(.horizontal)
+      .navigationTitle("Todo")
     } // END: Zstack
   }
 }
