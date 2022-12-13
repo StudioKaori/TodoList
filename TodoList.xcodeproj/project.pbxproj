@@ -13,6 +13,7 @@
 		435F3FBC29488E0300099512 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FBB29488E0300099512 /* HomeView.swift */; };
 		435F3FC029488F5900099512 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FBF29488F5900099512 /* HomeViewModel.swift */; };
 		435F3FC62948908D00099512 /* TodoContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FC42948908D00099512 /* TodoContainer.xcdatamodeld */; };
+		435F3FC9294897F800099512 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FC8294897F800099512 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		435F3FBB29488E0300099512 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		435F3FBF29488F5900099512 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		435F3FC52948908D00099512 /* TodoContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoContainer.xcdatamodel; sourceTree = "<group>"; };
+		435F3FC8294897F800099512 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				435F3FA429488D4A00099512 /* TodoListApp.swift */,
 				435F3FB229488D4B00099512 /* Info.plist */,
 				435F3FA829488D4B00099512 /* Assets.xcassets */,
+				435F3FC7294897E600099512 /* Extensions */,
 				435F3FBE29488F3500099512 /* ViewModels */,
 				435F3FBA29488DEF00099512 /* Views */,
 				435F3FBD29488F1400099512 /* Entities */,
@@ -97,6 +100,14 @@
 				435F3FBF29488F5900099512 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		435F3FC7294897E600099512 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				435F3FC8294897F800099512 /* Color.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +183,7 @@
 				435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */,
 				435F3FBC29488E0300099512 /* HomeView.swift in Sources */,
 				435F3FC029488F5900099512 /* HomeViewModel.swift in Sources */,
+				435F3FC9294897F800099512 /* Color.swift in Sources */,
 				435F3FC62948908D00099512 /* TodoContainer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
