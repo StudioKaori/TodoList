@@ -10,12 +10,12 @@ import SwiftUI
 struct HomeView: View {
   
   @StateObject var vm = HomeViewModel()
-  @State var addTodoText: String = ""
+  @State var addTodoString: String = ""
   
   var body: some View {
     VStack(spacing: 20) {
       HStack {
-        TextField("Add todo here...", text: $addTodoText)
+        TextField("Add todo here...", text: $addTodoString)
           .font(.headline)
           .padding(.leading)
           .frame(height: 55)
@@ -23,10 +23,13 @@ struct HomeView: View {
           .cornerRadius(10)
         
         Button {
-          guard !addTodoText.isEmpty else { return }
-          
+          guard !addTodoString.isEmpty else { return }
+          vm.addTodo(todoTitle: addTodoString)
+          addTodoString = ""
         } label: {
-          
+          Image(systemName: "plus.circle")
+            .font(.headline)
+            .foregroundColor(.gray)
         }
 
       }
