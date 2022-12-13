@@ -8,13 +8,34 @@
 import SwiftUI
 
 struct HomeView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  
+  @StateObject var vm = HomeViewModel()
+  @State var addTodoText: String = ""
+  
+  var body: some View {
+    VStack(spacing: 20) {
+      HStack {
+        TextField("Add todo here...", text: $addTodoText)
+          .font(.headline)
+          .padding(.leading)
+          .frame(height: 55)
+          .background(.gray)
+          .cornerRadius(10)
+        
+        Button {
+          guard !addTodoText.isEmpty else { return }
+          
+        } label: {
+          
+        }
+
+      }
     }
+  }
 }
 
 struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
+  static var previews: some View {
+    HomeView()
+  }
 }

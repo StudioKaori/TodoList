@@ -32,6 +32,12 @@ class HomeViewModel: ObservableObject {
     }
   } // END: fetchTodos
   
+  func addTodo(todoTitle: String) {
+    let newTodo = TodoEntity(context: container.viewContext)
+    newTodo.title = todoTitle
+    saveData()
+  } // END: addTodo
+  
   func updateTodo(entity: TodoEntity) {
     let currentTitle = entity.title ?? ""
     let newTitle = currentTitle + "!"
