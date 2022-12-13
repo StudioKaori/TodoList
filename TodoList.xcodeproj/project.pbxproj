@@ -21,6 +21,8 @@
 		435F3FDA2948BD7800099512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FD92948BD7800099512 /* Assets.xcassets */; };
 		435F3FDE2948BD7800099512 /* TodoListWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 435F3FCE2948BD7600099512 /* TodoListWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		435F3FE32948BD9900099512 /* TodoContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FC42948908D00099512 /* TodoContainer.xcdatamodeld */; };
+		435F3FE62948C38200099512 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FBF29488F5900099512 /* HomeViewModel.swift */; };
+		435F40082948FFCA00099512 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F40072948FFCA00099512 /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,7 @@
 		435F3FDB2948BD7800099512 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		435F3FE42948BE1D00099512 /* TodoList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoList.entitlements; sourceTree = "<group>"; };
 		435F3FE52948C21700099512 /* TodoListWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoListWidgetExtension.entitlements; sourceTree = "<group>"; };
+		435F40072948FFCA00099512 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Persistence.swift; path = ../../CoredataTest/CoredataTest/Persistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +114,9 @@
 		435F3FA329488D4A00099512 /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
-				435F3FE42948BE1D00099512 /* TodoList.entitlements */,
 				435F3FA429488D4A00099512 /* TodoListApp.swift */,
+				435F3FE42948BE1D00099512 /* TodoList.entitlements */,
+				435F40072948FFCA00099512 /* Persistence.swift */,
 				435F3FB229488D4B00099512 /* Info.plist */,
 				435F3FA829488D4B00099512 /* Assets.xcassets */,
 				435F3FC7294897E600099512 /* Extensions */,
@@ -288,6 +292,7 @@
 				435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */,
 				435F3FBC29488E0300099512 /* HomeView.swift in Sources */,
 				435F3FC029488F5900099512 /* HomeViewModel.swift in Sources */,
+				435F40082948FFCA00099512 /* Persistence.swift in Sources */,
 				435F3FC9294897F800099512 /* Color.swift in Sources */,
 				435F3FC62948908D00099512 /* TodoContainer.xcdatamodeld in Sources */,
 			);
@@ -300,6 +305,7 @@
 				435F3FE32948BD9900099512 /* TodoContainer.xcdatamodeld in Sources */,
 				435F3FD62948BD7700099512 /* TodoListWidgetBundle.swift in Sources */,
 				435F3FD82948BD7700099512 /* TodoListWidget.swift in Sources */,
+				435F3FE62948C38200099512 /* HomeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
