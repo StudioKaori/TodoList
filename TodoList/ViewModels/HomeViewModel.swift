@@ -39,9 +39,17 @@ class HomeViewModel: ObservableObject {
     saveData()
   } // END: updateTodo
   
+  func deleteTodo(indexSet: IndexSet) {
+    guard let index = indexSet.first else { return }
+    let entity = savedTodos[index]
+    container.viewContext.delete(entity)
+    saveData()
+  }
+  
   func saveData() {
     do {
       try container.viewContext.save()
+      fetchTodos()
     } catch let error {
       print("Error saving: \(error)")
     }
