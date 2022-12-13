@@ -13,27 +13,33 @@ struct HomeView: View {
   @State var addTodoString: String = ""
   
   var body: some View {
-    VStack(spacing: 20) {
-      HStack {
-        TextField("Add todo here...", text: $addTodoString)
-          .font(.headline)
-          .padding(.leading)
-          .frame(height: 55)
-          .background(.gray)
-          .cornerRadius(10)
-        
-        Button {
-          guard !addTodoString.isEmpty else { return }
-          vm.addTodo(todoTitle: addTodoString)
-          addTodoString = ""
-        } label: {
-          Image(systemName: "plus.circle")
+    ZStack {
+      
+      Color.theme.background
+        .ignoresSafeArea()
+      
+      VStack(spacing: 20) {
+        HStack {
+          TextField("Add todo here...", text: $addTodoString)
             .font(.headline)
-            .foregroundColor(.gray)
-        }
+            .padding(.leading)
+            .frame(height: 55)
+            .background(.gray)
+            .cornerRadius(10)
+          
+          Button {
+            guard !addTodoString.isEmpty else { return }
+            vm.addTodo(todoTitle: addTodoString)
+            addTodoString = ""
+          } label: {
+            Image(systemName: "plus.circle")
+              .font(.headline)
+              .foregroundColor(Color.theme.primaryText)
+          }
 
-      }
-    }
+        }
+      } // END: Vstack
+    } // END: Zstack
   }
 }
 
