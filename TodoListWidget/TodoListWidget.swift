@@ -19,7 +19,7 @@ struct TodoListWidget: Widget {
       TodoListWidgetEntryView(entry: entry)
         .environment(\.managedObjectContext, persistenceController.container.viewContext)
     }
-    .configurationDisplayName("My Widget")
+    .configurationDisplayName("Todo List")
     .description("This is an example widget.")
   }
 }
