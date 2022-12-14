@@ -40,6 +40,11 @@ class HomeViewModel: ObservableObject {
     saveData()
   } // END: updateTodo
   
+  func tickTodo(entity: TodoEntity) {
+    container.viewContext.delete(entity)
+    saveData()
+  }
+  
   func deleteTodo(indexSet: IndexSet) {
     guard let index = indexSet.first else { return }
     let entity = savedTodos[index]

@@ -10,7 +10,8 @@ import SwiftUI
 struct HomeView: View {
   
   @StateObject var vm = HomeViewModel()
-  @State var addTodoString: String = ""
+  @State private var addTodoString: String = ""
+  @State private var showingEditSheet = false
   
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
@@ -28,11 +29,27 @@ struct HomeView: View {
         List {
           ForEach(vm.savedTodos) { entity in
             Text(entity.title ?? "")
+              .swipeActions(edge: .trailing) {
+                Button {
+                  vm.tickTodo(entity: entity)
+                } label: {
+                  Image(systemName: "checkmark.circle.fill")
+                }
+                .tint(.blue)
+              }
+              .swipeActions(edge: .leading) {
+                Button {
+                  showingEditSheet.toggle()
+                } label: {
+                  Image(systemName: "pencil")
+                }
+                .tint(.orange)
+              }
               .onTapGesture {
                 vm.updateTodo(entity: entity)
               }
           }
-          .onDelete(perform: vm.deleteTodo)
+          //.onDelete(perform: vm.deleteTodo)
         }
         .listStyle(PlainListStyle())
         
@@ -61,6 +78,27 @@ struct HomeView: View {
       } // END: Vstack Main container
       .padding(.horizontal)
       .navigationTitle("Todo")
+      .sheet(isPresented: $showingEditSheet) {
+        HStack {
+          TextField("Add todo here...", text: $addTodoString)
+            .onSubmit {
+              addTodo()
+            }
+            .font(.headline)
+            .padding(.leading)
+            .frame(height: 55)
+            .background(Color.theme.textFieldBackground)
+            .cornerRadius(10)
+          
+          Button {
+            addTodo()
+          } label: {
+            Image(systemName: "plus.circle")
+              .font(.headline)
+              .foregroundColor(Color.theme.primaryText)
+          }
+        } // END: Hstack AddTask Text field
+      }
     } // END: Zstack
   }
 }
