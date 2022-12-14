@@ -10,7 +10,7 @@ import CoreData
 
 class HomeViewModel: ObservableObject {
   
-  let container: NSPersistentCloudKitContainer = PersistenceController.shared.container
+  let container: NSPersistentContainer = PersistenceController.shared.container
   @Published var savedTodos: [TodoEntity] = []
   
   init() {
