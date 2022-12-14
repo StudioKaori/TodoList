@@ -10,16 +10,16 @@ import CoreData
 
 class HomeViewModel: ObservableObject {
   
-  let container: NSPersistentContainer
+  let container: NSPersistentCloudKitContainer = PersistenceController.shared.container
   @Published var savedTodos: [TodoEntity] = []
   
   init() {
-    container = NSPersistentContainer(name: "TodoContainer")
-    container.loadPersistentStores { description, error in
-      if let error = error {
-        print("Error loading core data: \(error)")
-      }
-    }
+//    container = NSPersistentCloudKitContainer(name: "TodoContainer")
+//    container.loadPersistentStores { description, error in
+//      if let error = error {
+//        print("Error loading core data: \(error)")
+//      }
+//    }
     fetchTodos()
   } // END: init
   

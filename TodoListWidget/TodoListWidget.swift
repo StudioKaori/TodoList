@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import CoreData
 
 struct Provider: TimelineProvider {
   func placeholder(in context: Context) -> SimpleEntry {
@@ -20,16 +21,29 @@ struct Provider: TimelineProvider {
   
   func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
     var entries: [SimpleEntry] = []
+    var savedTodos: [TodoEntity] = []
     
+    // NSPersistentContainerの定義
+    let persistenceController = PersistenceController.shared
     
+    let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
+    
+    do {
+      savedTodos = try persistenceController.container.viewContext.fetch(request)
+      print("savedTodos: \(savedTodos)")
+    } catch let error {
+      print("Error fetching: \(error)")
+    }
     
     // Generate a timeline consisting of five entries an hour apart, starting from the current date.
     let currentDate = Date()
     for hourOffset in 0 ..< 5 {
       let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-      let entry = SimpleEntry(date: entryDate, title: "Test")
+      let entry = SimpleEntry(date: entryDate, title: savedTodos.first?.title ?? "No data")
       entries.append(entry)
     }
+    
+    print("entries: \(entries)")
     
     let timeline = Timeline(entries: entries, policy: .atEnd)
     completion(timeline)
@@ -52,10 +66,13 @@ struct TodoListWidgetEntryView : View {
 
 struct TodoListWidget: Widget {
   let kind: String = "TodoListWidget"
+  // NSPersistentContainerの定義
+  let persistenceController = PersistenceController.shared
   
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
       TodoListWidgetEntryView(entry: entry)
+        .environment(\.managedObjectContext, persistenceController.container.viewContext)
     }
     .configurationDisplayName("My Widget")
     .description("This is an example widget.")

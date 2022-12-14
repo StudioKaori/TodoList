@@ -22,6 +22,7 @@
 		435F3FDE2948BD7800099512 /* TodoListWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 435F3FCE2948BD7600099512 /* TodoListWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		435F3FE32948BD9900099512 /* TodoContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FC42948908D00099512 /* TodoContainer.xcdatamodeld */; };
 		435F40082948FFCA00099512 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F40072948FFCA00099512 /* Persistence.swift */; };
+		43C511FC29491E5B00019DEC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F40072948FFCA00099512 /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -302,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				435F3FE32948BD9900099512 /* TodoContainer.xcdatamodeld in Sources */,
+				43C511FC29491E5B00019DEC /* Persistence.swift in Sources */,
 				435F3FD62948BD7700099512 /* TodoListWidgetBundle.swift in Sources */,
 				435F3FD82948BD7700099512 /* TodoListWidget.swift in Sources */,
 			);
