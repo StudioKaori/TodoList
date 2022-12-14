@@ -12,28 +12,55 @@ struct HomeView: View {
   @StateObject var vm = HomeViewModel()
   @State var addTodoString: String = ""
   
+  private func addTodo() {
+    guard !addTodoString.isEmpty else { return }
+    vm.addTodo(todoTitle: addTodoString)
+    addTodoString = ""
+  }
+  
   var body: some View {
-    VStack(spacing: 20) {
-      HStack {
-        TextField("Add todo here...", text: $addTodoString)
-          .font(.headline)
-          .padding(.leading)
-          .frame(height: 55)
-          .background(.gray)
-          .cornerRadius(10)
-        
-        Button {
-          guard !addTodoString.isEmpty else { return }
-          vm.addTodo(todoTitle: addTodoString)
-          addTodoString = ""
-        } label: {
-          Image(systemName: "plus.circle")
+    ZStack {
+      
+      Color.theme.background
+        .ignoresSafeArea()
+      
+      VStack(spacing: 20) {
+        HStack {
+          TextField("Add todo here...", text: $addTodoString)
+            .onSubmit {
+              addTodo()
+            }
             .font(.headline)
-            .foregroundColor(.gray)
-        }
+            .padding(.leading)
+            .frame(height: 55)
+            .background(Color.theme.textFieldBackground)
+            .cornerRadius(10)
+          
+          Button {
+            addTodo()
+          } label: {
+            Image(systemName: "plus.circle")
+              .font(.headline)
+              .foregroundColor(Color.theme.primaryText)
+          }
 
-      }
-    }
+        } // END: AddTask Text field Hstack
+        
+        List {
+          ForEach(vm.savedTodos) { entity in
+            Text(entity.title ?? "")
+              .onTapGesture {
+                vm.updateTodo(entity: entity)
+              }
+          }
+          .onDelete(perform: vm.deleteTodo)
+        }
+        .listStyle(PlainListStyle())
+        
+      } // END: Vstack
+      .padding(.horizontal)
+      .navigationTitle("Todo")
+    } // END: Zstack
   }
 }
 
