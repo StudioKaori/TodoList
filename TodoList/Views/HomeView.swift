@@ -11,7 +11,8 @@ struct HomeView: View {
   
   @StateObject var vm = HomeViewModel()
   @State private var addTodoString: String = ""
-  @State private var showingEditSheet = false
+  @State var showingEditSheet = false
+  @State private var editTargetTodo: TodoEntity?
   
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
@@ -39,7 +40,8 @@ struct HomeView: View {
               }
               .swipeActions(edge: .leading) {
                 Button {
-                  showingEditSheet.toggle()
+                  editTargetTodo = entity
+                  self.showingEditSheet.toggle()
                 } label: {
                   Image(systemName: "pencil")
                 }
@@ -78,28 +80,16 @@ struct HomeView: View {
       } // END: Vstack Main container
       .padding(.horizontal)
       .navigationTitle("Todo")
-      .sheet(isPresented: $showingEditSheet) {
-        HStack {
-          TextField("Add todo here...", text: $addTodoString)
-            .onSubmit {
-              addTodo()
-            }
-            .font(.headline)
-            .padding(.leading)
-            .frame(height: 55)
-            .background(Color.theme.textFieldBackground)
-            .cornerRadius(10)
-          
-          Button {
-            addTodo()
-          } label: {
-            Image(systemName: "plus.circle")
-              .font(.headline)
-              .foregroundColor(Color.theme.primaryText)
-          }
-        } // END: Hstack AddTask Text field
+      
+      if showingEditSheet && editTargetTodo != nil {
+        TodoEditView(vm: vm, todo: editTargetTodo!, showingEditSheet: $showingEditSheet)
       }
+//      if showingEditSheet {
+//
+//      }
     } // END: Zstack
+    
+
   }
 }
 
