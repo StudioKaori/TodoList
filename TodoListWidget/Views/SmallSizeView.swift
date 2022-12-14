@@ -11,8 +11,12 @@ struct SmallSizeView: View {
   var entry: SimpleEntry
   
   var body: some View {
-    Text(entry.date, style: .time)
-    Text(entry.todos.first?.title ?? "No data")
+    
+    VStack(alignment: .leading) {
+      ForEach(entry.todos) { todo in
+        Text(todo.title)
+      }
+    } // END: Vstack main container
   }
 }
 

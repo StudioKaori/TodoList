@@ -5,14 +5,17 @@
 //  Created by Kaori Persson on 2022-12-14.
 //
 
-import WidgetKit
 import SwiftUI
 
 struct MediumSizeView: View {
   var entry: SimpleEntry
   
-    var body: some View {
-      Text(entry.date, style: .time)
-      Text(entry.todos.first?.title ?? "No data")
-    }
+  var body: some View {
+    
+    VStack(alignment: .leading) {
+      ForEach(entry.todos) { todo in
+        Text(todo.title)
+      }
+    } // END: Vstack main container
+  }
 }

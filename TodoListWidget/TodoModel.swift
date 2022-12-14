@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct TodoModel {
+struct TodoModel: Identifiable {
+  let id: String = UUID().uuidString
   let title: String
   let completed: Bool
 }
