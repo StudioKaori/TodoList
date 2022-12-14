@@ -67,5 +67,5 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
-.DS_Store
-TodoList.xcodeproj/project.xcworkspace/xcuserdata/kaoripersson.xcuserdatad/UserInterfaceState.xcuserstate
+/.DS_Store
+/TodoList.xcodeproj/project.xcworkspace/xcuserdata/kaoripersson.xcuserdatad/UserInterfaceState.xcuserstate
