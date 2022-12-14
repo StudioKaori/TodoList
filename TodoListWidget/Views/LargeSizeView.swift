@@ -10,10 +10,10 @@ import SwiftUI
 struct LargeSizeView: View {
   var entry: SimpleEntry
   
-    var body: some View {
-      Text(entry.date, style: .time)
-      Text(entry.title)
-    }
+  var body: some View {
+    Text(entry.date, style: .time)
+    Text(entry.todos.first?.title ?? "No data")
+  }
 }
 
 //struct LargeSizeView_Previews: PreviewProvider {

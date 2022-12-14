@@ -24,9 +24,9 @@ struct TodoListWidget: Widget {
   }
 }
 
-struct TodoListWidget_Previews: PreviewProvider {
-  static var previews: some View {
-    TodoListWidgetEntryView(entry: SimpleEntry(date: Date(), title: "My todo"))
-      .previewContext(WidgetPreviewContext(family: .systemSmall))
-  }
-}
+//struct TodoListWidget_Previews: PreviewProvider {
+//  static var previews: some View {
+//    TodoListWidgetEntryView(entry: SimpleEntry(date: Date(), title: "My todo"))
+//      .previewContext(WidgetPreviewContext(family: .systemSmall))
+//  }
+//}

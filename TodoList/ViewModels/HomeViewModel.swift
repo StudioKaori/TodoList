@@ -14,12 +14,6 @@ class HomeViewModel: ObservableObject {
   @Published var savedTodos: [TodoEntity] = []
   
   init() {
-//    container = NSPersistentCloudKitContainer(name: "TodoContainer")
-//    container.loadPersistentStores { description, error in
-//      if let error = error {
-//        print("Error loading core data: \(error)")
-//      }
-//    }
     fetchTodos()
   } // END: init
   

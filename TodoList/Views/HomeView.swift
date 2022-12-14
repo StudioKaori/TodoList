@@ -25,6 +25,19 @@ struct HomeView: View {
         .ignoresSafeArea()
       
       VStack(spacing: 20) {
+        List {
+          ForEach(vm.savedTodos) { entity in
+            Text(entity.title ?? "")
+              .onTapGesture {
+                vm.updateTodo(entity: entity)
+              }
+          }
+          .onDelete(perform: vm.deleteTodo)
+        }
+        .listStyle(PlainListStyle())
+        
+        Spacer()
+        
         HStack {
           TextField("Add todo here...", text: $addTodoString)
             .onSubmit {
@@ -43,21 +56,9 @@ struct HomeView: View {
               .font(.headline)
               .foregroundColor(Color.theme.primaryText)
           }
-
-        } // END: AddTask Text field Hstack
+        } // END: Hstack AddTask Text field
         
-        List {
-          ForEach(vm.savedTodos) { entity in
-            Text(entity.title ?? "")
-              .onTapGesture {
-                vm.updateTodo(entity: entity)
-              }
-          }
-          .onDelete(perform: vm.deleteTodo)
-        }
-        .listStyle(PlainListStyle())
-        
-      } // END: Vstack
+      } // END: Vstack Main container
       .padding(.horizontal)
       .navigationTitle("Todo")
     } // END: Zstack

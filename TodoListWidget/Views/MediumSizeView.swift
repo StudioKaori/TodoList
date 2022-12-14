@@ -13,6 +13,6 @@ struct MediumSizeView: View {
   
     var body: some View {
       Text(entry.date, style: .time)
-      Text(entry.title)
+      Text(entry.todos.first?.title ?? "No data")
     }
 }

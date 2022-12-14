@@ -10,18 +10,17 @@ import CoreData
 
 struct Provider: TimelineProvider {
   func placeholder(in context: Context) -> SimpleEntry {
-    SimpleEntry(date: Date(), title: "My todo")
+    SimpleEntry(date: Date(), todos: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4), .placeholder(5)])
   }
   
   func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-    let entry = SimpleEntry(date: Date(), title: "My todo")
+    let entry = SimpleEntry(date: Date(), todos: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4), .placeholder(5)])
     completion(entry)
   }
   
   func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
-    var entries: [SimpleEntry] = []
+    var entries: [SimpleEntry] = [SimpleEntry(date: Date(), todos: [])]
     var savedTodos: [TodoEntity] = []
-    print("--get time line")
     
     let persistenceController = PersistenceController.shared
     
@@ -31,26 +30,12 @@ struct Provider: TimelineProvider {
       savedTodos = try persistenceController.container.viewContext.fetch(request)
       print("savedTodos: \(savedTodos)")
       
-      // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-      let currentDate = Date()
-      for hourOffset in 0 ..< 5 {
-        let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-        let entry = SimpleEntry(date: entryDate, title: savedTodos.first?.title ?? "No data: \(savedTodos.count)")
-        entries.append(entry)
+      savedTodos.forEach { todoEntity in
+        entries[0].todos.append(TodoModel(title: todoEntity.title ?? "", completed: false))
       }
     } catch let error {
       print("Error fetching: \(error)")
-      
-      // delete later
-      let currentDate = Date()
-      for hourOffset in 0 ..< 5 {
-        let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-        let entry = SimpleEntry(date: entryDate, title: "Error fetching: \(error)")
-        entries.append(entry)
-      } // END: delete later
     }
-    
-    print("entries: \(entries)")
     
     let timeline = Timeline(entries: entries, policy: .atEnd)
     completion(timeline)

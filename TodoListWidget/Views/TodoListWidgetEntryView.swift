@@ -23,7 +23,7 @@ struct TodoListWidgetEntryView : View {
       LargeSizeView(entry: entry)
     default:
       Text(entry.date, style: .time)
-      Text(entry.title)
+      Text(entry.todos.first?.title ?? "No Todos")
     }
   }
 }
