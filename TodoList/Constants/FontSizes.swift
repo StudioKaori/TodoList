@@ -12,6 +12,7 @@ struct FontSizeMedium {
   let headline: CGFloat = 24
   let h3: CGFloat = 18
   let body: CGFloat = 16
+  let widgetBody: CGFloat = 14
   let footNote: CGFloat = 10
 }
 
@@ -20,5 +21,6 @@ struct FontSizeLarge {
   let headline: CGFloat = 32
   let h3: CGFloat = 26
   let body: CGFloat = 20
+  let widgetBody: CGFloat = 16
   let footNote: CGFloat = 18
 }

@@ -6,29 +6,34 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct SmallSizeView: View {
   var entry: SimpleEntry
   
   var body: some View {
-    
-    ZStack {
+    ZStack(alignment: .topLeading) {
       Color.theme.background
       
       VStack(alignment: .leading) {
-        Text("Todos")
-          .bold()
-          .font(.system(size: UserSettings.fontSize.h3))
-          .foregroundColor(Color.theme.accent)
-          .frame(maxWidth: .infinity)
-          .frame(height: 28)
-          .background(Color.theme.textFieldBackground)
+        HStack {
+          Text("Todos")
+            .bold()
+            .font(.system(size: UserSettings.fontSize.body))
+            .foregroundColor(Color.theme.accent)
+            .padding()
 
+          Spacer()
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 36)
+        .background(Color.theme.textFieldBackground)
+        
         VStack(alignment: .leading, spacing: 6) {
           ForEach(entry.todos.prefix(4)) { todo in
             Text(todo.title)
               .foregroundColor(Color.theme.primaryText)
-              .font(.system(size: UserSettings.fontSize.body))
+              .font(.system(size: UserSettings.fontSize.widgetBody))
           }
         }
         .padding(.horizontal)
@@ -40,7 +45,8 @@ struct SmallSizeView: View {
 }
 
 struct SmallSizeView_Previews: PreviewProvider {
-    static var previews: some View {
-      SmallSizeView(entry: .placeholder())
-    }
+  static var previews: some View {
+    SmallSizeView(entry: .placeholder())
+      .previewContext(WidgetPreviewContext(family: .systemSmall))
+  }
 }
