@@ -10,4 +10,9 @@ import Foundation
 class HomeViewModel: ObservableObject {
   @Published var showingEditSheet = false
   @Published var editTargetTodo: TodoEntity?
+  
+  func showTodoEdit(entity: TodoEntity) {
+    self.editTargetTodo = entity
+    self.showingEditSheet.toggle()
+  }
 }

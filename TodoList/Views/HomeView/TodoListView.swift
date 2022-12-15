@@ -11,42 +11,47 @@ struct TodoListView: View {
   let vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   
-  private func showTodoEdit(entity: TodoEntity) {
-    vm.editTargetTodo = entity
-    vm.showingEditSheet.toggle()
-  }
-  
   var body: some View {
     List {
       ForEach(todoDataManager.savedTodos) { entity in
-        Text(entity.title ?? "")
-          .font(.system(size: UserSettings.fontSize.body))
-          .swipeActions(edge: .trailing) {
-            Button {
-              todoDataManager.tickTodo(entity: entity)
-            } label: {
-              Image(systemName: "checkmark.circle.fill")
+        HStack {
+          Text(entity.title ?? "")
+          Spacer()
+          Image(systemName: "checkmark.circle")
+            .foregroundColor(Color.theme.secondaryText)
+            .onTapGesture {
+              TodoDataManager.shared.tickTodo(entity: entity)
             }
-            .tint(Color.theme.accent)
+        }
+        .font(.system(size: UserSettings.fontSize.body))
+        .swipeActions(edge: .trailing) {
+          Button {
+            todoDataManager.tickTodo(entity: entity)
+          } label: {
+            Image(systemName: "checkmark.circle.fill")
           }
-          .swipeActions(edge: .leading) {
-            Button {
-              showTodoEdit(entity: entity)
-            } label: {
-              Image(systemName: "pencil")
-            }
-            .tint(.orange)
+          .tint(Color.theme.accent)
+        }
+        .swipeActions(edge: .leading) {
+          Button {
+            vm.showTodoEdit(entity: entity)
+          } label: {
+            Image(systemName: "pencil")
           }
-          .onTapGesture {
-            showTodoEdit(entity: entity)
-          }
+          .tint(.orange)
+        }
+        .onTapGesture {
+          vm.showTodoEdit(entity: entity)
+        }
+        // END: Hstack list item
+        
       }
     } // END: list
   }
 }
 
-//struct TodoListView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    TodoListView(editTargetTodo: <#Binding<TodoEntity>#>, showingEditSheet: .constant(true))
-//  }
-//}
+struct TodoListView_Previews: PreviewProvider {
+  static var previews: some View {
+    TodoListView(vm: HomeViewModel())
+  }
+}
