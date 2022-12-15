@@ -12,16 +12,35 @@ struct SmallSizeView: View {
   
   var body: some View {
     
-    VStack(alignment: .leading) {
-      ForEach(entry.todos) { todo in
-        Text(todo.title)
+    ZStack {
+      Color.theme.background
+      
+      VStack(alignment: .leading) {
+        Text("Todos")
+          .bold()
+          .font(.system(size: UserSettings.fontSize.h3))
+          .foregroundColor(Color.theme.accent)
+          .frame(maxWidth: .infinity)
+          .frame(height: 28)
+          .background(Color.theme.textFieldBackground)
+
+        VStack(alignment: .leading, spacing: 6) {
+          ForEach(entry.todos.prefix(4)) { todo in
+            Text(todo.title)
+              .foregroundColor(Color.theme.primaryText)
+              .font(.system(size: UserSettings.fontSize.body))
+          }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 4)
+        
       }
     } // END: Vstack main container
   }
 }
 
-//struct SmallSizeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SmallSizeView()
-//    }
-//}
+struct SmallSizeView_Previews: PreviewProvider {
+    static var previews: some View {
+      SmallSizeView(entry: .placeholder())
+    }
+}

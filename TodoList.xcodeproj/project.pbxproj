@@ -20,6 +20,10 @@
 		4314959F294B622300068F8A /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314958E2949EF7100068F8A /* TodoModel.swift */; };
 		431495A1294BA72C00068F8A /* FontSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431495A0294BA72C00068F8A /* FontSizes.swift */; };
 		431495A4294BA8E200068F8A /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431495A3294BA8E200068F8A /* UserSettings.swift */; };
+		431495A7294BB22500068F8A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FC8294897F800099512 /* Color.swift */; };
+		431495A8294BB24200068F8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FA829488D4B00099512 /* Assets.xcassets */; };
+		431495A9294BB29800068F8A /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431495A3294BA8E200068F8A /* UserSettings.swift */; };
+		431495AA294BB29800068F8A /* FontSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431495A0294BA72C00068F8A /* FontSizes.swift */; };
 		435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FA429488D4A00099512 /* TodoListApp.swift */; };
 		435F3FA929488D4B00099512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FA829488D4B00099512 /* Assets.xcassets */; };
 		435F3FAC29488D4B00099512 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FAB29488D4B00099512 /* Preview Assets.xcassets */; };
@@ -354,6 +358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431495A8294BB24200068F8A /* Assets.xcassets in Resources */,
 				435F3FDA2948BD7800099512 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,10 +389,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4314958B2949EB4C00068F8A /* LargeSizeView.swift in Sources */,
+				431495AA294BB29800068F8A /* FontSizes.swift in Sources */,
 				431495842949E57800068F8A /* SimpleEntry.swift in Sources */,
 				435F3FE32948BD9900099512 /* TodoContainer.xcdatamodeld in Sources */,
 				4314959F294B622300068F8A /* TodoModel.swift in Sources */,
+				431495A9294BB29800068F8A /* UserSettings.swift in Sources */,
 				435F3FD62948BD7700099512 /* TodoListWidgetBundle.swift in Sources */,
+				431495A7294BB22500068F8A /* Color.swift in Sources */,
 				431495862949E5B700068F8A /* TodoListWidgetEntryView.swift in Sources */,
 				4314958D2949EB5800068F8A /* SmallSizeView.swift in Sources */,
 				435F3FD82948BD7700099512 /* TodoListWidget.swift in Sources */,

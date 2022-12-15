@@ -10,6 +10,7 @@ import Foundation
 struct FontSizeMedium {
   let largeTitle: CGFloat = 32
   let headline: CGFloat = 24
+  let h3: CGFloat = 18
   let body: CGFloat = 16
   let footNote: CGFloat = 10
 }
@@ -17,6 +18,7 @@ struct FontSizeMedium {
 struct FontSizeLarge {
   let largeTitle: CGFloat = 38
   let headline: CGFloat = 32
-  let body: CGFloat = 28
+  let h3: CGFloat = 26
+  let body: CGFloat = 20
   let footNote: CGFloat = 18
 }
