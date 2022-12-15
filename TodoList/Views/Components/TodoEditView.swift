@@ -43,7 +43,7 @@ struct TodoEditView: View {
             .onSubmit {
               updateTodo()
             }
-            .font(.headline)
+            .font(.system(size: UserSettings.fontSize.body))
             .padding(.leading)
             .frame(height: 55)
             .background(Color.theme.textFieldBackground)
@@ -53,7 +53,7 @@ struct TodoEditView: View {
             updateTodo()
           } label: {
             Image(systemName: "pencil.circle")
-              .font(.system(size: 32))
+              .font(.system(size: UserSettings.fontSize.largeTitle))
               .foregroundColor(Color.theme.accent)
           }
           
@@ -61,7 +61,7 @@ struct TodoEditView: View {
             vm.showingEditSheet.toggle()
           } label: {
             Image(systemName: "x.circle")
-              .font(.system(size: 32))
+              .font(.system(size: UserSettings.fontSize.largeTitle))
               .foregroundColor(Color.theme.secondaryText)
           }
         } // END: Hstack AddTask Text field

@@ -20,6 +20,7 @@ struct TodoListView: View {
     List {
       ForEach(todoDataManager.savedTodos) { entity in
         Text(entity.title ?? "")
+          .font(.system(size: UserSettings.fontSize.body))
           .swipeActions(edge: .trailing) {
             Button {
               todoDataManager.tickTodo(entity: entity)

@@ -34,12 +34,12 @@ struct HomeView: View {
         Spacer()
         
         HStack {
-          TextField("Add todo here...", text: $addTodoString)
+          TextField("Add new todo here...", text: $addTodoString)
             .focused($addFieldFocused)
             .onSubmit {
               addTodo()
             }
-            .font(.headline)
+            .font(.system(size: UserSettings.fontSize.body))
             .padding(.leading)
             .frame(height: 55)
             .background(Color.theme.textFieldBackground)
@@ -49,7 +49,7 @@ struct HomeView: View {
             addTodo()
           } label: {
             Image(systemName: "plus.circle")
-              .font(.system(size: 32))
+              .font(.system(size: UserSettings.fontSize.largeTitle))
               .foregroundColor(Color.theme.accent)
           }
         } // END: Hstack AddTask Text field
