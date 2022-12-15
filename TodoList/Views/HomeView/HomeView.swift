@@ -60,9 +60,6 @@ struct HomeView: View {
       if vm.showingEditSheet && vm.editTargetTodo != nil {
         TodoEditView(vm: vm)
       }
-//      if showingEditSheet {
-//
-//      }
     } // END: Zstack
     .onAppear {
       addFieldFocused = true

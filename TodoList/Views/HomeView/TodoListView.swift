@@ -11,6 +11,11 @@ struct TodoListView: View {
   let vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   
+  private func showTodoEdit(entity: TodoEntity) {
+    vm.editTargetTodo = entity
+    vm.showingEditSheet.toggle()
+  }
+  
   var body: some View {
     List {
       ForEach(todoDataManager.savedTodos) { entity in
@@ -25,15 +30,14 @@ struct TodoListView: View {
           }
           .swipeActions(edge: .leading) {
             Button {
-              vm.editTargetTodo = entity
-              vm.showingEditSheet.toggle()
+              showTodoEdit(entity: entity)
             } label: {
               Image(systemName: "pencil")
             }
             .tint(.orange)
           }
           .onTapGesture {
-            todoDataManager.updateTodo(entity: entity)
+            showTodoEdit(entity: entity)
           }
       }
     } // END: list

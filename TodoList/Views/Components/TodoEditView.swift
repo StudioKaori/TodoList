@@ -17,13 +17,19 @@ struct TodoEditView: View {
     self._todoString = State(initialValue: vm.editTargetTodo?.title ?? "")
   }
   
+  private func updateTodo() {
+    if todoString.isEmpty { return }
+    guard let editTargetTodo = vm.editTargetTodo else { return }
+    let newTodo = TodoModel(title: todoString, completed: false)
+    todoDataManager.updateTodo(entity: editTargetTodo, newTodo: newTodo)
+    vm.showingEditSheet.toggle()
+  }
+  
   var body: some View {
     HStack {
       TextField(vm.editTargetTodo?.title ?? "", text: $todoString)
         .onSubmit {
-          guard let editTargetTodo = vm.editTargetTodo else { return }
-          todoDataManager.updateTodo(entity: editTargetTodo)
-          vm.showingEditSheet.toggle()
+          updateTodo()
         }
         .font(.headline)
         .padding(.leading)
@@ -32,9 +38,7 @@ struct TodoEditView: View {
         .cornerRadius(10)
       
       Button {
-        guard let editTargetTodo = vm.editTargetTodo else { return }
-        todoDataManager.updateTodo(entity: editTargetTodo)
-        vm.showingEditSheet.toggle()
+        updateTodo()
       } label: {
         Image(systemName: "plus.circle")
           .font(.headline)

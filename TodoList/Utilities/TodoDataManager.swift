@@ -35,9 +35,9 @@ class TodoDataManager: ObservableObject {
     saveData()
   } // END: addTodo
   
-  func updateTodo(entity: TodoEntity) {
+  func updateTodo(entity: TodoEntity, newTodo: TodoModel) {
     let currentTitle = entity.title ?? ""
-    let newTitle = currentTitle + "!"
+    let newTitle = newTodo.title
     entity.title = newTitle
     saveData()
   } // END: updateTodo
