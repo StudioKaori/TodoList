@@ -49,10 +49,11 @@ struct HomeView: View {
             addTodo()
           } label: {
             Image(systemName: "plus.circle")
-              .font(.headline)
-              .foregroundColor(Color.theme.secondaryText)
+              .font(.system(size: 32))
+              .foregroundColor(Color.theme.accent)
           }
         } // END: Hstack AddTask Text field
+        .padding()
         
       } // END: Vstack Main container
       .navigationTitle("Todo")

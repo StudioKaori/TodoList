@@ -27,34 +27,55 @@ struct TodoEditView: View {
   }
   
   var body: some View {
-    HStack {
-      TextField(vm.editTargetTodo?.title ?? "", text: $todoString)
-        .focused($editFieldFocused)
-        .onSubmit {
-          updateTodo()
+    ZStack {
+      Color.black.opacity(0.7)
+        .onTapGesture {
+          vm.showingEditSheet.toggle()
         }
-        .font(.headline)
-        .padding(.leading)
-        .frame(height: 55)
-        .background(Color.theme.textFieldBackground)
-        .cornerRadius(10)
+        .ignoresSafeArea()
       
-      Button {
-        updateTodo()
-      } label: {
-        Image(systemName: "plus.circle")
-          .font(.headline)
-          .foregroundColor(Color.theme.secondaryText)
-      }
-    } // END: Hstack AddTask Text field
-    .onAppear {
-      editFieldFocused = true
+      VStack {
+        Spacer()
+        
+        HStack {
+          TextField(vm.editTargetTodo?.title ?? "", text: $todoString)
+            .focused($editFieldFocused)
+            .onSubmit {
+              updateTodo()
+            }
+            .font(.headline)
+            .padding(.leading)
+            .frame(height: 55)
+            .background(Color.theme.textFieldBackground)
+            .cornerRadius(10)
+          
+          Button {
+            updateTodo()
+          } label: {
+            Image(systemName: "pencil.circle")
+              .font(.system(size: 32))
+              .foregroundColor(Color.theme.accent)
+          }
+          
+          Button {
+            vm.showingEditSheet.toggle()
+          } label: {
+            Image(systemName: "x.circle")
+              .font(.system(size: 32))
+              .foregroundColor(Color.theme.secondaryText)
+          }
+        } // END: Hstack AddTask Text field
+        .padding()
+        .onAppear {
+          editFieldFocused = true
+        } // END: Hstack main container
+      } // END: Vstack
     }
   }
 }
 
-//struct TodoEditView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    TodoEditView(todo: <#T##TodoEntity#>)
-//  }
-//}
+struct TodoEditView_Previews: PreviewProvider {
+  static var previews: some View {
+    TodoEditView(vm: HomeViewModel())
+  }
+}
