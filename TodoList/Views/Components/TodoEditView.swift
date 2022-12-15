@@ -19,9 +19,9 @@ struct TodoEditView: View {
   
   private func updateTodo() {
     if todoString.isEmpty { return }
-    guard let editTargetTodo = vm.editTargetTodo else { return }
-    let newTodo = TodoModel(title: todoString, completed: false)
-    todoDataManager.updateTodo(entity: editTargetTodo, newTodo: newTodo)
+    if vm.editTargetTodo == nil { return }
+    vm.editTargetTodo?.title = todoString
+    todoDataManager.saveData()
     vm.showingEditSheet.toggle()
   }
   

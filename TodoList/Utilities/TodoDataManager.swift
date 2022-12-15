@@ -31,14 +31,20 @@ class TodoDataManager: ObservableObject {
   
   func addTodo(todoTitle: String) {
     let newTodo = TodoEntity(context: container.viewContext)
+    newTodo.id = UUID().uuidString
+    newTodo.addedDate = Date()
+    newTodo.order = Int16(savedTodos.count + 1)
     newTodo.title = todoTitle
+    newTodo.listId = "0"
+    newTodo.completed = false
+    newTodo.color = 0
+    //newTodo.dueDate = nil
+    newTodo.starred = false
+    //newTodo.image = nil
     saveData()
   } // END: addTodo
   
-  func updateTodo(entity: TodoEntity, newTodo: TodoModel) {
-    let currentTitle = entity.title ?? ""
-    let newTitle = newTodo.title
-    entity.title = newTitle
+  func updateTodo(entity: TodoEntity) {
     saveData()
   } // END: updateTodo
   

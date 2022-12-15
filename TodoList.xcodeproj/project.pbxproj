@@ -17,8 +17,7 @@
 		43149594294AEA9A00068F8A /* TodoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43149593294AEA9A00068F8A /* TodoDataManager.swift */; };
 		43149596294AED4300068F8A /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43149595294AED4300068F8A /* TodoListView.swift */; };
 		43149599294AEFB800068F8A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43149598294AEFB800068F8A /* HomeViewModel.swift */; };
-		4314959A294AF6BB00068F8A /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314958E2949EF7100068F8A /* TodoModel.swift */; };
-		4314959B294AF6BF00068F8A /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314958E2949EF7100068F8A /* TodoModel.swift */; };
+		4314959F294B622300068F8A /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314958E2949EF7100068F8A /* TodoModel.swift */; };
 		435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FA429488D4A00099512 /* TodoListApp.swift */; };
 		435F3FA929488D4B00099512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FA829488D4B00099512 /* Assets.xcassets */; };
 		435F3FAC29488D4B00099512 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FAB29488D4B00099512 /* Preview Assets.xcassets */; };
@@ -144,6 +143,7 @@
 		4314959C294AF6C900068F8A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				431495832949E57800068F8A /* SimpleEntry.swift */,
 				4314958E2949EF7100068F8A /* TodoModel.swift */,
 			);
 			path = Models;
@@ -177,7 +177,6 @@
 				435F3FB229488D4B00099512 /* Info.plist */,
 				435F3FA829488D4B00099512 /* Assets.xcassets */,
 				435F3FBD29488F1400099512 /* Entities */,
-				4314959C294AF6C900068F8A /* Models */,
 				43C5124B2949DA1E00019DEC /* Utilities */,
 				435F3FC7294897E600099512 /* Extensions */,
 				435F3FBA29488DEF00099512 /* Views */,
@@ -234,7 +233,7 @@
 				435F3FD52948BD7700099512 /* TodoListWidgetBundle.swift */,
 				435F3FD72948BD7700099512 /* TodoListWidget.swift */,
 				431495812949E52A00068F8A /* Provider.swift */,
-				431495832949E57800068F8A /* SimpleEntry.swift */,
+				4314959C294AF6C900068F8A /* Models */,
 				431495872949EAC900068F8A /* Views */,
 				435F3FD92948BD7800099512 /* Assets.xcassets */,
 				435F3FDB2948BD7800099512 /* Info.plist */,
@@ -355,7 +354,6 @@
 				43149592294A6B8900068F8A /* TodoEditView.swift in Sources */,
 				43149599294AEFB800068F8A /* HomeViewModel.swift in Sources */,
 				435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */,
-				4314959A294AF6BB00068F8A /* TodoModel.swift in Sources */,
 				43149596294AED4300068F8A /* TodoListView.swift in Sources */,
 				43C512492949D9B100019DEC /* PersistenceController.swift in Sources */,
 				43149594294AEA9A00068F8A /* TodoDataManager.swift in Sources */,
@@ -372,7 +370,7 @@
 				4314958B2949EB4C00068F8A /* LargeSizeView.swift in Sources */,
 				431495842949E57800068F8A /* SimpleEntry.swift in Sources */,
 				435F3FE32948BD9900099512 /* TodoContainer.xcdatamodeld in Sources */,
-				4314959B294AF6BF00068F8A /* TodoModel.swift in Sources */,
+				4314959F294B622300068F8A /* TodoModel.swift in Sources */,
 				435F3FD62948BD7700099512 /* TodoListWidgetBundle.swift in Sources */,
 				431495862949E5B700068F8A /* TodoListWidgetEntryView.swift in Sources */,
 				4314958D2949EB5800068F8A /* SmallSizeView.swift in Sources */,
