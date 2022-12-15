@@ -9,10 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
   
-  @StateObject var todoDataManager = TodoDataManager.shared
+  @StateObject var vm = HomeViewModel()
+  @StateObject private var todoDataManager = TodoDataManager.shared
+  
   @State private var addTodoString: String = ""
-  @State var showingEditSheet = false
-  @State private var editTargetTodo: TodoEntity?
   @FocusState private var addFieldFocused: Bool
   
   private func addTodo() {
@@ -29,31 +29,7 @@ struct HomeView: View {
         .ignoresSafeArea()
       
       VStack(spacing: 0) {
-        List {
-          ForEach(todoDataManager.savedTodos) { entity in
-            Text(entity.title ?? "")
-              .swipeActions(edge: .trailing) {
-                Button {
-                  todoDataManager.tickTodo(entity: entity)
-                } label: {
-                  Image(systemName: "checkmark.circle.fill")
-                }
-                .tint(Color.theme.accent)
-              }
-              .swipeActions(edge: .leading) {
-                Button {
-                  editTargetTodo = entity
-                  self.showingEditSheet.toggle()
-                } label: {
-                  Image(systemName: "pencil")
-                }
-                .tint(.orange)
-              }
-              .onTapGesture {
-                todoDataManager.updateTodo(entity: entity)
-              }
-          }
-        } // END: list
+        TodoListView(vm: vm)
         
         Spacer()
         
@@ -81,8 +57,8 @@ struct HomeView: View {
       } // END: Vstack Main container
       .navigationTitle("Todo")
       
-      if showingEditSheet && editTargetTodo != nil {
-        TodoEditView(todo: editTargetTodo!, showingEditSheet: $showingEditSheet)
+      if vm.showingEditSheet && vm.editTargetTodo != nil {
+        TodoEditView(vm: vm)
       }
 //      if showingEditSheet {
 //

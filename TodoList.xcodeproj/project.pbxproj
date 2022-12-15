@@ -16,6 +16,8 @@
 		4314958F2949EF7100068F8A /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314958E2949EF7100068F8A /* TodoModel.swift */; };
 		43149592294A6B8900068F8A /* TodoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43149591294A6B8900068F8A /* TodoEditView.swift */; };
 		43149594294AEA9A00068F8A /* TodoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43149593294AEA9A00068F8A /* TodoDataManager.swift */; };
+		43149596294AED4300068F8A /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43149595294AED4300068F8A /* TodoListView.swift */; };
+		43149599294AEFB800068F8A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43149598294AEFB800068F8A /* HomeViewModel.swift */; };
 		435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FA429488D4A00099512 /* TodoListApp.swift */; };
 		435F3FA929488D4B00099512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FA829488D4B00099512 /* Assets.xcassets */; };
 		435F3FAC29488D4B00099512 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FAB29488D4B00099512 /* Preview Assets.xcassets */; };
@@ -67,6 +69,8 @@
 		4314958E2949EF7100068F8A /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		43149591294A6B8900068F8A /* TodoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditView.swift; sourceTree = "<group>"; };
 		43149593294AEA9A00068F8A /* TodoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDataManager.swift; sourceTree = "<group>"; };
+		43149595294AED4300068F8A /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
+		43149598294AEFB800068F8A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		435F3FA129488D4A00099512 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		435F3FA429488D4A00099512 /* TodoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListApp.swift; sourceTree = "<group>"; };
 		435F3FA829488D4B00099512 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,6 +130,16 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		43149597294AEFA300068F8A /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				435F3FBB29488E0300099512 /* HomeView.swift */,
+				43149598294AEFB800068F8A /* HomeViewModel.swift */,
+				43149595294AED4300068F8A /* TodoListView.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
 		435F3F9829488D4A00099512 = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +169,6 @@
 				435F3FA829488D4B00099512 /* Assets.xcassets */,
 				43C5124B2949DA1E00019DEC /* Utilities */,
 				435F3FC7294897E600099512 /* Extensions */,
-				435F3FBE29488F3500099512 /* ViewModels */,
 				435F3FBA29488DEF00099512 /* Views */,
 				435F3FBD29488F1400099512 /* Entities */,
 				435F3FAA29488D4B00099512 /* Preview Content */,
@@ -175,7 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				43149590294A6B6B00068F8A /* Components */,
-				435F3FBB29488E0300099512 /* HomeView.swift */,
+				43149597294AEFA300068F8A /* HomeView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -186,13 +199,6 @@
 				435F3FC42948908D00099512 /* TodoContainer.xcdatamodeld */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		435F3FBE29488F3500099512 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		435F3FC7294897E600099512 /* Extensions */ = {
@@ -338,7 +344,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				43149592294A6B8900068F8A /* TodoEditView.swift in Sources */,
+				43149599294AEFB800068F8A /* HomeViewModel.swift in Sources */,
 				435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */,
+				43149596294AED4300068F8A /* TodoListView.swift in Sources */,
 				43C512492949D9B100019DEC /* PersistenceController.swift in Sources */,
 				43149594294AEA9A00068F8A /* TodoDataManager.swift in Sources */,
 				435F3FBC29488E0300099512 /* HomeView.swift in Sources */,
