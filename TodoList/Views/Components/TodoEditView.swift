@@ -11,6 +11,7 @@ struct TodoEditView: View {
   let vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   @State private var todoString = ""
+  @FocusState private var editFieldFocused: Bool
   
   init(vm: HomeViewModel) {
     self.vm = vm
@@ -28,6 +29,7 @@ struct TodoEditView: View {
   var body: some View {
     HStack {
       TextField(vm.editTargetTodo?.title ?? "", text: $todoString)
+        .focused($editFieldFocused)
         .onSubmit {
           updateTodo()
         }
@@ -45,6 +47,9 @@ struct TodoEditView: View {
           .foregroundColor(Color.theme.secondaryText)
       }
     } // END: Hstack AddTask Text field
+    .onAppear {
+      editFieldFocused = true
+    }
   }
 }
 
