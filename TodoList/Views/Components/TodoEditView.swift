@@ -46,7 +46,7 @@ struct TodoEditView: View {
       } label: {
         Image(systemName: "plus.circle")
           .font(.headline)
-          .foregroundColor(Color.theme.primaryText)
+          .foregroundColor(Color.theme.secondaryText)
       }
     } // END: Hstack AddTask Text field
   }

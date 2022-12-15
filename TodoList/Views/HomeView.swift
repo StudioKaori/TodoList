@@ -13,11 +13,13 @@ struct HomeView: View {
   @State private var addTodoString: String = ""
   @State var showingEditSheet = false
   @State private var editTargetTodo: TodoEntity?
+  @FocusState private var addFieldFocused: Bool
   
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
     vm.addTodo(todoTitle: addTodoString)
     addTodoString = ""
+    addFieldFocused = true
   }
   
   var body: some View {
@@ -26,7 +28,7 @@ struct HomeView: View {
       Color.theme.background
         .ignoresSafeArea()
       
-      VStack(spacing: 20) {
+      VStack(spacing: 0) {
         List {
           ForEach(vm.savedTodos) { entity in
             Text(entity.title ?? "")
@@ -36,7 +38,7 @@ struct HomeView: View {
                 } label: {
                   Image(systemName: "checkmark.circle.fill")
                 }
-                .tint(.blue)
+                .tint(Color.theme.accent)
               }
               .swipeActions(edge: .leading) {
                 Button {
@@ -51,14 +53,13 @@ struct HomeView: View {
                 vm.updateTodo(entity: entity)
               }
           }
-          //.onDelete(perform: vm.deleteTodo)
-        }
-        .listStyle(PlainListStyle())
+        } // END: list
         
         Spacer()
         
         HStack {
           TextField("Add todo here...", text: $addTodoString)
+            .focused($addFieldFocused)
             .onSubmit {
               addTodo()
             }
@@ -73,12 +74,11 @@ struct HomeView: View {
           } label: {
             Image(systemName: "plus.circle")
               .font(.headline)
-              .foregroundColor(Color.theme.primaryText)
+              .foregroundColor(Color.theme.secondaryText)
           }
         } // END: Hstack AddTask Text field
         
       } // END: Vstack Main container
-      .padding(.horizontal)
       .navigationTitle("Todo")
       
       if showingEditSheet && editTargetTodo != nil {
@@ -88,7 +88,9 @@ struct HomeView: View {
 //
 //      }
     } // END: Zstack
-    
+    .onAppear {
+      addFieldFocused = true
+    }
 
   }
 }
