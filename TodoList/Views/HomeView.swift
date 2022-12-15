@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
   
-  @StateObject var vm = HomeViewModel()
+  @StateObject var todoDataManager = TodoDataManager.shared
   @State private var addTodoString: String = ""
   @State var showingEditSheet = false
   @State private var editTargetTodo: TodoEntity?
@@ -17,7 +17,7 @@ struct HomeView: View {
   
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
-    vm.addTodo(todoTitle: addTodoString)
+    todoDataManager.addTodo(todoTitle: addTodoString)
     addTodoString = ""
     addFieldFocused = true
   }
@@ -30,11 +30,11 @@ struct HomeView: View {
       
       VStack(spacing: 0) {
         List {
-          ForEach(vm.savedTodos) { entity in
+          ForEach(todoDataManager.savedTodos) { entity in
             Text(entity.title ?? "")
               .swipeActions(edge: .trailing) {
                 Button {
-                  vm.tickTodo(entity: entity)
+                  todoDataManager.tickTodo(entity: entity)
                 } label: {
                   Image(systemName: "checkmark.circle.fill")
                 }
@@ -50,7 +50,7 @@ struct HomeView: View {
                 .tint(.orange)
               }
               .onTapGesture {
-                vm.updateTodo(entity: entity)
+                todoDataManager.updateTodo(entity: entity)
               }
           }
         } // END: list
@@ -82,7 +82,7 @@ struct HomeView: View {
       .navigationTitle("Todo")
       
       if showingEditSheet && editTargetTodo != nil {
-        TodoEditView(vm: vm, todo: editTargetTodo!, showingEditSheet: $showingEditSheet)
+        TodoEditView(todo: editTargetTodo!, showingEditSheet: $showingEditSheet)
       }
 //      if showingEditSheet {
 //

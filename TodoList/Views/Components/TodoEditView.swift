@@ -8,20 +8,12 @@
 import SwiftUI
 
 struct TodoEditView: View {
-  let vm: HomeViewModel
+  let todoDataManager = TodoDataManager.shared
   var todo: TodoEntity
   @Binding var showingEditSheet: Bool
   @State var todoString = ""
   
-//  init(vm: HomeViewModel, todo: TodoEntity, editTargetTodo: Binding<TodoEntity>? = nil) {
-//    self.vm = vm
-//    self.todo = todo
-//    self._editTargetTodo = editTargetTodo ?? nil
-//    self._todoString = State(initialValue: todo.title ?? "")
-//  }
-  
-  init(vm: HomeViewModel, todo: TodoEntity, showingEditSheet: Binding<Bool>) {
-    self.vm = vm
+  init(todo: TodoEntity, showingEditSheet: Binding<Bool>) {
     self.todo = todo
     self._showingEditSheet = showingEditSheet
     self._todoString = State(initialValue: todo.title ?? "")
@@ -31,7 +23,7 @@ struct TodoEditView: View {
     HStack {
       TextField(todo.title ?? "", text: $todoString)
         .onSubmit {
-          vm.updateTodo(entity: todo)
+          todoDataManager.updateTodo(entity: todo)
           showingEditSheet.toggle()
         }
         .font(.headline)
@@ -41,7 +33,7 @@ struct TodoEditView: View {
         .cornerRadius(10)
       
       Button {
-        vm.updateTodo(entity: todo)
+        todoDataManager.updateTodo(entity: todo)
         showingEditSheet.toggle()
       } label: {
         Image(systemName: "plus.circle")

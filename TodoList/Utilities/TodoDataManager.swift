@@ -1,14 +1,16 @@
 //
-//  HomeViewModel.swift
+//  TodoDataManager.swift
 //  TodoList
 //
-//  Created by Kaori Persson on 2022-12-13.
+//  Created by Kaori Persson on 2022-12-15.
 //
 
 import SwiftUI
 import CoreData
 
-class HomeViewModel: ObservableObject {
+class TodoDataManager: ObservableObject {
+  
+  static let shared = TodoDataManager()
   
   let container: NSPersistentContainer = PersistenceController.shared.container
   @Published var savedTodos: [TodoEntity] = []
@@ -61,3 +63,4 @@ class HomeViewModel: ObservableObject {
     }
   } // END: saveData
 }
+
