@@ -29,16 +29,7 @@ struct MediumSizeView: View {
         .frame(height: 36)
         .background(Color.theme.textFieldBackground)
         
-        VStack(alignment: .leading, spacing: 6) {
-          ForEach(entry.todos.prefix(4)) { todo in
-            Text(todo.title)
-              .foregroundColor(Color.theme.primaryText)
-              .font(.system(size: UserSettings.fontSize.widgetBody))
-          }
-        }
-        .padding(.horizontal)
-        .padding(.vertical, 4)
-        
+        WidgetTodoListView(entry: entry, maxTodoLength: 4)
       }
     } // END: Vstack main container
   }
