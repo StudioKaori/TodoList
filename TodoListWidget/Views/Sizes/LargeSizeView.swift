@@ -16,18 +16,7 @@ struct LargeSizeView: View {
       Color.theme.background
       
       VStack(alignment: .leading) {
-        HStack {
-          Text("Todos")
-            .bold()
-            .font(.system(size: UserSettings.fontSize.body))
-            .foregroundColor(Color.theme.accent)
-            .padding()
-
-          Spacer()
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 36)
-        .background(Color.theme.textFieldBackground)
+        WidgetTitleView()
         
         WidgetTodoListView(entry: entry, maxTodoLength: 20)
       }
