@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import WidgetKit
 
 class TodoDataManager: ObservableObject {
   
@@ -24,6 +25,9 @@ class TodoDataManager: ObservableObject {
     
     do {
       savedTodos = try container.viewContext.fetch(request)
+      
+      // reload the widget
+      WidgetCenter.shared.reloadTimelines(ofKind: "TodoListWidget")
     } catch let error {
       print("Error fetching: \(error)")
     }

@@ -20,7 +20,7 @@ struct TodoListWidget: Widget {
         .environment(\.managedObjectContext, persistenceController.container.viewContext)
     }
     .configurationDisplayName("Todo List")
-    .description("This is an example widget.")
+    .description("Simple Todo list app")
   }
 }
 
