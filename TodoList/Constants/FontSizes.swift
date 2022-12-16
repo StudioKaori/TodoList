@@ -14,7 +14,7 @@ struct FontSizeMedium {
   let body: CGFloat = 16
   let widgetBody: CGFloat = 14
   let footNote: CGFloat = 10
-  let bulletSymbol: CGFloat = 8
+  let bulletSymbol: CGFloat = 4
 }
 
 struct FontSizeLarge {

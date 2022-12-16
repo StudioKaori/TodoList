@@ -172,8 +172,8 @@
 		431495AD294C93F000068F8A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				431495AB294C920600068F8A /* WidgetTodoListView.swift */,
 				431495AF294C954700068F8A /* WidgetTitleView.swift */,
+				431495AB294C920600068F8A /* WidgetTodoListView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct WidgetTodoListView: View {
   var entry: SimpleEntry
@@ -38,7 +39,7 @@ struct WidgetTodoListView: View {
         }
       } // END: foreach
     }
-    .padding(.horizontal)
+    .padding(.horizontal, 10)
     .padding(.vertical, 0)
   }
 }
@@ -46,5 +47,6 @@ struct WidgetTodoListView: View {
 struct WidgetTodoListView_Previews: PreviewProvider {
   static var previews: some View {
     WidgetTodoListView(entry: .placeholder(), maxTodoLength: 4)
+      .previewContext(WidgetPreviewContext(family: .systemSmall))
   }
 }
