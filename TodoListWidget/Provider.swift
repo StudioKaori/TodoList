@@ -25,6 +25,8 @@ struct Provider: TimelineProvider {
     let persistenceController = PersistenceController.shared
     
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
+    let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
+    request.sortDescriptors = [sort]
     
     do {
       savedTodos = try persistenceController.container.viewContext.fetch(request)

@@ -16,12 +16,14 @@ class TodoDataManager: ObservableObject {
   let container: NSPersistentContainer = PersistenceController.shared.container
   @Published var savedTodos: [TodoEntity] = []
   
-  init() {
+  private init() {
     fetchTodos()
   } // END: init
   
   func fetchTodos() {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
+    let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
+    request.sortDescriptors = [sort]
     
     do {
       savedTodos = try container.viewContext.fetch(request)
