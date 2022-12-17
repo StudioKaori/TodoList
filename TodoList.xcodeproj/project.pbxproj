@@ -26,6 +26,7 @@
 		431495AA294BB29800068F8A /* FontSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431495A0294BA72C00068F8A /* FontSizes.swift */; };
 		431495AC294C920600068F8A /* WidgetTodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431495AB294C920600068F8A /* WidgetTodoListView.swift */; };
 		431495B0294C954700068F8A /* WidgetTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431495AF294C954700068F8A /* WidgetTitleView.swift */; };
+		431495B4294DC12900068F8A /* TodoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43149593294AEA9A00068F8A /* TodoDataManager.swift */; };
 		435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FA429488D4A00099512 /* TodoListApp.swift */; };
 		435F3FA929488D4B00099512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FA829488D4B00099512 /* Assets.xcassets */; };
 		435F3FAC29488D4B00099512 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FAB29488D4B00099512 /* Preview Assets.xcassets */; };
@@ -419,6 +420,7 @@
 				431495A9294BB29800068F8A /* UserSettings.swift in Sources */,
 				435F3FD62948BD7700099512 /* TodoListWidgetBundle.swift in Sources */,
 				431495A7294BB22500068F8A /* Color.swift in Sources */,
+				431495B4294DC12900068F8A /* TodoDataManager.swift in Sources */,
 				431495862949E5B700068F8A /* TodoListWidgetEntryView.swift in Sources */,
 				4314958D2949EB5800068F8A /* SmallSizeView.swift in Sources */,
 				435F3FD82948BD7700099512 /* TodoListWidget.swift in Sources */,

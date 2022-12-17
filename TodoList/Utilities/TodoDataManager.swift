@@ -17,7 +17,7 @@ class TodoDataManager: ObservableObject {
   @Published var savedTodos: [TodoEntity] = []
   
   private init() {
-    fetchTodos()
+    fetchTodos(incompleteOnly: true)
   } // END: init
   
   func countTodos() -> Int {
@@ -32,12 +32,15 @@ class TodoDataManager: ObservableObject {
     }
   }
   
-  func fetchTodos() {
+  func fetchTodos(incompleteOnly: Bool) {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
     request.sortDescriptors = [sort]
-    let predicate = NSPredicate(format: "completed == %d", false)
-    request.predicate = predicate
+    
+    if incompleteOnly {
+      let predicate = NSPredicate(format: "completed == %d", false)
+      request.predicate = predicate
+    }
     
     do {
       savedTodos = try container.viewContext.fetch(request)
@@ -84,7 +87,7 @@ class TodoDataManager: ObservableObject {
   func saveData() {
     do {
       try container.viewContext.save()
-      fetchTodos()
+      fetchTodos(incompleteOnly: true)
     } catch let error {
       print("Error saving: \(error)")
     }

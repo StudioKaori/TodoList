@@ -20,23 +20,10 @@ struct Provider: TimelineProvider {
   
   func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
     var entries: [SimpleEntry] = [SimpleEntry(date: Date(), todos: [])]
-    var savedTodos: [TodoEntity] = []
-    
-    let persistenceController = PersistenceController.shared
-    
-    let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
-    let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
-    request.sortDescriptors = [sort]
-    
-    do {
-      savedTodos = try persistenceController.container.viewContext.fetch(request)
-      print("savedTodos: \(savedTodos)")
-      
-      savedTodos.forEach { todoEntity in
-        entries[0].todos.append(TodoModel(title: todoEntity.title ?? "", completed: false))
-      }
-    } catch let error {
-      print("Error fetching: \(error)")
+
+    TodoDataManager.shared.fetchTodos(incompleteOnly: true)
+    TodoDataManager.shared.savedTodos.forEach { todoEntity in
+      entries[0].todos.append(TodoModel(title: todoEntity.title ?? "", completed: false))
     }
     
     let timeline = Timeline(entries: entries, policy: .atEnd)
