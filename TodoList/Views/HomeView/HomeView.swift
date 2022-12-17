@@ -19,7 +19,6 @@ struct HomeView: View {
     guard !addTodoString.isEmpty else { return }
     todoDataManager.addTodo(todoTitle: addTodoString)
     addTodoString = ""
-    addFieldFocused = true
   }
   
   var body: some View {
@@ -62,9 +61,6 @@ struct HomeView: View {
         TodoEditView(vm: vm)
       }
     } // END: Zstack
-    .onAppear {
-      addFieldFocused = true
-    }
 
   }
 }

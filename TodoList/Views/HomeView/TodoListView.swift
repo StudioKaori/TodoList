@@ -15,18 +15,22 @@ struct TodoListView: View {
     List {
       ForEach(todoDataManager.savedTodos) { entity in
         HStack {
-          Text(entity.title ?? "")
-          Spacer()
-          Image(systemName: "checkmark.circle")
+          Image(systemName: "circle")
             .foregroundColor(Color.theme.secondaryText)
             .onTapGesture {
-              TodoDataManager.shared.tickTodo(entity: entity)
+              withAnimation{
+                TodoDataManager.shared.tickTodo(entity: entity)
+              }
             }
+          
+          Text(entity.title ?? "")
         }
         .font(.system(size: UserSettings.fontSize.body))
         .swipeActions(edge: .trailing) {
           Button {
-            todoDataManager.tickTodo(entity: entity)
+            withAnimation {
+              todoDataManager.tickTodo(entity: entity)
+            }
           } label: {
             Image(systemName: "checkmark.circle.fill")
           }
@@ -34,7 +38,9 @@ struct TodoListView: View {
         }
         .swipeActions(edge: .leading) {
           Button {
-            vm.showTodoEdit(entity: entity)
+            withAnimation {
+              vm.showTodoEdit(entity: entity)
+            }
           } label: {
             Image(systemName: "pencil")
           }

@@ -27,6 +27,7 @@ class TodoDataManager: ObservableObject {
     
     do {
       savedTodos = try container.viewContext.fetch(request)
+      print(savedTodos)
       
       // reload the widget
       WidgetCenter.shared.reloadTimelines(ofKind: "TodoListWidget")
