@@ -19,7 +19,7 @@ struct WidgetTitleView: View {
       
       Spacer()
       
-      Image(systemName: "plus.circle")
+      Image(systemName: "plus")
         .padding(.horizontal)
     }
     .font(.system(size: UserSettings.fontSize.body))

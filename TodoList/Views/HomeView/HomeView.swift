@@ -28,6 +28,9 @@ struct HomeView: View {
         .ignoresSafeArea()
       
       VStack(spacing: 0) {
+        Text("Todos")
+          .font(.headline)
+        
         TodoListView(vm: vm)
         
         Spacer()
@@ -55,7 +58,6 @@ struct HomeView: View {
         .padding()
         
       } // END: Vstack Main container
-      .navigationTitle("Todo")
       
       if vm.showingEditSheet && vm.editTargetTodo != nil {
         TodoEditView(vm: vm)

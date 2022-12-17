@@ -19,5 +19,5 @@ struct ColorTheme {
   let primaryText = Color("PrimaryTextColor")
   let secondaryText = Color("SecondaryTextColor")
   let textFieldBackground = Color("TextFieldBackground")
-  
+  let listBackground = Color("ListBackgroundColor")
 }
