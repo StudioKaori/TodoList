@@ -53,7 +53,7 @@ class TodoDataManager: ObservableObject {
     }
   } // END: fetchTodos
   
-  func addTodo(todoTitle: String) {
+  func addTodo(todoTitle: String, incompleteOnly: Bool = true) {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
     newTodo.addedDate = Date()
@@ -65,15 +65,15 @@ class TodoDataManager: ObservableObject {
     //newTodo.dueDate = nil
     newTodo.starred = false
     //newTodo.image = nil
-    saveData()
+    saveData(incompleteOnly: incompleteOnly)
   } // END: addTodo
   
-  func updateTodo(entity: TodoEntity) {
-    saveData()
+  func updateTodo(entity: TodoEntity, incompleteOnly: Bool = true) {
+    saveData(incompleteOnly: incompleteOnly)
   } // END: updateTodo
   
-  func tickTodo(entity: TodoEntity, incompleteOnly: Bool = true) {
-    entity.completed = true
+  func updateCompleted(entity: TodoEntity, completed: Bool, incompleteOnly: Bool = true) {
+    entity.completed = completed
     saveData(incompleteOnly: incompleteOnly)
   }
   

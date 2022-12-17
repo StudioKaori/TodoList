@@ -13,11 +13,10 @@ struct HomeView: View {
   @StateObject private var todoDataManager = TodoDataManager.shared
   
   @State private var addTodoString: String = ""
-  @FocusState private var addFieldFocused: Bool
   
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
-    todoDataManager.addTodo(todoTitle: addTodoString)
+    todoDataManager.addTodo(todoTitle: addTodoString, incompleteOnly: vm.showAllTodos ? false : true)
     addTodoString = ""
   }
   
@@ -37,7 +36,6 @@ struct HomeView: View {
         
         HStack {
           TextField("Add new todo here...", text: $addTodoString)
-            .focused($addFieldFocused)
             .onSubmit {
               addTodo()
             }

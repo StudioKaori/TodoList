@@ -20,7 +20,7 @@ struct TodoListView: View {
               .foregroundColor(entity.completed ? Color.theme.accent : Color.theme.secondaryText)
               .onTapGesture {
                 withAnimation{
-                  TodoDataManager.shared.tickTodo(entity: entity, incompleteOnly: vm.showAllTodos ? false : true)
+                  TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
                 }
               }
             
@@ -31,10 +31,10 @@ struct TodoListView: View {
           .swipeActions(edge: .trailing) {
             Button {
               withAnimation {
-                todoDataManager.tickTodo(entity: entity)
+                TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
               }
             } label: {
-              Image(systemName: "checkmark.circle.fill")
+              Image(systemName: entity.completed ? "circle" : "checkmark.circle.fill")
             }
             .tint(Color.theme.accent)
           }
