@@ -77,11 +77,9 @@ class TodoDataManager: ObservableObject {
     saveData(incompleteOnly: incompleteOnly)
   }
   
-  func deleteTodo(indexSet: IndexSet) {
-    guard let index = indexSet.first else { return }
-    let entity = savedTodos[index]
+  func deleteTodo(entity: TodoEntity, incompleteOnly: Bool = true) {
     container.viewContext.delete(entity)
-    saveData()
+    saveData(incompleteOnly: incompleteOnly)
   }
   
   func saveData(incompleteOnly: Bool = true) {

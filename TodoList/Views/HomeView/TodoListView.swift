@@ -31,14 +31,23 @@ struct TodoListView: View {
           .swipeActions(edge: .trailing) {
             Button {
               withAnimation {
-                TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
+                todoDataManager.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
               }
             } label: {
               Image(systemName: entity.completed ? "circle" : "checkmark.circle.fill")
             }
             .tint(Color.theme.accent)
           }
-          .swipeActions(edge: .leading) {
+          .swipeActions(edge: .leading, allowsFullSwipe: false) {
+            Button {
+              withAnimation {
+                todoDataManager.deleteTodo(entity: entity, incompleteOnly: vm.showAllTodos ? false : true)
+              }
+            } label: {
+              Image(systemName: "trash")
+            }
+            .tint(.red)
+            
             Button {
               withAnimation {
                 vm.showTodoEdit(entity: entity)
@@ -46,7 +55,7 @@ struct TodoListView: View {
             } label: {
               Image(systemName: "pencil")
             }
-            .tint(.orange)
+            .tint(.blue)
           }
           .onTapGesture {
             vm.showTodoEdit(entity: entity)
