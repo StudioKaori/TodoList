@@ -20,10 +20,24 @@ class TodoDataManager: ObservableObject {
     fetchTodos()
   } // END: init
   
+  func countTodos() -> Int {
+    let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
+    do {
+      let todos = try container.viewContext.fetch(request)
+      return todos.count
+    } catch let error {
+      print("Error fetching: \(error)")
+      // Todo implement error handling
+      return 0
+    }
+  }
+  
   func fetchTodos() {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
     request.sortDescriptors = [sort]
+    let predicate = NSPredicate(format: "completed == %d", false)
+    request.predicate = predicate
     
     do {
       savedTodos = try container.viewContext.fetch(request)
@@ -40,7 +54,7 @@ class TodoDataManager: ObservableObject {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
     newTodo.addedDate = Date()
-    newTodo.order = Int16(savedTodos.count + 1)
+    newTodo.order = Int16(countTodos() + 1)
     newTodo.title = todoTitle
     newTodo.listId = "0"
     newTodo.completed = false
@@ -56,7 +70,7 @@ class TodoDataManager: ObservableObject {
   } // END: updateTodo
   
   func tickTodo(entity: TodoEntity) {
-    container.viewContext.delete(entity)
+    entity.completed = true
     saveData()
   }
   
@@ -76,4 +90,3 @@ class TodoDataManager: ObservableObject {
     }
   } // END: saveData
 }
-
