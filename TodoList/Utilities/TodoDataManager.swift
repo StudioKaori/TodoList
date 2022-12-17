@@ -72,9 +72,9 @@ class TodoDataManager: ObservableObject {
     saveData()
   } // END: updateTodo
   
-  func tickTodo(entity: TodoEntity) {
+  func tickTodo(entity: TodoEntity, incompleteOnly: Bool = true) {
     entity.completed = true
-    saveData()
+    saveData(incompleteOnly: incompleteOnly)
   }
   
   func deleteTodo(indexSet: IndexSet) {
@@ -84,10 +84,10 @@ class TodoDataManager: ObservableObject {
     saveData()
   }
   
-  func saveData() {
+  func saveData(incompleteOnly: Bool = true) {
     do {
       try container.viewContext.save()
-      fetchTodos(incompleteOnly: true)
+      fetchTodos(incompleteOnly: incompleteOnly)
     } catch let error {
       print("Error saving: \(error)")
     }

@@ -8,8 +8,9 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-  @Published var showingEditSheet = false
+  @Published var showingEditSheet: Bool = false
   @Published var editTargetTodo: TodoEntity?
+  @Published var showAllTodos: Bool = false
   
   func showTodoEdit(entity: TodoEntity) {
     self.editTargetTodo = entity

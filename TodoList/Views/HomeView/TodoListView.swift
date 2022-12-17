@@ -16,15 +16,16 @@ struct TodoListView: View {
       List {
         ForEach(todoDataManager.savedTodos) { entity in
           HStack {
-            Image(systemName: "circle")
-              .foregroundColor(Color.theme.secondaryText)
+            Image(systemName: entity.completed ? "checkmark.circle" : "circle")
+              .foregroundColor(entity.completed ? Color.theme.accent : Color.theme.secondaryText)
               .onTapGesture {
                 withAnimation{
-                  TodoDataManager.shared.tickTodo(entity: entity)
+                  TodoDataManager.shared.tickTodo(entity: entity, incompleteOnly: vm.showAllTodos ? false : true)
                 }
               }
             
             Text(entity.title ?? "")
+              .strikethrough(entity.completed ? true : false)
           }
           .font(.system(size: UserSettings.fontSize.body))
           .swipeActions(edge: .trailing) {
@@ -58,11 +59,16 @@ struct TodoListView: View {
         Spacer()
         
         Button {
-          //
+          vm.showAllTodos.toggle()
+          if vm.showAllTodos {
+            todoDataManager.fetchTodos(incompleteOnly: false)
+          } else {
+            todoDataManager.fetchTodos(incompleteOnly: true)
+          }
         } label: {
           HStack {
-            Image(systemName: "checkmark.circle.fill")
-            Text("Show All Todos")
+            Image(systemName: vm.showAllTodos ? "eye.slash" : "eye.fill")
+            Text(vm.showAllTodos ? "Hide Completed Todos" : "Show All Todos")
           }
           .font(.caption)
         }
