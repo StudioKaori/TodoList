@@ -83,7 +83,7 @@ struct TodoListView: View {
         }
       }
       .padding(.horizontal, 24)
-      .padding(.vertical,8)
+      .padding(.vertical,12)
       .background(Color.theme.listBackground)
       
     }

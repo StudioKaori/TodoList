@@ -11,6 +11,7 @@ struct HomeView: View {
   
   @StateObject var vm = HomeViewModel()
   @StateObject private var todoDataManager = TodoDataManager.shared
+  @FocusState private var addTodoFieldFocus: Bool
   
   @State private var addTodoString: String = ""
   
@@ -18,6 +19,7 @@ struct HomeView: View {
     guard !addTodoString.isEmpty else { return }
     todoDataManager.addTodo(todoTitle: addTodoString, incompleteOnly: vm.showAllTodos ? false : true)
     addTodoString = ""
+    addTodoFieldFocus = false
   }
   
   var body: some View {
@@ -29,6 +31,7 @@ struct HomeView: View {
       VStack(spacing: 0) {
         Text("Todos")
           .font(.headline)
+          .padding()
         
         TodoListView(vm: vm)
         
@@ -36,6 +39,7 @@ struct HomeView: View {
         
         HStack {
           TextField("Add new todo here...", text: $addTodoString)
+            .focused($addTodoFieldFocus)
             .onSubmit {
               addTodo()
             }
@@ -52,16 +56,28 @@ struct HomeView: View {
               .font(.system(size: UserSettings.fontSize.largeTitle))
               .foregroundColor(Color.theme.accent)
           }
+          
+          if addTodoFieldFocus {
+            Button {
+              addTodoFieldFocus = false
+            } label: {
+              Image(systemName: "arrow.down.circle")
+                .font(.system(size: UserSettings.fontSize.largeTitle))
+                .foregroundColor(Color.theme.secondaryText)
+            }
+          }
         } // END: Hstack AddTask Text field
         .padding()
         
       } // END: Vstack Main container
       
       if vm.showingEditSheet && vm.editTargetTodo != nil {
-        TodoEditView(vm: vm)
+        TodoEditView(vm: vm, ieEditMode: true)
       }
     } // END: Zstack
-
+    .onAppear {
+      addTodoFieldFocus = false
+    }
   }
 }
 

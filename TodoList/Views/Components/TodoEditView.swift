@@ -9,12 +9,14 @@ import SwiftUI
 
 struct TodoEditView: View {
   let vm: HomeViewModel
+  let ieEditMode: Bool
   @StateObject var todoDataManager = TodoDataManager.shared
   @State private var todoString = ""
   @FocusState private var editFieldFocused: Bool
   
-  init(vm: HomeViewModel) {
+  init(vm: HomeViewModel, ieEditMode: Bool) {
     self.vm = vm
+    self.ieEditMode = ieEditMode
     self._todoString = State(initialValue: vm.editTargetTodo?.title ?? "")
   }
   
@@ -76,6 +78,6 @@ struct TodoEditView: View {
 
 struct TodoEditView_Previews: PreviewProvider {
   static var previews: some View {
-    TodoEditView(vm: HomeViewModel())
+    TodoEditView(vm: HomeViewModel(), ieEditMode: false)
   }
 }
