@@ -59,6 +59,7 @@ class TodoDataManager: ObservableObject {
     newTodo.addedDate = Date()
     newTodo.order = Int16(countTodos() + 1)
     newTodo.title = todoTitle
+    newTodo.memo = ""
     newTodo.listId = "0"
     newTodo.completed = false
     newTodo.color = 0
