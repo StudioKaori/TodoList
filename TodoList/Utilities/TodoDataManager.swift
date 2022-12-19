@@ -15,9 +15,11 @@ class TodoDataManager: ObservableObject {
   
   let container: NSPersistentContainer = PersistenceController.shared.container
   @Published var savedTodos: [TodoEntity] = []
+  @Published var todoLists: [ListEntity] = []
+  @Published var userSettings: UserSettingsEntity?
   
   private init() {
-    fetchTodos(incompleteOnly: true)
+    fetchUserSettings()
   } // END: init
   
   func countTodos() -> Int {
@@ -60,7 +62,7 @@ class TodoDataManager: ObservableObject {
     newTodo.order = Int16(countTodos() + 1)
     newTodo.title = todoTitle
     newTodo.memo = ""
-    newTodo.listId = UserSettingsManager.shared.userSettings?.activeListId ?? "0"
+    newTodo.listId = userSettings?.activeListId ?? "0"
     newTodo.completed = false
     newTodo.color = 0
     //newTodo.dueDate = nil
@@ -83,6 +85,55 @@ class TodoDataManager: ObservableObject {
     saveData(incompleteOnly: incompleteOnly)
   }
   
+  // MARK: -UserSettings
+  func fetchUserSettings() {
+    let request = NSFetchRequest<UserSettingsEntity>(entityName: "UserSettingsEntity")
+    
+    do {
+      let userSettingsArray = try container.viewContext.fetch(request)
+      
+      if userSettingsArray.count == 0 {
+        // Generate the userSettings if not exist
+        generateDefaultList()
+        let newUserSettings = UserSettingsEntity(context: container.viewContext)
+        newUserSettings.activeListId = "0"
+        saveData()
+        fetchLists()
+        fetchTodos(incompleteOnly: true)
+      } else {
+        userSettings = userSettingsArray[0]
+      }
+    } catch let error {
+      print("Error fetching user settings: \(error)")
+    }
+  }
+  
+  func updateActiveListId(id: String) {
+    userSettings?.activeListId = id
+    saveData()
+    
+  }
+  
+  // MARK: - Lists
+  func fetchLists() {
+    let request = NSFetchRequest<ListEntity>(entityName: "ListEntity")
+    do {
+      todoLists = try container.viewContext.fetch(request)
+      print("MyTodoLists: \(todoLists)")
+    } catch let error {
+      print("Error fetching fetchlist: \(error)")
+    }
+  }
+  
+  func generateDefaultList() {
+    let defaultList = ListEntity(context: container.viewContext)
+    defaultList.id = "0"
+    defaultList.title = "Todos"
+    saveData()
+  }
+  
+  
+  // MARK: - General
   func saveData(incompleteOnly: Bool = true) {
     do {
       try container.viewContext.save()

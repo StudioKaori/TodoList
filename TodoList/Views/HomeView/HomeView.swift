@@ -34,26 +34,24 @@ struct HomeView: View {
           .padding(.bottom, 30)
         
         ScrollView(.horizontal, showsIndicators: false) {
+
           HStack(spacing: 42) {
-            VStack {
-              Text("Todos")
-              Spacer()
-              Rectangle()
-                .frame(width: .infinity, height: 2)
-            }
-            .foregroundColor(Color.theme.accent)
             
-            VStack {
-              Text("Maternity")
-              Spacer()
+            ForEach(todoDataManager.todoLists) { list in
+              VStack {
+                Text(list.title ?? "No name list")
+                Spacer()
+                Rectangle()
+                  .frame(width: .infinity, height: 2)
+              }
+              .foregroundColor(Color.theme.accent)
+              
+//              VStack {
+//                Text("Maternity")
+//                Spacer()
+//              }
+//              .foregroundColor(Color.theme.primaryText)
             }
-            .foregroundColor(Color.theme.primaryText)
-            
-            VStack {
-              Text("Work")
-              Spacer()
-            }
-            .foregroundColor(Color.theme.primaryText)
             
             VStack {
               Image(systemName: "plus")
