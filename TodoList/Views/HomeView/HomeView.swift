@@ -31,7 +31,41 @@ struct HomeView: View {
       VStack(spacing: 0) {
         Text("Todos")
           .font(.headline)
-          .padding()
+          .padding(.bottom, 30)
+        
+        ScrollView(.horizontal, showsIndicators: false) {
+          HStack(spacing: 42) {
+            VStack {
+              Text("Todos")
+              Spacer()
+              Rectangle()
+                .frame(width: .infinity, height: 2)
+            }
+            .foregroundColor(Color.theme.accent)
+            
+            VStack {
+              Text("Maternity")
+              Spacer()
+            }
+            .foregroundColor(Color.theme.primaryText)
+            
+            VStack {
+              Text("Work")
+              Spacer()
+            }
+            .foregroundColor(Color.theme.primaryText)
+            
+            VStack {
+              Image(systemName: "plus")
+              Spacer()
+            }
+            .foregroundColor(Color.theme.primaryText)
+            
+          }
+          .frame(height: 30)
+        }
+        .font(.subheadline)
+        .padding(.horizontal)
         
         TodoListView(vm: vm)
         
