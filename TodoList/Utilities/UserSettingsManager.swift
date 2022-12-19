@@ -27,6 +27,7 @@ class UserSettingsManager: ObservableObject {
       
       if userSettingsArray.count == 0 {
         // Generate the userSettings if not exist
+        TodoListsManager.shared.generateDefaultList()
         let newUserSettings = UserSettingsEntity(context: container.viewContext)
         newUserSettings.activeListId = "0"
         saveData()
