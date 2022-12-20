@@ -11,57 +11,66 @@ struct TodoListView: View {
   let vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   
+  func move(from source: IndexSet, to destination: Int) {
+//    todoDataManager.savedTodos.move(fromOffsets: source, toOffset: destination)
+//    todoDataManager.saveData(incompleteOnly: vm.showAllTodos)
+    print("from:\(source) to: \(destination)")
+  }
+  
   var body: some View {
     ZStack(alignment: .topLeading) {
       List {
         ForEach(todoDataManager.savedTodos) { entity in
-          HStack {
-            Image(systemName: entity.completed ? "checkmark.circle" : "circle")
-              .foregroundColor(entity.completed ? Color.theme.accent : Color.theme.secondaryText)
-              .onTapGesture {
-                withAnimation{
-                  TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
+          if !entity.completed {
+            HStack {
+              Image(systemName: entity.completed ? "checkmark.circle" : "circle")
+                .foregroundColor(entity.completed ? Color.theme.accent : Color.theme.secondaryText)
+                .onTapGesture {
+                  withAnimation{
+                    TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
+                  }
                 }
-              }
-            
-            Text(entity.title ?? "")
-              .strikethrough(entity.completed ? true : false)
-          }
-          .font(.body)
-          .swipeActions(edge: .trailing) {
-            Button {
-              withAnimation {
-                todoDataManager.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
-              }
-            } label: {
-              Image(systemName: entity.completed ? "circle" : "checkmark.circle.fill")
+              
+              Text(entity.title ?? "")
+                .strikethrough(entity.completed ? true : false)
             }
-            .tint(Color.theme.accent)
-          }
-          .swipeActions(edge: .leading, allowsFullSwipe: false) {
-            Button {
-              withAnimation {
-                todoDataManager.deleteTodo(entity: entity, incompleteOnly: vm.showAllTodos ? false : true)
+            .font(.body)
+            .swipeActions(edge: .trailing) {
+              Button {
+                withAnimation {
+                  todoDataManager.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
+                }
+              } label: {
+                Image(systemName: entity.completed ? "circle" : "checkmark.circle.fill")
               }
-            } label: {
-              Image(systemName: "trash")
+              .tint(Color.theme.accent)
             }
-            .tint(.red)
-            
-            Button {
-              withAnimation {
-                vm.showTodoEdit(entity: entity)
+            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+              Button {
+                withAnimation {
+                  todoDataManager.deleteTodo(entity: entity, incompleteOnly: vm.showAllTodos ? false : true)
+                }
+              } label: {
+                Image(systemName: "trash")
               }
-            } label: {
-              Image(systemName: "pencil")
+              .tint(.red)
+              
+              Button {
+                withAnimation {
+                  vm.showTodoEdit(entity: entity)
+                }
+              } label: {
+                Image(systemName: "pencil")
+              }
+              .tint(.blue)
             }
-            .tint(.blue)
+            .onTapGesture {
+              vm.showTodoEdit(entity: entity)
+            }
+            // END: Hstack list item
           }
-          .onTapGesture {
-            vm.showTodoEdit(entity: entity)
-          }
-          // END: Hstack list item
-        }
+        } // END: Foreach
+        .onMove(perform: move)
       } // END: list
       
       HStack {

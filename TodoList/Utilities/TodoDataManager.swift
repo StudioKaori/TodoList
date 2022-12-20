@@ -22,8 +22,10 @@ class TodoDataManager: ObservableObject {
     fetchUserSettings()
   } // END: init
   
-  func countTodos() -> Int {
+  func countTodos(listId: String) -> Int {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
+    let listIdPredicate = NSPredicate(format: "listId = %@", listId)
+    request.predicate = listIdPredicate
     do {
       let todos = try container.viewContext.fetch(request)
       return todos.count
@@ -40,12 +42,13 @@ class TodoDataManager: ObservableObject {
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
     request.sortDescriptors = [sort]
     
-    if incompleteOnly {
-      let incompletePredicate = NSPredicate(format: "completed == %d", false)
-      request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [listIdPredicate, incompletePredicate])
-    } else {
-      request.predicate = listIdPredicate
-    }
+//    if incompleteOnly {
+//      let incompletePredicate = NSPredicate(format: "completed == %d", false)
+//      request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [listIdPredicate, incompletePredicate])
+//    } else {
+//      request.predicate = listIdPredicate
+//    }
+    request.predicate = listIdPredicate
     
     do {
       savedTodos = try container.viewContext.fetch(request)
@@ -62,7 +65,7 @@ class TodoDataManager: ObservableObject {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
     newTodo.addedDate = Date()
-    newTodo.order = Int16(countTodos() + 1)
+    newTodo.order = Int16(countTodos(listId: userSettings?.activeListId ?? defaultActiveListId) + 1)
     newTodo.title = todoTitle
     newTodo.memo = ""
     newTodo.listId = userSettings?.activeListId ?? defaultActiveListId
