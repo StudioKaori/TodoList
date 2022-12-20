@@ -50,12 +50,12 @@ struct HomeView: View {
                 .foregroundColor(todoDataManager.userSettings?.activeListId == list.id ? Color.theme.accent : Color.theme.primaryText)
               }
 
-
             }
             
             VStack {
               Button {
-                todoDataManager.addNewList(listTitle: "New", incompleteOnly: vm.showAllTodos)
+                vm.editMode = "list"
+                vm.showingEditSheet = true
               } label: {
                 Image(systemName: "plus")
                   .foregroundColor(Color.theme.primaryText)
@@ -109,8 +109,8 @@ struct HomeView: View {
         
       } // END: Vstack Main container
       
-      if vm.showingEditSheet && vm.editTargetTodo != nil {
-        TodoEditView(vm: vm, editMode: "todo", ieEditMode: true)
+      if vm.showingEditSheet {
+        TodoEditView(vm: vm, editMode: vm.editMode, ieEditMode: true)
       }
     } // END: Zstack
     .onAppear {
