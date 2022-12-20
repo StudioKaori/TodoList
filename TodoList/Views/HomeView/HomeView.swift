@@ -38,26 +38,32 @@ struct HomeView: View {
           HStack(spacing: 42) {
             
             ForEach(todoDataManager.todoLists) { list in
-              VStack {
-                Text(list.title ?? "No name list")
-                Spacer()
-                Rectangle()
-                  .frame(width: .infinity, height: 2)
+              Button {
+                todoDataManager.updateActiveListId(id: list.id ?? "0")
+              } label: {
+                VStack {
+                  Text(list.title ?? "No name list")
+                  Spacer()
+                  Rectangle()
+                    .frame(height: todoDataManager.userSettings?.activeListId == list.id ? 2 : 0)
+                }
+                .foregroundColor(todoDataManager.userSettings?.activeListId == list.id ? Color.theme.accent : Color.theme.primaryText)
               }
-              .foregroundColor(Color.theme.accent)
-              
-//              VStack {
-//                Text("Maternity")
-//                Spacer()
-//              }
-//              .foregroundColor(Color.theme.primaryText)
+
+
             }
             
             VStack {
-              Image(systemName: "plus")
+              Button {
+                todoDataManager.addNewList(listTitle: "New", incompleteOnly: vm.showAllTodos)
+              } label: {
+                Image(systemName: "plus")
+                  .foregroundColor(Color.theme.primaryText)
+              }
+              
               Spacer()
             }
-            .foregroundColor(Color.theme.primaryText)
+            
             
           }
           .frame(height: 30)

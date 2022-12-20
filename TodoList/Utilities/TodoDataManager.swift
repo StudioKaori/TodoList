@@ -97,12 +97,14 @@ class TodoDataManager: ObservableObject {
         generateDefaultList()
         let newUserSettings = UserSettingsEntity(context: container.viewContext)
         newUserSettings.activeListId = "0"
+        newUserSettings.widgetListId = "0"
         saveData()
-        fetchLists()
-        fetchTodos(incompleteOnly: true)
       } else {
         userSettings = userSettingsArray[0]
       }
+      
+      fetchLists()
+      fetchTodos(incompleteOnly: true)
     } catch let error {
       print("Error fetching user settings: \(error)")
     }
@@ -125,6 +127,27 @@ class TodoDataManager: ObservableObject {
     }
   }
   
+  func addNewList(listTitle: String, incompleteOnly: Bool) {
+    if listTitle == "" { return }
+    let newList = ListEntity(context: container.viewContext)
+    newList.id = UUID().uuidString
+    newList.title = listTitle
+    newList.order = Int16(countList() + 1)
+    saveData(incompleteOnly: incompleteOnly)
+  }
+  
+  func countList() -> Int {
+    let request = NSFetchRequest<ListEntity>(entityName: "ListEntity")
+    do {
+      let lists = try container.viewContext.fetch(request)
+      return lists.count
+    } catch let error {
+      print("Error fetching: \(error)")
+      // Todo implement error handling
+      return 0
+    }
+  }
+  
   func generateDefaultList() {
     let defaultList = ListEntity(context: container.viewContext)
     defaultList.id = "0"
@@ -137,6 +160,7 @@ class TodoDataManager: ObservableObject {
   func saveData(incompleteOnly: Bool = true) {
     do {
       try container.viewContext.save()
+      fetchLists()
       fetchTodos(incompleteOnly: incompleteOnly)
     } catch let error {
       print("Error saving: \(error)")

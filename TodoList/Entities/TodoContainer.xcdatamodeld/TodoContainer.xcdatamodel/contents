@@ -21,5 +21,6 @@
     <entity name="UserSettingsEntity" representedClassName="UserSettingsEntity" syncable="YES" codeGenerationType="class">
         <attribute name="activeListId" optional="YES" attributeType="String"/>
         <attribute name="fontSize" optional="YES" attributeType="String"/>
+        <attribute name="widgetListId" optional="YES" attributeType="String"/>
     </entity>
 </model>
