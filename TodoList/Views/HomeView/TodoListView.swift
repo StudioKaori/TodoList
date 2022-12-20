@@ -21,13 +21,13 @@ struct TodoListView: View {
     ZStack(alignment: .topLeading) {
       List {
         ForEach(todoDataManager.savedTodos) { entity in
-          if !entity.completed {
+          if !entity.completed || vm.showAllTodos {
             HStack {
               Image(systemName: entity.completed ? "checkmark.circle" : "circle")
                 .foregroundColor(entity.completed ? Color.theme.accent : Color.theme.secondaryText)
                 .onTapGesture {
                   withAnimation{
-                    TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
+                    TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed)
                   }
                 }
               
@@ -38,7 +38,7 @@ struct TodoListView: View {
             .swipeActions(edge: .trailing) {
               Button {
                 withAnimation {
-                  todoDataManager.updateCompleted(entity: entity, completed: !entity.completed, incompleteOnly: vm.showAllTodos ? false : true)
+                  todoDataManager.updateCompleted(entity: entity, completed: !entity.completed)
                 }
               } label: {
                 Image(systemName: entity.completed ? "circle" : "checkmark.circle.fill")
@@ -48,7 +48,7 @@ struct TodoListView: View {
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
               Button {
                 withAnimation {
-                  todoDataManager.deleteTodo(entity: entity, incompleteOnly: vm.showAllTodos ? false : true)
+                  todoDataManager.deleteTodo(entity: entity)
                 }
               } label: {
                 Image(systemName: "trash")
@@ -79,9 +79,9 @@ struct TodoListView: View {
         Button {
           vm.showAllTodos.toggle()
           if vm.showAllTodos {
-            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: false)
+            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId)
           } else {
-            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: true)
+            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId)
           }
         } label: {
           HStack {

@@ -42,7 +42,7 @@ struct TextFieldView: View {
       vm.showingEditSheet.toggle()
     case .list:
       if textFieldString.isEmpty { return }
-      todoDataManager.addNewList(listTitle: textFieldString, incompleteOnly: vm.showAllTodos)
+      todoDataManager.addNewList(listTitle: textFieldString)
       vm.showingEditSheet.toggle()
     }
   }

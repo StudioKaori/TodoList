@@ -17,7 +17,7 @@ struct HomeView: View {
   
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
-    todoDataManager.addTodo(todoTitle: addTodoString, incompleteOnly: vm.showAllTodos ? false : true)
+    todoDataManager.addTodo(todoTitle: addTodoString)
     addTodoString = ""
     addTodoFieldFocus = false
   }

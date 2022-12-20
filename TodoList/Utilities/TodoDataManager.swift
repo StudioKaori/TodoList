@@ -36,19 +36,18 @@ class TodoDataManager: ObservableObject {
     }
   }
   
-  func fetchTodos(activeListId: String, incompleteOnly: Bool) {
+  func fetchTodos(activeListId: String, incompleteOnly: Bool = false) {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
     let listIdPredicate = NSPredicate(format: "listId = %@", activeListId)
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
     request.sortDescriptors = [sort]
     
-//    if incompleteOnly {
-//      let incompletePredicate = NSPredicate(format: "completed == %d", false)
-//      request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [listIdPredicate, incompletePredicate])
-//    } else {
-//      request.predicate = listIdPredicate
-//    }
-    request.predicate = listIdPredicate
+    if incompleteOnly {
+      let incompletePredicate = NSPredicate(format: "completed == %d", false)
+      request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [listIdPredicate, incompletePredicate])
+    } else {
+      request.predicate = listIdPredicate
+    }
     
     do {
       savedTodos = try container.viewContext.fetch(request)
@@ -61,7 +60,7 @@ class TodoDataManager: ObservableObject {
     }
   } // END: fetchTodos
   
-  func addTodo(todoTitle: String, incompleteOnly: Bool = true) {
+  func addTodo(todoTitle: String, incompleteOnly: Bool = false) {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
     newTodo.addedDate = Date()
@@ -77,16 +76,16 @@ class TodoDataManager: ObservableObject {
     saveData(incompleteOnly: incompleteOnly)
   } // END: addTodo
   
-  func updateTodo(entity: TodoEntity, incompleteOnly: Bool = true) {
+  func updateTodo(entity: TodoEntity, incompleteOnly: Bool = false) {
     saveData(incompleteOnly: incompleteOnly)
   } // END: updateTodo
   
-  func updateCompleted(entity: TodoEntity, completed: Bool, incompleteOnly: Bool = true) {
+  func updateCompleted(entity: TodoEntity, completed: Bool, incompleteOnly: Bool = false) {
     entity.completed = completed
     saveData(incompleteOnly: incompleteOnly)
   }
   
-  func deleteTodo(entity: TodoEntity, incompleteOnly: Bool = true) {
+  func deleteTodo(entity: TodoEntity, incompleteOnly: Bool = false) {
     container.viewContext.delete(entity)
     saveData(incompleteOnly: incompleteOnly)
   }
@@ -110,7 +109,7 @@ class TodoDataManager: ObservableObject {
       }
       
       fetchLists()
-      fetchTodos(activeListId: userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: true)
+      fetchTodos(activeListId: userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: false)
     } catch let error {
       print("Error fetching user settings: \(error)")
     }
@@ -133,7 +132,7 @@ class TodoDataManager: ObservableObject {
     }
   }
   
-  func addNewList(listTitle: String, incompleteOnly: Bool) {
+  func addNewList(listTitle: String, incompleteOnly: Bool = false) {
     if listTitle == "" { return }
     let newList = ListEntity(context: container.viewContext)
     newList.id = UUID().uuidString
@@ -164,7 +163,7 @@ class TodoDataManager: ObservableObject {
   
   
   // MARK: - General
-  func saveData(incompleteOnly: Bool = true) {
+  func saveData(incompleteOnly: Bool = false) {
     do {
       try container.viewContext.save()
       fetchLists()
