@@ -7,35 +7,43 @@
 
 import SwiftUI
 
-struct TodoEditView: View {
+enum TextFieldEditMode: String {
+  case todo = "todo"
+  case list = "list"
+}
+
+struct TextFieldView: View {
   let vm: HomeViewModel
-  let editMode: String
+  let editMode: TextFieldEditMode
   let ieEditMode: Bool
   @StateObject var todoDataManager = TodoDataManager.shared
   @State private var textFieldString = ""
   @FocusState private var editFieldFocused: Bool
   
-  init(vm: HomeViewModel, editMode: String, ieEditMode: Bool) {
+  init(vm: HomeViewModel, editMode: TextFieldEditMode, ieEditMode: Bool) {
     self.vm = vm
     self.editMode = editMode
     self.ieEditMode = ieEditMode
-    self._textFieldString = State(initialValue: vm.editTargetTodo?.title ?? "")
+    switch(editMode) {
+    case .todo:
+      self._textFieldString = State(initialValue: vm.editTargetTodo?.title ?? "")
+    case .list:
+      self._textFieldString = State(initialValue: "")
+    }
   }
   
   private func submitChange() {
     switch(editMode) {
-    case "todo":
+    case .todo:
       if textFieldString.isEmpty { return }
       if vm.editTargetTodo == nil { return }
       vm.editTargetTodo?.title = textFieldString
       todoDataManager.saveData()
       vm.showingEditSheet.toggle()
-    case "list":
+    case .list:
       if textFieldString.isEmpty { return }
       todoDataManager.addNewList(listTitle: textFieldString, incompleteOnly: vm.showAllTodos)
       vm.showingEditSheet.toggle()
-    default:
-      return
     }
   }
   
@@ -51,7 +59,7 @@ struct TodoEditView: View {
         Spacer()
         
         HStack {
-          TextField(vm.editTargetTodo?.title ?? "", text: $textFieldString)
+          TextField("Input \(editMode.rawValue) title...", text: $textFieldString)
             .focused($editFieldFocused)
             .onSubmit {
               submitChange()
@@ -89,6 +97,6 @@ struct TodoEditView: View {
 
 struct TodoEditView_Previews: PreviewProvider {
   static var previews: some View {
-    TodoEditView(vm: HomeViewModel(), editMode: "list", ieEditMode: false)
+    TextFieldView(vm: HomeViewModel(), editMode: .list, ieEditMode: false)
   }
 }

@@ -54,7 +54,7 @@ struct HomeView: View {
             
             VStack {
               Button {
-                vm.editMode = "list"
+                vm.editMode = .list
                 vm.showingEditSheet = true
               } label: {
                 Image(systemName: "plus")
@@ -110,7 +110,7 @@ struct HomeView: View {
       } // END: Vstack Main container
       
       if vm.showingEditSheet {
-        TodoEditView(vm: vm, editMode: vm.editMode, ieEditMode: true)
+        TextFieldView(vm: vm, editMode: vm.editMode, ieEditMode: true)
       }
     } // END: Zstack
     .onAppear {

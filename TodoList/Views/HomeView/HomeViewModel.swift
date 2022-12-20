@@ -12,11 +12,11 @@ class HomeViewModel: ObservableObject {
   @Published var editTargetTodo: TodoEntity?
   @Published var showAllTodos: Bool = false
   
-  var editMode: String = ""
+  var editMode: TextFieldEditMode = .todo
   
   func showTodoEdit(entity: TodoEntity) {
     self.editTargetTodo = entity
-    self.editMode = "todo"
+    self.editMode = .todo
     self.showingEditSheet.toggle()
   }
 }
