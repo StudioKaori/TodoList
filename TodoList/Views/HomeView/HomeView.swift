@@ -110,7 +110,7 @@ struct HomeView: View {
       } // END: Vstack Main container
       
       if vm.showingEditSheet && vm.editTargetTodo != nil {
-        TodoEditView(vm: vm, ieEditMode: true)
+        TodoEditView(vm: vm, editMode: "todo", ieEditMode: true)
       }
     } // END: Zstack
     .onAppear {

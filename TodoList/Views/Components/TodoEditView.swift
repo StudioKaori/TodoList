@@ -9,23 +9,34 @@ import SwiftUI
 
 struct TodoEditView: View {
   let vm: HomeViewModel
+  let editMode: String
   let ieEditMode: Bool
   @StateObject var todoDataManager = TodoDataManager.shared
-  @State private var todoString = ""
+  @State private var textFieldString = ""
   @FocusState private var editFieldFocused: Bool
   
-  init(vm: HomeViewModel, ieEditMode: Bool) {
+  init(vm: HomeViewModel, editMode: String, ieEditMode: Bool) {
     self.vm = vm
+    self.editMode = editMode
     self.ieEditMode = ieEditMode
-    self._todoString = State(initialValue: vm.editTargetTodo?.title ?? "")
+    self._textFieldString = State(initialValue: vm.editTargetTodo?.title ?? "")
   }
   
-  private func updateTodo() {
-    if todoString.isEmpty { return }
-    if vm.editTargetTodo == nil { return }
-    vm.editTargetTodo?.title = todoString
-    todoDataManager.saveData()
-    vm.showingEditSheet.toggle()
+  private func submitChange() {
+    switch(editMode) {
+    case "todo":
+      if textFieldString.isEmpty { return }
+      if vm.editTargetTodo == nil { return }
+      vm.editTargetTodo?.title = textFieldString
+      todoDataManager.saveData()
+      vm.showingEditSheet.toggle()
+    case "list":
+      if textFieldString.isEmpty { return }
+      todoDataManager.addNewList(listTitle: textFieldString, incompleteOnly: vm.showAllTodos)
+      vm.showingEditSheet.toggle()
+    default:
+      return
+    }
   }
   
   var body: some View {
@@ -40,10 +51,10 @@ struct TodoEditView: View {
         Spacer()
         
         HStack {
-          TextField(vm.editTargetTodo?.title ?? "", text: $todoString)
+          TextField(vm.editTargetTodo?.title ?? "", text: $textFieldString)
             .focused($editFieldFocused)
             .onSubmit {
-              updateTodo()
+              submitChange()
             }
             .font(.system(size: UserSettings.fontSize.body))
             .padding(.leading)
@@ -52,7 +63,7 @@ struct TodoEditView: View {
             .cornerRadius(10)
           
           Button {
-            updateTodo()
+            submitChange()
           } label: {
             Image(systemName: "pencil.circle")
               .font(.system(size: UserSettings.fontSize.largeTitle))
@@ -78,6 +89,6 @@ struct TodoEditView: View {
 
 struct TodoEditView_Previews: PreviewProvider {
   static var previews: some View {
-    TodoEditView(vm: HomeViewModel(), ieEditMode: false)
+    TodoEditView(vm: HomeViewModel(), editMode: "list", ieEditMode: false)
   }
 }
