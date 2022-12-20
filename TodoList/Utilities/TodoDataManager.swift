@@ -34,9 +34,11 @@ class TodoDataManager: ObservableObject {
     }
   }
   
-  func fetchTodos(incompleteOnly: Bool) {
+  func fetchTodos(activeListId: String, incompleteOnly: Bool) {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
+    let predicate = NSPredicate(format: "listId == %d", activeListId)
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
+    request.predicate = predicate
     request.sortDescriptors = [sort]
     
     if incompleteOnly {
@@ -104,7 +106,7 @@ class TodoDataManager: ObservableObject {
       }
       
       fetchLists()
-      fetchTodos(incompleteOnly: true)
+      fetchTodos(activeListId: userSettings?.activeListId ?? "0", incompleteOnly: true)
     } catch let error {
       print("Error fetching user settings: \(error)")
     }
@@ -133,6 +135,7 @@ class TodoDataManager: ObservableObject {
     newList.id = UUID().uuidString
     newList.title = listTitle
     newList.order = Int16(countList() + 1)
+    userSettings?.activeListId = newList.id
     saveData(incompleteOnly: incompleteOnly)
   }
   
@@ -161,7 +164,7 @@ class TodoDataManager: ObservableObject {
     do {
       try container.viewContext.save()
       fetchLists()
-      fetchTodos(incompleteOnly: incompleteOnly)
+      fetchTodos(activeListId: userSettings?.activeListId ?? "0", incompleteOnly: incompleteOnly)
     } catch let error {
       print("Error saving: \(error)")
     }

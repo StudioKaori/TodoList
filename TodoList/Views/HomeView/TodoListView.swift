@@ -70,9 +70,9 @@ struct TodoListView: View {
         Button {
           vm.showAllTodos.toggle()
           if vm.showAllTodos {
-            todoDataManager.fetchTodos(incompleteOnly: false)
+            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? "0", incompleteOnly: false)
           } else {
-            todoDataManager.fetchTodos(incompleteOnly: true)
+            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? "0", incompleteOnly: true)
           }
         } label: {
           HStack {
