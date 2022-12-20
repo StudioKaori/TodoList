@@ -19,4 +19,10 @@ class HomeViewModel: ObservableObject {
     self.editMode = .todo
     self.showingEditSheet.toggle()
   }
+  
+  func move(from source: IndexSet, to destination: Int) {
+//    todoDataManager.savedTodos.move(fromOffsets: source, toOffset: destination)
+//    todoDataManager.saveData(incompleteOnly: vm.showAllTodos)
+    print("from:\(source) to: \(destination)")
+  }
 }

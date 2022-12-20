@@ -40,6 +40,7 @@
 		435F3FE32948BD9900099512 /* TodoContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FC42948908D00099512 /* TodoContainer.xcdatamodeld */; };
 		43C071FE29522C25000BA4CB /* DefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C071FD29522C25000BA4CB /* DefaultValues.swift */; };
 		43C071FF29522C4F000BA4CB /* DefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C071FD29522C25000BA4CB /* DefaultValues.swift */; };
+		43C0720129523D51000BA4CB /* TodoListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0720029523D51000BA4CB /* TodoListItemView.swift */; };
 		43C512492949D9B100019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 		43C5124A2949D9E800019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 /* End PBXBuildFile section */
@@ -101,6 +102,7 @@
 		435F3FE42948BE1D00099512 /* TodoList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoList.entitlements; sourceTree = "<group>"; };
 		435F3FE52948C21700099512 /* TodoListWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoListWidgetExtension.entitlements; sourceTree = "<group>"; };
 		43C071FD29522C25000BA4CB /* DefaultValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValues.swift; sourceTree = "<group>"; };
+		43C0720029523D51000BA4CB /* TodoListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListItemView.swift; sourceTree = "<group>"; };
 		43C512482949D9B100019DEC /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				43149591294A6B8900068F8A /* TextFieldView.swift */,
+				43C0720029523D51000BA4CB /* TodoListItemView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				431495A1294BA72C00068F8A /* FontSizes.swift in Sources */,
 				43C071FE29522C25000BA4CB /* DefaultValues.swift in Sources */,
 				435F3FBC29488E0300099512 /* HomeView.swift in Sources */,
+				43C0720129523D51000BA4CB /* TodoListItemView.swift in Sources */,
 				435F3FC9294897F800099512 /* Color.swift in Sources */,
 				435F3FC62948908D00099512 /* TodoContainer.xcdatamodeld in Sources */,
 			);

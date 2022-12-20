@@ -8,69 +8,18 @@
 import SwiftUI
 
 struct TodoListView: View {
-  let vm: HomeViewModel
+  @StateObject var vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
-  
-  func move(from source: IndexSet, to destination: Int) {
-//    todoDataManager.savedTodos.move(fromOffsets: source, toOffset: destination)
-//    todoDataManager.saveData(incompleteOnly: vm.showAllTodos)
-    print("from:\(source) to: \(destination)")
-  }
   
   var body: some View {
     ZStack(alignment: .topLeading) {
       List {
         ForEach(todoDataManager.savedTodos) { entity in
           if !entity.completed || vm.showAllTodos {
-            HStack {
-              Image(systemName: entity.completed ? "checkmark.circle" : "circle")
-                .foregroundColor(entity.completed ? Color.theme.accent : Color.theme.secondaryText)
-                .onTapGesture {
-                  withAnimation{
-                    TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed)
-                  }
-                }
-              
-              Text(entity.title ?? "")
-                .strikethrough(entity.completed ? true : false)
-            }
-            .font(.body)
-            .swipeActions(edge: .trailing) {
-              Button {
-                withAnimation {
-                  todoDataManager.updateCompleted(entity: entity, completed: !entity.completed)
-                }
-              } label: {
-                Image(systemName: entity.completed ? "circle" : "checkmark.circle.fill")
-              }
-              .tint(Color.theme.accent)
-            }
-            .swipeActions(edge: .leading, allowsFullSwipe: false) {
-              Button {
-                withAnimation {
-                  todoDataManager.deleteTodo(entity: entity)
-                }
-              } label: {
-                Image(systemName: "trash")
-              }
-              .tint(.red)
-              
-              Button {
-                withAnimation {
-                  vm.showTodoEdit(entity: entity)
-                }
-              } label: {
-                Image(systemName: "pencil")
-              }
-              .tint(.blue)
-            }
-            .onTapGesture {
-              vm.showTodoEdit(entity: entity)
-            }
-            // END: Hstack list item
+            TodoListItemView(vm: vm, entity: entity)
           }
         } // END: Foreach
-        .onMove(perform: move)
+        .onMove(perform: vm.move)
       } // END: list
       
       HStack {
@@ -78,11 +27,11 @@ struct TodoListView: View {
         
         Button {
           vm.showAllTodos.toggle()
-          if vm.showAllTodos {
-            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId)
-          } else {
-            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId)
-          }
+//          if vm.showAllTodos {
+//            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId)
+//          } else {
+//            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId)
+//          }
         } label: {
           HStack {
             Image(systemName: vm.showAllTodos ? "eye.slash" : "eye.fill")
