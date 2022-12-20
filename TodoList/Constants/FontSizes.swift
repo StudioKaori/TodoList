@@ -7,22 +7,13 @@
 
 import Foundation
 
+// This file is not used. Delete it later
 struct FontSizeMedium {
-  let largeTitle: CGFloat = 32
-  let headline: CGFloat = 24
-  let h3: CGFloat = 18
-  let body: CGFloat = 16
   let widgetBody: CGFloat = 14
-  let footNote: CGFloat = 10
   let bulletSymbol: CGFloat = 8
 }
 
 struct FontSizeLarge {
-  let largeTitle: CGFloat = 38
-  let headline: CGFloat = 32
-  let h3: CGFloat = 26
-  let body: CGFloat = 20
   let widgetBody: CGFloat = 16
-  let footNote: CGFloat = 18
   let bulletSymbol: CGFloat = 12
 }

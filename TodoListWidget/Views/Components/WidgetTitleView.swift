@@ -22,7 +22,7 @@ struct WidgetTitleView: View {
       Image(systemName: "plus")
         .padding(.horizontal)
     }
-    .font(.system(size: UserSettings.fontSize.body))
+    .font(.body)
     .foregroundColor(Color.theme.accent)
     .frame(maxWidth: .infinity)
     .background(Color.theme.textFieldBackground)

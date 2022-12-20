@@ -27,7 +27,7 @@ struct TodoListView: View {
             Text(entity.title ?? "")
               .strikethrough(entity.completed ? true : false)
           }
-          .font(.system(size: UserSettings.fontSize.body))
+          .font(.body)
           .swipeActions(edge: .trailing) {
             Button {
               withAnimation {

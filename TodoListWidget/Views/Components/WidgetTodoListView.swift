@@ -25,12 +25,12 @@ struct WidgetTodoListView: View {
         VStack(alignment: .leading, spacing: 6) {
           HStack {
             Image(systemName: "circle.fill")
-              .font(.system(size: UserSettings.fontSize.bulletSymbol))
+              .font(.system(size: bulletSymbolFontSize))
               .foregroundColor(Color.theme.accent)
             
             Text(entry.todos[i].title)
               .foregroundColor(Color.theme.primaryText)
-              .font(.system(size: UserSettings.fontSize.widgetBody))
+              .font(.footnote)
           }
           
           if i != (todosLength - 1) {

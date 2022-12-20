@@ -64,7 +64,7 @@ struct TextFieldView: View {
             .onSubmit {
               submitChange()
             }
-            .font(.system(size: UserSettings.fontSize.body))
+            .font(.body)
             .padding(.leading)
             .frame(height: 55)
             .background(Color.theme.textFieldBackground)
@@ -74,7 +74,7 @@ struct TextFieldView: View {
             submitChange()
           } label: {
             Image(systemName: "pencil.circle")
-              .font(.system(size: UserSettings.fontSize.largeTitle))
+              .font(.largeTitle)
               .foregroundColor(Color.theme.accent)
           }
           
@@ -82,7 +82,7 @@ struct TextFieldView: View {
             vm.showingEditSheet.toggle()
           } label: {
             Image(systemName: "x.circle")
-              .font(.system(size: UserSettings.fontSize.largeTitle))
+              .font(.largeTitle)
               .foregroundColor(Color.theme.secondaryText)
           }
         } // END: Hstack AddTask Text field

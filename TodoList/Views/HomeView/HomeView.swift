@@ -81,7 +81,7 @@ struct HomeView: View {
             .onSubmit {
               addTodo()
             }
-            .font(.system(size: UserSettings.fontSize.body))
+            .font(.body)
             .padding(.leading)
             .frame(height: 55)
             .background(Color.theme.textFieldBackground)
@@ -91,7 +91,7 @@ struct HomeView: View {
             addTodo()
           } label: {
             Image(systemName: "plus.circle")
-              .font(.system(size: UserSettings.fontSize.largeTitle))
+              .font(.largeTitle)
               .foregroundColor(Color.theme.accent)
           }
           
@@ -100,7 +100,7 @@ struct HomeView: View {
               addTodoFieldFocus = false
             } label: {
               Image(systemName: "arrow.down.circle")
-                .font(.system(size: UserSettings.fontSize.largeTitle))
+                .font(.largeTitle)
                 .foregroundColor(Color.theme.secondaryText)
             }
           }
