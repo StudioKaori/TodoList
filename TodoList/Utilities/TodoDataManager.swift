@@ -22,35 +22,25 @@ class TodoDataManager: ObservableObject {
     fetchUserSettings()
   } // END: init
   
-  func countTodos(listId: String) -> Int {
+  func getTodoRequest(listId: String, incompleteOnly: Bool = false) -> NSFetchRequest<TodoEntity> {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
     let listIdPredicate = NSPredicate(format: "listId = %@", listId)
-    request.predicate = listIdPredicate
-    do {
-      let todos = try container.viewContext.fetch(request)
-      return todos.count
-    } catch let error {
-      print("Error fetching: \(error)")
-      // Todo implement error handling
-      return 0
-    }
-  }
-  
-  func fetchTodos(activeListId: String, incompleteOnly: Bool = false) {
-    let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
-    let listIdPredicate = NSPredicate(format: "listId = %@", activeListId)
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
     request.sortDescriptors = [sort]
+    var predicates: [NSPredicate] = [listIdPredicate]
     
     if incompleteOnly {
       let incompletePredicate = NSPredicate(format: "completed == %d", false)
-      request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [listIdPredicate, incompletePredicate])
-    } else {
-      request.predicate = listIdPredicate
+      predicates.append(incompletePredicate)
     }
     
+    request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+    return request
+  }
+  
+  func fetchTodos(activeListId: String, incompleteOnly: Bool = false) {
     do {
-      savedTodos = try container.viewContext.fetch(request)
+      savedTodos = try container.viewContext.fetch(getTodoRequest(listId: activeListId, incompleteOnly: incompleteOnly))
       print("saved Todos: \(savedTodos)")
       
       // reload the widget
@@ -60,11 +50,22 @@ class TodoDataManager: ObservableObject {
     }
   } // END: fetchTodos
   
+  func getNextTodoOrder(listId: String) -> Int16 {
+    do {
+      let todos = try container.viewContext.fetch(getTodoRequest(listId: listId, incompleteOnly: false))
+      return (todos.first?.order ?? 0) + 1
+    } catch let error {
+      print("Error fetching: \(error)")
+      // Todo implement error handling
+      return 1
+    }
+  }
+  
   func addTodo(todoTitle: String, incompleteOnly: Bool = false) {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
     newTodo.addedDate = Date()
-    newTodo.order = Int16(countTodos(listId: userSettings?.activeListId ?? defaultActiveListId) + 1)
+    newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? defaultActiveListId)
     newTodo.title = todoTitle
     newTodo.memo = ""
     newTodo.listId = userSettings?.activeListId ?? defaultActiveListId
@@ -137,20 +138,20 @@ class TodoDataManager: ObservableObject {
     let newList = ListEntity(context: container.viewContext)
     newList.id = UUID().uuidString
     newList.title = listTitle
-    newList.order = Int16(countList() + 1)
+    newList.order = getNextListOrder()
     userSettings?.activeListId = newList.id
     saveData(incompleteOnly: incompleteOnly)
   }
   
-  func countList() -> Int {
+  func getNextListOrder() -> Int16 {
     let request = NSFetchRequest<ListEntity>(entityName: "ListEntity")
     do {
       let lists = try container.viewContext.fetch(request)
-      return lists.count
+      return (lists.first?.order ?? 0) + 1
     } catch let error {
       print("Error fetching: \(error)")
       // Todo implement error handling
-      return 0
+      return 1
     }
   }
   
