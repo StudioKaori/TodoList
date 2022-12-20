@@ -39,7 +39,7 @@ struct HomeView: View {
             
             ForEach(todoDataManager.todoLists) { list in
               Button {
-                todoDataManager.updateActiveListId(id: list.id ?? "0")
+                todoDataManager.updateActiveListId(id: list.id ?? defaultActiveListId)
               } label: {
                 VStack {
                   Text(list.title ?? "No name list")

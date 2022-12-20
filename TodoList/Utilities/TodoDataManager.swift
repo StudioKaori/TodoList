@@ -65,7 +65,7 @@ class TodoDataManager: ObservableObject {
     newTodo.order = Int16(countTodos() + 1)
     newTodo.title = todoTitle
     newTodo.memo = ""
-    newTodo.listId = userSettings?.activeListId ?? "0"
+    newTodo.listId = userSettings?.activeListId ?? defaultActiveListId
     newTodo.completed = false
     newTodo.color = 0
     //newTodo.dueDate = nil
@@ -99,15 +99,15 @@ class TodoDataManager: ObservableObject {
         // Generate the userSettings if not exist
         generateDefaultList()
         let newUserSettings = UserSettingsEntity(context: container.viewContext)
-        newUserSettings.activeListId = "0"
-        newUserSettings.widgetListId = "0"
+        newUserSettings.activeListId = defaultActiveListId
+        newUserSettings.widgetListId = defaultWidgetListId
         saveData()
       } else {
         userSettings = userSettingsArray[0]
       }
       
       fetchLists()
-      fetchTodos(activeListId: userSettings?.activeListId ?? "0", incompleteOnly: true)
+      fetchTodos(activeListId: userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: true)
     } catch let error {
       print("Error fetching user settings: \(error)")
     }
@@ -154,7 +154,7 @@ class TodoDataManager: ObservableObject {
   
   func generateDefaultList() {
     let defaultList = ListEntity(context: container.viewContext)
-    defaultList.id = "0"
+    defaultList.id = defaultActiveListId
     defaultList.title = "Todos"
     saveData()
   }
@@ -165,7 +165,7 @@ class TodoDataManager: ObservableObject {
     do {
       try container.viewContext.save()
       fetchLists()
-      fetchTodos(activeListId: userSettings?.activeListId ?? "0", incompleteOnly: incompleteOnly)
+      fetchTodos(activeListId: userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: incompleteOnly)
     } catch let error {
       print("Error saving: \(error)")
     }

@@ -7,4 +7,9 @@
 
 import Foundation
 
+// MARK: - Font sizes
 let bulletSymbolFontSize: CGFloat = 8
+
+// MARK: - Core data default values
+let defaultActiveListId = "0"
+let defaultWidgetListId = "0"
