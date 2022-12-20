@@ -36,19 +36,20 @@ class TodoDataManager: ObservableObject {
   
   func fetchTodos(activeListId: String, incompleteOnly: Bool) {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
-    let predicate = NSPredicate(format: "listId == %d", activeListId)
+    let listIdPredicate = NSPredicate(format: "listId = %@", activeListId)
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
-    request.predicate = predicate
     request.sortDescriptors = [sort]
     
     if incompleteOnly {
-      let predicate = NSPredicate(format: "completed == %d", false)
-      request.predicate = predicate
+      let incompletePredicate = NSPredicate(format: "completed == %d", false)
+      request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [listIdPredicate, incompletePredicate])
+    } else {
+      request.predicate = listIdPredicate
     }
     
     do {
       savedTodos = try container.viewContext.fetch(request)
-      print(savedTodos)
+      print("saved Todos: \(savedTodos)")
       
       // reload the widget
       WidgetCenter.shared.reloadTimelines(ofKind: "TodoListWidget")
@@ -123,7 +124,7 @@ class TodoDataManager: ObservableObject {
     let request = NSFetchRequest<ListEntity>(entityName: "ListEntity")
     do {
       todoLists = try container.viewContext.fetch(request)
-      print("MyTodoLists: \(todoLists)")
+      //print("MyTodoLists: \(todoLists)")
     } catch let error {
       print("Error fetching fetchlist: \(error)")
     }
