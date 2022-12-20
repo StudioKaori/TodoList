@@ -41,6 +41,7 @@
 		43C071FE29522C25000BA4CB /* DefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C071FD29522C25000BA4CB /* DefaultValues.swift */; };
 		43C071FF29522C4F000BA4CB /* DefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C071FD29522C25000BA4CB /* DefaultValues.swift */; };
 		43C0720129523D51000BA4CB /* TodoListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0720029523D51000BA4CB /* TodoListItemView.swift */; };
+		43C0720329524D07000BA4CB /* HorizontalListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0720229524D07000BA4CB /* HorizontalListsView.swift */; };
 		43C512492949D9B100019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 		43C5124A2949D9E800019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 		435F3FE52948C21700099512 /* TodoListWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoListWidgetExtension.entitlements; sourceTree = "<group>"; };
 		43C071FD29522C25000BA4CB /* DefaultValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValues.swift; sourceTree = "<group>"; };
 		43C0720029523D51000BA4CB /* TodoListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListItemView.swift; sourceTree = "<group>"; };
+		43C0720229524D07000BA4CB /* HorizontalListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalListsView.swift; sourceTree = "<group>"; };
 		43C512482949D9B100019DEC /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +153,7 @@
 				435F3FBB29488E0300099512 /* HomeView.swift */,
 				43149598294AEFB800068F8A /* HomeViewModel.swift */,
 				43149595294AED4300068F8A /* TodoListView.swift */,
+				43C0720229524D07000BA4CB /* HorizontalListsView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				43149592294A6B8900068F8A /* TextFieldView.swift in Sources */,
 				43149599294AEFB800068F8A /* HomeViewModel.swift in Sources */,
 				435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */,
+				43C0720329524D07000BA4CB /* HorizontalListsView.swift in Sources */,
 				43149596294AED4300068F8A /* TodoListView.swift in Sources */,
 				43C512492949D9B100019DEC /* PersistenceController.swift in Sources */,
 				43149594294AEA9A00068F8A /* TodoDataManager.swift in Sources */,

@@ -33,43 +33,7 @@ struct HomeView: View {
           .font(.headline)
           .padding(.bottom, 30)
         
-        ScrollView(.horizontal, showsIndicators: false) {
-
-          HStack(spacing: 42) {
-            
-            ForEach(todoDataManager.todoLists) { list in
-              Button {
-                todoDataManager.updateActiveListId(id: list.id ?? defaultActiveListId)
-              } label: {
-                VStack {
-                  Text(list.title ?? "No name list")
-                  Spacer()
-                  Rectangle()
-                    .frame(height: todoDataManager.userSettings?.activeListId == list.id ? 2 : 0)
-                }
-                .foregroundColor(todoDataManager.userSettings?.activeListId == list.id ? Color.theme.accent : Color.theme.primaryText)
-              }
-
-            }
-            
-            VStack {
-              Button {
-                vm.editMode = .list
-                vm.showingEditSheet = true
-              } label: {
-                Image(systemName: "plus")
-                  .foregroundColor(Color.theme.primaryText)
-              }
-              
-              Spacer()
-            }
-            
-            
-          }
-          .frame(height: 30)
-        }
-        .font(.subheadline)
-        .padding(.horizontal)
+        HorizontalListsView(vm: vm)
         
         TodoListView(vm: vm)
         
@@ -97,7 +61,7 @@ struct HomeView: View {
           
           if addTodoFieldFocus {
             Button {
-              addTodoFieldFocus = false
+              addTodoFieldFocus.toggle()
             } label: {
               Image(systemName: "arrow.down.circle")
                 .font(.largeTitle)

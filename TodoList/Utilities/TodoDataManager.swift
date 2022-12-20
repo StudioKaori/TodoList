@@ -91,6 +91,13 @@ class TodoDataManager: ObservableObject {
     saveData(incompleteOnly: incompleteOnly)
   }
   
+  func updateTodosOrder() {
+    savedTodos.reversed().enumerated().forEach { (index, todo) in
+      todo.order = Int16(index)
+    }
+    saveData()
+  }
+  
   // MARK: -UserSettings
   func fetchUserSettings() {
     let request = NSFetchRequest<UserSettingsEntity>(entityName: "UserSettingsEntity")
@@ -154,6 +161,13 @@ class TodoDataManager: ObservableObject {
       return 1
     }
   }
+  
+//  func updateListsOrder() {
+//    todoLists.reversed().enumerated().forEach { (index, list) in
+//      list.order = Int16(index)
+//    }
+//    saveData()
+//  }
   
   func generateDefaultList() {
     let defaultList = ListEntity(context: container.viewContext)

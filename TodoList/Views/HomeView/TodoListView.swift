@@ -11,6 +11,12 @@ struct TodoListView: View {
   @StateObject var vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   
+  private func updateTodosOrder(from: IndexSet, to: Int) {
+    print("from:\(from) to: \(to)")
+    todoDataManager.savedTodos.move(fromOffsets: from, toOffset: to)
+    todoDataManager.updateTodosOrder()
+  }
+  
   var body: some View {
     ZStack(alignment: .topLeading) {
       List {
@@ -19,7 +25,7 @@ struct TodoListView: View {
             TodoListItemView(vm: vm, entity: entity)
           }
         } // END: Foreach
-        .onMove(perform: vm.move)
+        .onMove(perform: updateTodosOrder)
       } // END: list
       
       HStack {
@@ -27,11 +33,6 @@ struct TodoListView: View {
         
         Button {
           vm.showAllTodos.toggle()
-//          if vm.showAllTodos {
-//            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId)
-//          } else {
-//            todoDataManager.fetchTodos(activeListId: todoDataManager.userSettings?.activeListId ?? defaultActiveListId)
-//          }
         } label: {
           HStack {
             Image(systemName: vm.showAllTodos ? "eye.slash" : "eye.fill")
