@@ -9,14 +9,11 @@ import SwiftUI
 
 struct CameraView: View {
   
-  @ObservedObject var viewModel : CameraViewModel
+  @ObservedObject var todoDataManager = TodoDataManager.shared
   
   @Binding var imageData : Data
   @Binding var source:UIImagePickerController.SourceType
-  
   @Binding var image:Image
-  
-  @Binding var isActionSheet:Bool
   @Binding var isImagePicker:Bool
   
   var body: some View {
@@ -32,11 +29,18 @@ struct CameraView: View {
         VStack{
           HStack(spacing:30){
             Text("photo")
-            image
+            
+            Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
               .resizable()
               .aspectRatio(contentMode: .fill)
               .frame(width: 60, height: 60)
               .cornerRadius(10)
+              .onAppear {
+                if imageData.count != 0 {
+                  todoDataManager.imageData = imageData
+                }
+              }
+            
             Button(action: {
               self.source = .photoLibrary
               self.isImagePicker.toggle()
@@ -55,19 +59,7 @@ struct CameraView: View {
         }
       }
     }
-    .onAppear(){
-      loadImage()
-    }
-    .navigationBarTitle("Add Todo", displayMode: .inline)
-  }
-  
-  func loadImage() {
-    if imageData.count != 0{
-      viewModel.imageData = imageData
-      self.image = Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
-    }else{
-      self.image = Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
-    }
+    .navigationBarTitle("Back", displayMode: .inline)
   }
 }
 

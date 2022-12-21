@@ -18,6 +18,9 @@ class TodoDataManager: ObservableObject {
   @Published var todoLists: [ListEntity] = []
   @Published var userSettings: UserSettingsEntity?
   
+  // For camera
+  @Published var imageData: Data? = nil
+  
   private init() {
     fetchUserSettings()
   } // END: init
@@ -73,7 +76,7 @@ class TodoDataManager: ObservableObject {
     newTodo.color = 0
     //newTodo.dueDate = nil
     newTodo.starred = false
-    //newTodo.image = nil
+    newTodo.image = imageData
     saveData(incompleteOnly: incompleteOnly)
   } // END: addTodo
   
@@ -162,12 +165,12 @@ class TodoDataManager: ObservableObject {
     }
   }
   
-//  func updateListsOrder() {
-//    todoLists.reversed().enumerated().forEach { (index, list) in
-//      list.order = Int16(index)
-//    }
-//    saveData()
-//  }
+  //  func updateListsOrder() {
+  //    todoLists.reversed().enumerated().forEach { (index, list) in
+  //      list.order = Int16(index)
+  //    }
+  //    saveData()
+  //  }
   
   func generateDefaultList() {
     let defaultList = ListEntity(context: container.viewContext)
@@ -183,6 +186,7 @@ class TodoDataManager: ObservableObject {
       try container.viewContext.save()
       fetchLists()
       fetchTodos(activeListId: userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: incompleteOnly)
+      imageData = nil
     } catch let error {
       print("Error saving: \(error)")
     }

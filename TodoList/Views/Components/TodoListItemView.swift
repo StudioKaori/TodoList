@@ -21,7 +21,7 @@ struct TodoListItemView: View {
           }
         }
       
-      VStack {
+      VStack(alignment: .leading) {
         Text(entity.title ?? "")
           .strikethrough(entity.completed ? true : false)
         
@@ -29,7 +29,8 @@ struct TodoListItemView: View {
           Image(uiImage: UIImage(data: entity.image ?? Data.init())!)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: 80, height: 80)
+            .frame(width: .infinity)
+            .frame(height: 120)
             .cornerRadius(10)
         }
       }

@@ -15,10 +15,17 @@ struct HomeView: View {
   
   @State private var addTodoString: String = ""
   
+  // For image picker
+  @State private var image = Image(systemName: "photo")
+  @State var imageData: Data = .init(capacity:0)
+  @State var isImagePicker = false
+  @State var source:UIImagePickerController.SourceType = .photoLibrary
+  
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
     todoDataManager.addTodo(todoTitle: addTodoString)
     addTodoString = ""
+    imageData = .init(capacity:0)
     addTodoFieldFocus = false
   }
   
@@ -71,7 +78,18 @@ struct HomeView: View {
         } // END: Hstack AddTask Text field
         .padding()
         
-        NewDataSheet(viewModel: CameraViewModel())
+        // CameraView
+        HStack{
+          CameraView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
+            .padding(.top,50)
+          NavigationLink(
+            destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
+            isActive:$isImagePicker,
+            label: {
+              Text("")
+            })
+        } // END: camera
+        
       } // END: Vstack Main container
       
       if vm.showingEditSheet {
