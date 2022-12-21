@@ -21,8 +21,18 @@ struct TodoListItemView: View {
           }
         }
       
-      Text(entity.title ?? "")
-        .strikethrough(entity.completed ? true : false)
+      VStack {
+        Text(entity.title ?? "")
+          .strikethrough(entity.completed ? true : false)
+        
+        if entity.image?.count ?? 0 != 0{
+          Image(uiImage: UIImage(data: entity.image ?? Data.init())!)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 80, height: 80)
+            .cornerRadius(10)
+        }
+      }
     }
     .font(.body)
     .swipeActions(edge: .trailing) {

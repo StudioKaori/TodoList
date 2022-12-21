@@ -71,6 +71,7 @@ struct HomeView: View {
         } // END: Hstack AddTask Text field
         .padding()
         
+        NewDataSheet(viewModel: CameraViewModel())
       } // END: Vstack Main container
       
       if vm.showingEditSheet {

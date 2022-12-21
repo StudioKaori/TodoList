@@ -43,6 +43,10 @@
 		43C0720129523D51000BA4CB /* TodoListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0720029523D51000BA4CB /* TodoListItemView.swift */; };
 		43C0720329524D07000BA4CB /* HorizontalListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0720229524D07000BA4CB /* HorizontalListsView.swift */; };
 		43C0720629530201000BA4CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43C0720829530201000BA4CB /* Localizable.strings */; };
+		43C0722A29532FE2000BA4CB /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0722929532FE2000BA4CB /* CameraView.swift */; };
+		43C0722C29533026000BA4CB /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0722B29533026000BA4CB /* CameraViewModel.swift */; };
+		43C0722E2953308C000BA4CB /* NewDataSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0722D2953308C000BA4CB /* NewDataSheet.swift */; };
+		43C07230295330FB000BA4CB /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0722F295330FB000BA4CB /* ImageView.swift */; };
 		43C512492949D9B100019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 		43C5124A2949D9E800019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 /* End PBXBuildFile section */
@@ -108,6 +112,10 @@
 		43C0720229524D07000BA4CB /* HorizontalListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalListsView.swift; sourceTree = "<group>"; };
 		43C0720729530201000BA4CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43C0720929530272000BA4CB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		43C0722929532FE2000BA4CB /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		43C0722B29533026000BA4CB /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		43C0722D2953308C000BA4CB /* NewDataSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataSheet.swift; sourceTree = "<group>"; };
+		43C0722F295330FB000BA4CB /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		43C512482949D9B100019DEC /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +153,10 @@
 			isa = PBXGroup;
 			children = (
 				43149591294A6B8900068F8A /* TextFieldView.swift */,
+				43C0722929532FE2000BA4CB /* CameraView.swift */,
+				43C0722B29533026000BA4CB /* CameraViewModel.swift */,
+				43C0722D2953308C000BA4CB /* NewDataSheet.swift */,
+				43C0722F295330FB000BA4CB /* ImageView.swift */,
 				43C0720029523D51000BA4CB /* TodoListItemView.swift */,
 			);
 			path = Components;
@@ -406,13 +418,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				43149592294A6B8900068F8A /* TextFieldView.swift in Sources */,
+				43C0722A29532FE2000BA4CB /* CameraView.swift in Sources */,
 				43149599294AEFB800068F8A /* HomeViewModel.swift in Sources */,
+				43C07230295330FB000BA4CB /* ImageView.swift in Sources */,
 				435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */,
 				43C0720329524D07000BA4CB /* HorizontalListsView.swift in Sources */,
 				43149596294AED4300068F8A /* TodoListView.swift in Sources */,
 				43C512492949D9B100019DEC /* PersistenceController.swift in Sources */,
 				43149594294AEA9A00068F8A /* TodoDataManager.swift in Sources */,
+				43C0722C29533026000BA4CB /* CameraViewModel.swift in Sources */,
 				431495A1294BA72C00068F8A /* FontSizes.swift in Sources */,
+				43C0722E2953308C000BA4CB /* NewDataSheet.swift in Sources */,
 				43C071FE29522C25000BA4CB /* DefaultValues.swift in Sources */,
 				435F3FBC29488E0300099512 /* HomeView.swift in Sources */,
 				43C0720129523D51000BA4CB /* TodoListItemView.swift in Sources */,
