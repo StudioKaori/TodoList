@@ -18,48 +18,42 @@ struct CameraView: View {
   
   var body: some View {
     
-    VStack(spacing:0){
-      ZStack{
-        NavigationLink(
-          destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
-          isActive:$isImagePicker,
-          label: {
-            Text("")
-          })
-        VStack{
-          HStack(spacing:30){
-            Text("photo")
-            
-            Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: 60, height: 60)
-              .cornerRadius(10)
-              .onAppear {
-                if imageData.count != 0 {
-                  todoDataManager.imageData = imageData
-                }
-              }
-            
-            Button(action: {
-              self.source = .photoLibrary
-              self.isImagePicker.toggle()
-            }, label: {
-              Text("Upload")
-            })
-            Button(action: {
-              self.source = .camera
-              self.isImagePicker.toggle()
-            }, label: {
-              Text("Take Photo")
-            })
-            Spacer()
+    HStack(spacing: 20){
+      Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
+        .resizable()
+        .aspectRatio(contentMode: .fill)
+        .frame(width: 60, height: 60)
+        .cornerRadius(10)
+        .onAppear {
+          if imageData.count != 0 {
+            todoDataManager.imageData = imageData
           }
-          .padding()
         }
-      }
+      
+      NavigationLink(
+        destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
+        isActive:$isImagePicker) {
+          Button(action: {
+            self.source = .photoLibrary
+            self.isImagePicker.toggle()
+            
+          }, label: {
+            Text("Upload")
+          })
+        }
+      
+      NavigationLink(
+        destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
+        isActive:$isImagePicker) {
+          Button(action: {
+            self.source = .camera
+            self.isImagePicker.toggle()
+          }, label: {
+            Text("Take Photo")
+          })
+        }
+
     }
-    .navigationBarTitle("Back", displayMode: .inline)
   }
 }
 

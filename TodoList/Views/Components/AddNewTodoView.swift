@@ -27,52 +27,47 @@ struct AddNewTodoView: View {
   }
   
   var body: some View {
-    HStack {
-      TextField("Add new todo...", text: $addTodoString)
-        .focused($addTodoFieldFocus)
-        .onSubmit {
-          addTodo()
-        }
-        .font(.body)
-        .padding(.leading)
-        .frame(height: 55)
-        .background(Color.theme.textFieldBackground)
-        .cornerRadius(10)
-      
-      Button {
-        addTodo()
-      } label: {
-        Image(systemName: "plus.circle")
-          .font(.largeTitle)
-          .foregroundColor(Color.theme.accent)
-      }
-      
-      if addTodoFieldFocus {
+    VStack {
+      HStack {
+        TextField("Add new todo...", text: $addTodoString)
+          .focused($addTodoFieldFocus)
+          .onSubmit {
+            addTodo()
+          }
+          .font(.body)
+          .padding(.leading)
+          .frame(height: 55)
+          .background(Color.theme.textFieldBackground)
+          .cornerRadius(10)
+        
         Button {
-          addTodoFieldFocus.toggle()
+          addTodo()
         } label: {
-          Image(systemName: "arrow.down.circle")
+          Image(systemName: "plus.circle")
             .font(.largeTitle)
-            .foregroundColor(Color.theme.secondaryText)
+            .foregroundColor(Color.theme.accent)
         }
-      }
-    } // END: Hstack AddTask Text field
+        
+        if addTodoFieldFocus {
+          Button {
+            addTodoFieldFocus.toggle()
+          } label: {
+            Image(systemName: "arrow.down.circle")
+              .font(.largeTitle)
+              .foregroundColor(Color.theme.secondaryText)
+          }
+        }
+      } // END: Hstack AddTask Text field
+      
+      HStack{
+        CameraView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
+      } // END: camera
+    } // END: Vstack
     .padding()
     .onAppear {
       addTodoFieldFocus = false
     }
     
-    // CameraView
-    HStack{
-      CameraView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
-        .padding(.top,50)
-      NavigationLink(
-        destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
-        isActive:$isImagePicker,
-        label: {
-          Text("")
-        })
-    } // END: camera
   }
 }
 

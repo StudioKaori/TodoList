@@ -29,7 +29,7 @@ struct TodoListItemView: View {
           Image(uiImage: UIImage(data: entity.image ?? Data.init())!)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: .infinity)
+            .frame(maxWidth: .infinity)
             .frame(height: 120)
             .cornerRadius(10)
         }

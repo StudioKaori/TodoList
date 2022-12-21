@@ -184,9 +184,9 @@ class TodoDataManager: ObservableObject {
   func saveData(incompleteOnly: Bool = false) {
     do {
       try container.viewContext.save()
+      imageData = nil
       fetchLists()
       fetchTodos(activeListId: userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: incompleteOnly)
-      imageData = nil
     } catch let error {
       print("Error saving: \(error)")
     }

@@ -3,10 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
+	<string>Do you allow to use the camera for Todo list app??</string>
 </dict>
 </plist>
