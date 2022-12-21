@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  TodoList
+
+  Created by Kaori Persson on 2022-12-21.
+  
+*/
+
+// HomeView
+"Add new todo..." = "Add new todo...";
+
+// List view
+"No name list" = "No name list";
+
+// TodoListView
+"Hide Completed Todos" = "Hide Completed Todos";
+"Show All Todos" = "Show All Todos";

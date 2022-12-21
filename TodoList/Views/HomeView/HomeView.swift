@@ -40,7 +40,7 @@ struct HomeView: View {
         Spacer()
         
         HStack {
-          TextField("Add new todo here...", text: $addTodoString)
+          TextField("Add new todo...", text: $addTodoString)
             .focused($addTodoFieldFocus)
             .onSubmit {
               addTodo()
@@ -86,5 +86,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
     HomeView()
+      .environment(\.locale, Locale(identifier: "ja-jp"))
   }
 }

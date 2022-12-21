@@ -34,7 +34,7 @@ struct HorizontalListsView: View {
             vm.editMode = .list
             vm.showingEditSheet = true
           } label: {
-            Image(systemName: "plus")
+            Image(systemName: "plus.circle")
               .foregroundColor(Color.theme.primaryText)
           }
           
