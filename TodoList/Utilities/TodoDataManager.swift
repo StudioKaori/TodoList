@@ -15,6 +15,7 @@ class TodoDataManager: ObservableObject {
   
   let container: NSPersistentContainer = PersistenceController.shared.container
   @Published var savedTodos: [TodoEntity] = []
+  @Published var todoImages: [String: Data] = [:]
   @Published var todoLists: [ListEntity] = []
   @Published var userSettings: UserSettingsEntity?
   
@@ -48,6 +49,8 @@ class TodoDataManager: ObservableObject {
       
       // reload the widget
       WidgetCenter.shared.reloadTimelines(ofKind: "TodoListWidget")
+      
+      fetchTodoImages()
     } catch let error {
       print("Error fetching: \(error)")
     }
@@ -65,6 +68,23 @@ class TodoDataManager: ObservableObject {
     }
     print("Todos for widget: \(todos)")
     return todos
+  }
+  
+  func fetchTodoImages() {
+    let request = NSFetchRequest<TodoImageEntity>(entityName: "TodoImageEntity")
+    let listIdPredicate = NSPredicate(format: "listId = %@", userSettings?.activeListId ?? defaultActiveListId)
+    let predicates: [NSPredicate] = [listIdPredicate]
+    request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+    
+    do {
+      let results = try container.viewContext.fetch(request)
+      results.forEach { todoImage in
+        todoImages.updateValue(todoImage.image ?? Data(), forKey: todoImage.id ?? "")
+      }
+      
+    } catch let error {
+      print("Error fetching: \(error)")
+    }
   }
   
   func getNextTodoOrder(listId: String) -> Int16 {
@@ -90,7 +110,16 @@ class TodoDataManager: ObservableObject {
     newTodo.color = 0
     //newTodo.dueDate = nil
     newTodo.starred = false
-    newTodo.image = imageData
+    if imageData != nil {
+      let newImageId = UUID().uuidString
+      newTodo.imageId = newImageId
+      
+      let newImageEntity = TodoImageEntity(context: container.viewContext)
+      newImageEntity.id = newImageId
+      newImageEntity.image = imageData
+      newImageEntity.listId = userSettings?.activeListId ?? defaultActiveListId
+    }
+    
     saveData(incompleteOnly: incompleteOnly)
   } // END: addTodo
   

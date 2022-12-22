@@ -25,8 +25,8 @@ struct TodoListItemView: View {
         Text(entity.title ?? "")
           .strikethrough(entity.completed ? true : false)
         
-        if entity.image?.count ?? 0 != 0{
-          Image(uiImage: UIImage(data: entity.image ?? Data.init())!)
+        if let imageId: String = entity.imageId {
+          Image(uiImage: UIImage(data: TodoDataManager.shared.todoImages[imageId] ?? Data.init())!)
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: .infinity)
