@@ -10,6 +10,7 @@ import SwiftUI
 struct TodoListItemView: View {
   @StateObject var vm: HomeViewModel
   let entity: TodoEntity
+
   
   var body: some View {
     HStack {
@@ -22,8 +23,19 @@ struct TodoListItemView: View {
         }
       
       VStack(alignment: .leading) {
-        Text(entity.title ?? "")
-          .strikethrough(entity.completed ? true : false)
+        
+        HStack {
+          Text(entity.title ?? "")
+            .strikethrough(entity.completed ? true : false)
+          
+          if entity.dueDate != nil {
+            Spacer()
+            
+            Text("\(LocalisedDateFormatter.getFormattedDate(date: entity.dueDate!))")
+              .font(.caption2)
+              .foregroundColor(Color.theme.secondaryText)
+          }
+        }
         
         if let imageId: String = entity.imageId {
           Image(uiImage: UIImage(data: TodoDataManager.shared.todoImages[imageId] ?? Data.init())!)

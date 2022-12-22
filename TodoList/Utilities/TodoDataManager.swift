@@ -84,7 +84,9 @@ class TodoDataManager: ObservableObject {
     }
   }
   
-  func addTodo(todoTitle: String, incompleteOnly: Bool = false) {
+  func addTodo(todoTitle: String,
+               dueDate: Date? = nil,
+               incompleteOnly: Bool = false) {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
     newTodo.addedDate = Date()
@@ -94,7 +96,7 @@ class TodoDataManager: ObservableObject {
     newTodo.listId = userSettings?.activeListId ?? defaultActiveListId
     newTodo.completed = false
     newTodo.color = 0
-    //newTodo.dueDate = nil
+    newTodo.dueDate = dueDate
     newTodo.starred = false
     if imageData != nil {
       let newImageId = UUID().uuidString

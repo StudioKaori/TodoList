@@ -49,6 +49,8 @@
 		43C0723529541E48000BA4CB /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314958E2949EF7100068F8A /* TodoModel.swift */; };
 		43C512492949D9B100019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 		43C5124A2949D9E800019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
+		43F4FD0D29549941008A4C5B /* LocalisedDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */; };
+		43F4FD0E29549941008A4C5B /* LocalisedDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +118,7 @@
 		43C072332953A096000BA4CB /* AddNewTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTodoView.swift; sourceTree = "<group>"; };
 		43C512482949D9B100019DEC /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		43E738D129543262007BA734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisedDateFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +310,7 @@
 				43C512482949D9B100019DEC /* PersistenceController.swift */,
 				43149593294AEA9A00068F8A /* TodoDataManager.swift */,
 				431DD21B29544F6D00F9832F /* WidgetDataManager.swift */,
+				43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -415,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43F4FD0D29549941008A4C5B /* LocalisedDateFormatter.swift in Sources */,
 				43149592294A6B8900068F8A /* TextFieldView.swift in Sources */,
 				43C0723529541E48000BA4CB /* TodoModel.swift in Sources */,
 				43C0722A29532FE2000BA4CB /* AttachTodoImageView.swift in Sources */,
@@ -439,6 +444,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43F4FD0E29549941008A4C5B /* LocalisedDateFormatter.swift in Sources */,
 				4314958B2949EB4C00068F8A /* LargeSizeView.swift in Sources */,
 				431495B0294C954700068F8A /* WidgetTitleView.swift in Sources */,
 				431495AA294BB29800068F8A /* FontSizes.swift in Sources */,

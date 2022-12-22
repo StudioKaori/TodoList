@@ -31,6 +31,12 @@ struct WidgetTodoListView: View {
             Text(entry.todos[i].title)
               .foregroundColor(Color.theme.primaryText)
               .font(.footnote)
+            
+            if entry.todos[i].dueDate != nil {
+              Text("\(LocalisedDateFormatter.getFormattedDate(date: entry.todos[i].dueDate!))")
+                .font(.caption2)
+                .foregroundColor(Color.theme.secondaryText)
+            }
           }
           
           if i != (todosLength - 1) {

@@ -18,11 +18,18 @@ struct AddNewTodoView: View {
   @State var isImagePicker = false
   @State var source:UIImagePickerController.SourceType = .photoLibrary
   
+  @State private var dueDate: Date?
+  
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
-    todoDataManager.addTodo(todoTitle: addTodoString)
+    todoDataManager.addTodo(todoTitle: addTodoString, dueDate: dueDate)
+    resetFields()
+  }
+  
+  private func resetFields() {
     addTodoString = ""
     imageData = .init(capacity:0)
+    dueDate = nil
     addTodoFieldFocus = false
   }
   
@@ -50,7 +57,7 @@ struct AddNewTodoView: View {
         
         if addTodoFieldFocus {
           Button {
-            addTodoFieldFocus.toggle()
+            resetFields()
           } label: {
             Image(systemName: "arrow.down.circle")
               .font(.largeTitle)
@@ -59,7 +66,29 @@ struct AddNewTodoView: View {
         }
       } // END: Hstack AddTask Text field
       
-      HStack{
+      HStack(spacing: 6) {
+        
+        if dueDate != nil {
+          Text("Due Date; \(LocalisedDateFormatter.getFormattedDate(date: dueDate!))")
+        }
+        
+        Button {
+          dueDate = Date()
+        } label: {
+          Text("Today")
+        }
+        
+        Button {
+          dueDate = Date()
+        } label: {
+          Text("Tomorrow")
+        }
+
+      }
+      .foregroundColor(Color.theme.primaryText)
+      .font(.footnote)
+      
+      ScrollView(.horizontal, showsIndicators: false) {
         AttachTodoImageView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
       } // END: camera
     } // END: Vstack
