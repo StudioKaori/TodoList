@@ -63,6 +63,7 @@ class TodoDataManager: ObservableObject {
     } catch let error {
       print("Error fetching: \(error)")
     }
+    print("Todos for widget: \(todos)")
     return todos
   }
   
