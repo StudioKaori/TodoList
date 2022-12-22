@@ -56,20 +56,6 @@ class TodoDataManager: ObservableObject {
     }
   } // END: fetchTodos
   
-  func fetchTodosForWidget() -> [TodoModel] {
-    var todos: [TodoModel] = []
-    do {
-      let results = try container.viewContext.fetch(getTodoRequest(listId: userSettings?.widgetListId ?? defaultWidgetListId, incompleteOnly: true))
-      results.forEach { todoEntity in
-        todos.append(TodoModel(title: todoEntity.title ?? "", completed: false))
-      }
-    } catch let error {
-      print("Error fetching: \(error)")
-    }
-    print("Todos for widget: \(todos)")
-    return todos
-  }
-  
   func fetchTodoImages() {
     let request = NSFetchRequest<TodoImageEntity>(entityName: "TodoImageEntity")
     let listIdPredicate = NSPredicate(format: "listId = %@", userSettings?.activeListId ?? defaultActiveListId)
@@ -157,6 +143,7 @@ class TodoDataManager: ObservableObject {
         let newUserSettings = UserSettingsEntity(context: container.viewContext)
         newUserSettings.activeListId = defaultActiveListId
         newUserSettings.widgetListId = defaultWidgetListId
+        WidgetDataManager.shared.widgetListId = defaultWidgetListId
         saveData()
       } else {
         userSettings = userSettingsArray[0]

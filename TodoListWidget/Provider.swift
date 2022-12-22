@@ -20,7 +20,7 @@ struct Provider: TimelineProvider {
   
   func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
     var entries: [SimpleEntry] = [SimpleEntry(date: Date(), todos: [])]
-    entries[0].todos = TodoDataManager.shared.fetchTodosForWidget()
+    entries[0].todos = WidgetDataManager.shared.fetchTodosForWidget()
     
     let timeline = Timeline(entries: entries, policy: .atEnd)
     completion(timeline)
