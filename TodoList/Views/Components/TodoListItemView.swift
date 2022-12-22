@@ -10,7 +10,8 @@ import SwiftUI
 struct TodoListItemView: View {
   @StateObject var vm: HomeViewModel
   let entity: TodoEntity
-
+  
+  @State var isShowingImageSheet = false
   
   var body: some View {
     HStack {
@@ -36,19 +37,29 @@ struct TodoListItemView: View {
               .foregroundColor(Color.theme.secondaryText)
           }
         }
+        .onTapGesture {
+          vm.showTodoEdit(entity: entity)
+        } // END: Title Hstack
         
         if let imageId: String = entity.imageId {
-          Image(uiImage: UIImage(data: TodoDataManager.shared.todoImages[imageId] ?? Data.init())!)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(maxWidth: .infinity)
-            .frame(height: 120)
-            .cornerRadius(10)
-        }
+          Button {
+            isShowingImageSheet = true
+          } label: {
+            Image(uiImage: UIImage(data: TodoDataManager.shared.todoImages[imageId] ?? Data.init())!)
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(maxWidth: .infinity)
+              .frame(height: 120)
+              .cornerRadius(10)
+          }
+          .buttonStyle(BorderlessButtonStyle())
+
+        } // END: Image
+        
       }
     }
     .font(.body)
-    .swipeActions(edge: .trailing) {
+    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
       Button {
         withAnimation {
           TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed)
@@ -76,11 +87,11 @@ struct TodoListItemView: View {
         Image(systemName: "pencil")
       }
       .tint(.blue)
+    }// END: Hstack list item
+    .sheet(isPresented: $isShowingImageSheet) {
+      TodoImageView(imageId: entity.imageId!, navigationbarTitle: String(entity.title?.prefix(20) ?? ""), isShowingImageSheet: $isShowingImageSheet)
     }
-    .onTapGesture {
-      vm.showTodoEdit(entity: entity)
-    }
-    // END: Hstack list item
+    
   }
 }
 

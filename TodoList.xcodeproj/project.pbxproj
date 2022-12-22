@@ -51,6 +51,7 @@
 		43C5124A2949D9E800019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 		43F4FD0D29549941008A4C5B /* LocalisedDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */; };
 		43F4FD0E29549941008A4C5B /* LocalisedDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */; };
+		43F4FD102954B1BF008A4C5B /* TodoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		43C512482949D9B100019DEC /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		43E738D129543262007BA734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisedDateFormatter.swift; sourceTree = "<group>"; };
+		43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				43149591294A6B8900068F8A /* TextFieldView.swift */,
 				43C0722929532FE2000BA4CB /* AttachTodoImageView.swift */,
 				43C0720029523D51000BA4CB /* TodoListItemView.swift */,
+				43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */,
 				43C072332953A096000BA4CB /* AddNewTodoView.swift */,
 			);
 			path = Components;
@@ -424,6 +427,7 @@
 				43C0723529541E48000BA4CB /* TodoModel.swift in Sources */,
 				43C0722A29532FE2000BA4CB /* AttachTodoImageView.swift in Sources */,
 				43149599294AEFB800068F8A /* HomeViewModel.swift in Sources */,
+				43F4FD102954B1BF008A4C5B /* TodoImageView.swift in Sources */,
 				435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */,
 				43C0720329524D07000BA4CB /* HorizontalListsView.swift in Sources */,
 				43149596294AED4300068F8A /* TodoListView.swift in Sources */,
