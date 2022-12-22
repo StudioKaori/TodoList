@@ -60,7 +60,7 @@ struct AddNewTodoView: View {
       } // END: Hstack AddTask Text field
       
       HStack{
-        CameraView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
+        AttachTodoImageView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
       } // END: camera
     } // END: Vstack
     .padding()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CameraView: View {
+struct AttachTodoImageView: View {
   
   @ObservedObject var todoDataManager = TodoDataManager.shared
   @State private var isShowingActionSheet = false
@@ -19,28 +19,44 @@ struct CameraView: View {
   
   var body: some View {
     
-    HStack(spacing: 20){
+    HStack(spacing: 0){
       
       if (UIImage(data: imageData) != nil) {
-        Image(systemName: "photo")
-          .frame(maxHeight: 20)
-          .foregroundColor(Color.theme.accent)
+//        Image(systemName: "photo")
+//          .frame(maxHeight: 20)
+//          .foregroundColor(Color.theme.accent)
         
-        Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
-          .resizable()
-          .aspectRatio(contentMode: .fill)
-          .frame(maxWidth: 20, maxHeight: 20)
-          .cornerRadius(3)
-          .onAppear {
-            if imageData.count != 0 {
-              todoDataManager.imageData = imageData
+        Button {
+          isShowingActionSheet = true
+        } label: {
+          Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(maxWidth: 20, maxHeight: 20)
+            .cornerRadius(3)
+            .onAppear {
+              if imageData.count != 0 {
+                todoDataManager.imageData = imageData
+              }
             }
-          }
+        }
+        .actionSheet(isPresented: $isShowingActionSheet) {
+          ActionSheet(title: Text("Delete the image"),
+                      buttons: [
+                        .destructive(Text("Delete"), action: {
+                          imageData = Data()
+                        }),
+                        .cancel(Text("Cancel"))
+                      ]
+          )
+        }
+        
       } else {
         Button {
           isShowingActionSheet = true
         } label: {
           Image(systemName: "photo")
+            .foregroundColor(Color.theme.primaryText)
             .frame(maxHeight: 20)
         }
         .actionSheet(isPresented: $isShowingActionSheet) {
@@ -48,14 +64,19 @@ struct CameraView: View {
                       message: Text(""),
                       buttons: [
                         .default(Text("Photo library"), action: {
-                          
+                          self.source = .photoLibrary
+                          self.isImagePicker.toggle()
                         }),
-                        .default(Text("Photo library"), action: {
-                          
+                        .default(Text("Camera"), action: {
+                          self.source = .camera
+                          self.isImagePicker.toggle()
                         }),
                         .cancel(Text("Cancel"))
                         
                       ])
+        } // END: Actionsheet
+        .sheet(isPresented: $isImagePicker) {
+          Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source)
         }
         
       }
@@ -71,28 +92,28 @@ struct CameraView: View {
       //          }
       //        }
       
-      NavigationLink(
-        destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
-        isActive:$isImagePicker) {
-          Button(action: {
-            self.source = .photoLibrary
-            self.isImagePicker.toggle()
-            
-          }, label: {
-            Text("Upload")
-          })
-        }
-      
-      NavigationLink(
-        destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
-        isActive:$isImagePicker) {
-          Button(action: {
-            self.source = .camera
-            self.isImagePicker.toggle()
-          }, label: {
-            Text("Take Photo")
-          })
-        }
+//      NavigationLink(
+//        destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
+//        isActive:$isImagePicker) {
+//          Button(action: {
+//            self.source = .photoLibrary
+//            self.isImagePicker.toggle()
+//
+//          }, label: {
+//            Text("Upload")
+//          })
+//        }
+//
+//      NavigationLink(
+//        destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
+//        isActive:$isImagePicker) {
+//          Button(action: {
+//            self.source = .camera
+//            self.isImagePicker.toggle()
+//          }, label: {
+//            Text("Take Photo")
+//          })
+//        }
       
     }
   }
