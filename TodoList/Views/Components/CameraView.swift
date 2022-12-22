@@ -10,6 +10,7 @@ import SwiftUI
 struct CameraView: View {
   
   @ObservedObject var todoDataManager = TodoDataManager.shared
+  @State private var isShowingActionSheet = false
   
   @Binding var imageData : Data
   @Binding var source:UIImagePickerController.SourceType
@@ -19,16 +20,56 @@ struct CameraView: View {
   var body: some View {
     
     HStack(spacing: 20){
-      Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
-        .resizable()
-        .aspectRatio(contentMode: .fill)
-        .frame(width: 60, height: 60)
-        .cornerRadius(10)
-        .onAppear {
-          if imageData.count != 0 {
-            todoDataManager.imageData = imageData
+      
+      if (UIImage(data: imageData) != nil) {
+        Image(systemName: "photo")
+          .frame(maxHeight: 20)
+          .foregroundColor(Color.theme.accent)
+        
+        Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
+          .resizable()
+          .aspectRatio(contentMode: .fill)
+          .frame(maxWidth: 20, maxHeight: 20)
+          .cornerRadius(3)
+          .onAppear {
+            if imageData.count != 0 {
+              todoDataManager.imageData = imageData
+            }
           }
+      } else {
+        Button {
+          isShowingActionSheet = true
+        } label: {
+          Image(systemName: "photo")
+            .frame(maxHeight: 20)
         }
+        .actionSheet(isPresented: $isShowingActionSheet) {
+          ActionSheet(title: Text("Attach image"),
+                      message: Text(""),
+                      buttons: [
+                        .default(Text("Photo library"), action: {
+                          
+                        }),
+                        .default(Text("Photo library"), action: {
+                          
+                        }),
+                        .cancel(Text("Cancel"))
+                        
+                      ])
+        }
+        
+      }
+      
+      //      Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
+      //        .resizable()
+      //        .aspectRatio(contentMode: .fill)
+      //        .frame(width: 20, height: 20)
+      //        .cornerRadius(10)
+      //        .onAppear {
+      //          if imageData.count != 0 {
+      //            todoDataManager.imageData = imageData
+      //          }
+      //        }
       
       NavigationLink(
         destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
@@ -52,7 +93,7 @@ struct CameraView: View {
             Text("Take Photo")
           })
         }
-
+      
     }
   }
 }
