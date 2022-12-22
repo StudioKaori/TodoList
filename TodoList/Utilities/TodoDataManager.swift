@@ -53,6 +53,19 @@ class TodoDataManager: ObservableObject {
     }
   } // END: fetchTodos
   
+  func fetchTodosForWidget() -> [TodoModel] {
+    var todos: [TodoModel] = []
+    do {
+      let results = try container.viewContext.fetch(getTodoRequest(listId: userSettings?.widgetListId ?? defaultWidgetListId, incompleteOnly: true))
+      results.forEach { todoEntity in
+        todos.append(TodoModel(title: todoEntity.title ?? "", completed: false))
+      }
+    } catch let error {
+      print("Error fetching: \(error)")
+    }
+    return todos
+  }
+  
   func getNextTodoOrder(listId: String) -> Int16 {
     do {
       let todos = try container.viewContext.fetch(getTodoRequest(listId: listId, incompleteOnly: false))

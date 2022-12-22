@@ -9,23 +9,24 @@ import SwiftUI
 
 struct HorizontalListsView: View {
   @StateObject var vm: HomeViewModel
+  @StateObject var todoDataManager = TodoDataManager.shared
   
   var body: some View {
     ScrollView(.horizontal, showsIndicators: false) {
       
       HStack(spacing: 42) {
         
-        ForEach(TodoDataManager.shared.todoLists) { list in
+        ForEach(todoDataManager.todoLists) { list in
           Button {
-            TodoDataManager.shared.updateActiveListId(id: list.id ?? defaultActiveListId)
+            todoDataManager.updateActiveListId(id: list.id ?? defaultActiveListId)
           } label: {
             VStack {
               Text(list.title ?? "No name list")
               Spacer()
               Rectangle()
-                .frame(height: TodoDataManager.shared.userSettings?.activeListId == list.id ? 2 : 0)
+                .frame(height: todoDataManager.userSettings?.activeListId == list.id ? 2 : 0)
             }
-            .foregroundColor(TodoDataManager.shared.userSettings?.activeListId == list.id ? Color.theme.accent : Color.theme.primaryText)
+            .foregroundColor(todoDataManager.userSettings?.activeListId == list.id ? Color.theme.accent : Color.theme.primaryText)
           }
         } // END: foreach
         

@@ -45,6 +45,7 @@
 		43C0720629530201000BA4CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43C0720829530201000BA4CB /* Localizable.strings */; };
 		43C0722A29532FE2000BA4CB /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0722929532FE2000BA4CB /* CameraView.swift */; };
 		43C072342953A096000BA4CB /* AddNewTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C072332953A096000BA4CB /* AddNewTodoView.swift */; };
+		43C0723529541E48000BA4CB /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314958E2949EF7100068F8A /* TodoModel.swift */; };
 		43C512492949D9B100019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 		43C5124A2949D9E800019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 /* End PBXBuildFile section */
@@ -412,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43149592294A6B8900068F8A /* TextFieldView.swift in Sources */,
+				43C0723529541E48000BA4CB /* TodoModel.swift in Sources */,
 				43C0722A29532FE2000BA4CB /* CameraView.swift in Sources */,
 				43149599294AEFB800068F8A /* HomeViewModel.swift in Sources */,
 				435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */,
