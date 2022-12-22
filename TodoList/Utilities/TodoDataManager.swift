@@ -45,7 +45,7 @@ class TodoDataManager: ObservableObject {
   func fetchTodos(activeListId: String, incompleteOnly: Bool = false) {
     do {
       savedTodos = try container.viewContext.fetch(getTodoRequest(listId: activeListId, incompleteOnly: incompleteOnly))
-      print("saved Todos: \(savedTodos)")
+      //print("saved Todos: \(savedTodos)")
       
       // reload the widget
       WidgetCenter.shared.reloadTimelines(ofKind: "TodoListWidget")

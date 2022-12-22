@@ -22,6 +22,12 @@ struct HomeView: View {
           .font(.headline)
           .padding(.bottom, 30)
         
+        Button {
+          sendNotificationRequest()
+        } label: {
+          Text("NOTIFICATION")
+        }
+        
         HorizontalListsView(vm: vm)
         
         TodoListView(vm: vm)
@@ -35,7 +41,17 @@ struct HomeView: View {
         TextFieldView(vm: vm, editMode: vm.editMode, ieEditMode: true)
       }
     } // END: Zstack
-
+  }
+  
+  func sendNotificationRequest(){
+    let content = UNMutableNotificationContent()
+    content.title = "通知のタイトル"
+    content.body = "通知の内容です"
+    
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+    
+    let request = UNNotificationRequest(identifier: UUID().uuidString , content: content, trigger: trigger)
+    UNUserNotificationCenter.current().add(request)
   }
 }
 
