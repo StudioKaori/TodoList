@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 
-class AppDelegate:NSObject,UIApplicationDelegate,UNUserNotificationCenterDelegate{
+// For getting granted foreground notification
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate{
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    
+    // Setting delegate is important
+    UNUserNotificationCenter.current().delegate = self
     
     let center = UNUserNotificationCenter.current()
     center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
@@ -26,6 +30,6 @@ class AppDelegate:NSObject,UIApplicationDelegate,UNUserNotificationCenterDelegat
     _ center: UNUserNotificationCenter,
     willPresent notification: UNNotification,
     withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-      completionHandler([[.banner, .list, .sound]])
+      completionHandler([.banner, .list, .sound])
     }
 }
