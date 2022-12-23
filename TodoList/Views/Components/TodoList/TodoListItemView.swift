@@ -10,6 +10,7 @@ import SwiftUI
 struct TodoListItemView: View {
   @StateObject var vm: HomeViewModel
   let entity: TodoEntity
+  @Binding var showToast: Bool
   
   @State var isShowingImageSheet = false
   
@@ -20,6 +21,7 @@ struct TodoListItemView: View {
         .onTapGesture {
           withAnimation{
             TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed)
+            self.showToast.toggle()
           }
         }
       
@@ -63,6 +65,7 @@ struct TodoListItemView: View {
       Button {
         withAnimation {
           TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed)
+          self.showToast.toggle()
         }
       } label: {
         Image(systemName: entity.completed ? "circle" : "checkmark.circle.fill")
@@ -97,6 +100,6 @@ struct TodoListItemView: View {
 
 struct TodoListItemView_Previews: PreviewProvider {
   static var previews: some View {
-    TodoListItemView(vm: HomeViewModel(), entity: TodoEntity(context: PersistenceController.shared.container.viewContext))
+    TodoListItemView(vm: HomeViewModel(), entity: TodoEntity(context: PersistenceController.shared.container.viewContext), showToast: .constant(true))
   }
 }

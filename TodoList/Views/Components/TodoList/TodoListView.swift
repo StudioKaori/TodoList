@@ -11,6 +11,8 @@ struct TodoListView: View {
   @StateObject var vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   
+  @State var showToast = false
+  
   private func updateTodosOrder(from: IndexSet, to: Int) {
     print("from:\(from) to: \(to)")
     todoDataManager.savedTodos.move(fromOffsets: from, toOffset: to)
@@ -22,11 +24,12 @@ struct TodoListView: View {
       List {
         ForEach(todoDataManager.savedTodos) { entity in
           if !entity.completed || vm.showAllTodos {
-            TodoListItemView(vm: vm, entity: entity)
+            TodoListItemView(vm: vm, entity: entity, showToast: $showToast)
           }
         } // END: Foreach
         .onMove(perform: updateTodosOrder)
       } // END: list
+      .overlay(overlayView: ToastView(toast: Toast(title: "Deleted", image: "trash"), show: $showToast), show: $showToast)
       
       HStack {
         Spacer()

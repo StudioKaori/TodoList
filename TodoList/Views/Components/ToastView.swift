@@ -29,7 +29,7 @@ struct ToastView: View {
         .foregroundColor(Color.theme.primaryText)
         .padding(.vertical, 20)
         .padding(.horizontal, 40)
-        .background(.gray.opacity(0.4), in: Capsule())
+        .background(Color.theme.textFieldBackground.opacity(0.4), in: Capsule())
       }
       .frame(width: UIScreen.main.bounds.width / 1.25)
       .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
