@@ -53,6 +53,7 @@
 		43F4FD0E29549941008A4C5B /* LocalisedDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */; };
 		43F4FD102954B1BF008A4C5B /* TodoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */; };
 		43F4FD122954C9FA008A4C5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD112954C9FA008A4C5B /* AppDelegate.swift */; };
+		43F4FD142955B3DC008A4C5B /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD132955B3DC008A4C5B /* ToastView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisedDateFormatter.swift; sourceTree = "<group>"; };
 		43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoImageView.swift; sourceTree = "<group>"; };
 		43F4FD112954C9FA008A4C5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		43F4FD132955B3DC008A4C5B /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				43149591294A6B8900068F8A /* TextFieldView.swift */,
+				43F4FD132955B3DC008A4C5B /* ToastView.swift */,
 				43C0722929532FE2000BA4CB /* AttachTodoImageView.swift */,
 				43C0720029523D51000BA4CB /* TodoListItemView.swift */,
 				43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */,
@@ -426,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43F4FD0D29549941008A4C5B /* LocalisedDateFormatter.swift in Sources */,
+				43F4FD142955B3DC008A4C5B /* ToastView.swift in Sources */,
 				43149592294A6B8900068F8A /* TextFieldView.swift in Sources */,
 				43C0723529541E48000BA4CB /* TodoModel.swift in Sources */,
 				43C0722A29532FE2000BA4CB /* AttachTodoImageView.swift in Sources */,
