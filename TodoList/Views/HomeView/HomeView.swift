@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
   
-  @StateObject var vm = HomeViewModel()
+  @EnvironmentObject var vm: HomeViewModel
 
   var body: some View {
     ZStack {
@@ -27,10 +27,11 @@ struct HomeView: View {
         } label: {
           Text("NOTIFICATION")
         }
+        .padding(.bottom, 20)
         
-        HorizontalListsView(vm: vm)
+        HorizontalListsView()
         
-        TodoListView(vm: vm)
+        TodoListView()
         
         Spacer()
         
@@ -38,7 +39,7 @@ struct HomeView: View {
       } // END: Vstack Main container
       
       if vm.showingEditSheet {
-        TextFieldView(vm: vm, editMode: vm.editMode, ieEditMode: true)
+        TextFieldView(editMode: vm.editMode, ieEditMode: true)
       }
     } // END: Zstack
   }

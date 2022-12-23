@@ -13,15 +13,14 @@ enum TextFieldEditMode: String {
 }
 
 struct TextFieldView: View {
-  let vm: HomeViewModel
+  @EnvironmentObject var vm: HomeViewModel
   let editMode: TextFieldEditMode
   let ieEditMode: Bool
   @StateObject var todoDataManager = TodoDataManager.shared
   @State private var textFieldString = ""
   @FocusState private var editFieldFocused: Bool
   
-  init(vm: HomeViewModel, editMode: TextFieldEditMode, ieEditMode: Bool) {
-    self.vm = vm
+  init(editMode: TextFieldEditMode, ieEditMode: Bool) {
     self.editMode = editMode
     self.ieEditMode = ieEditMode
     switch(editMode) {
@@ -97,6 +96,6 @@ struct TextFieldView: View {
 
 struct TodoEditView_Previews: PreviewProvider {
   static var previews: some View {
-    TextFieldView(vm: HomeViewModel(), editMode: .list, ieEditMode: false)
+    TextFieldView(editMode: .list, ieEditMode: false)
   }
 }

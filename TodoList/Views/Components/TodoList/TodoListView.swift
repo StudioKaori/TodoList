@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TodoListView: View {
-  @StateObject var vm: HomeViewModel
+  @EnvironmentObject var vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   
   @State var showToast = false
@@ -24,12 +24,12 @@ struct TodoListView: View {
       List {
         ForEach(todoDataManager.savedTodos) { entity in
           if !entity.completed || vm.showAllTodos {
-            TodoListItemView(vm: vm, entity: entity, showToast: $showToast)
+            TodoListItemView(entity: entity, showToast: $showToast)
           }
         } // END: Foreach
         .onMove(perform: updateTodosOrder)
       } // END: list
-      .overlay(overlayView: ToastView(toast: Toast(title: "Deleted", image: "trash"), show: $showToast), show: $showToast)
+      .overlay(overlayView: ToastView(toast: Toast(title: "Completed!", image: "checkmark.circle"), show: $showToast), show: $showToast)
       
       HStack {
         Spacer()
@@ -54,6 +54,6 @@ struct TodoListView: View {
 
 struct TodoListView_Previews: PreviewProvider {
   static var previews: some View {
-    TodoListView(vm: HomeViewModel())
+    TodoListView()
   }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HorizontalListsView: View {
-  @StateObject var vm: HomeViewModel
+  @EnvironmentObject var vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   
   var body: some View {
@@ -51,6 +51,6 @@ struct HorizontalListsView: View {
 
 struct HorizontalListsView_Previews: PreviewProvider {
   static var previews: some View {
-    HorizontalListsView(vm: HomeViewModel())
+    HorizontalListsView()
   }
 }

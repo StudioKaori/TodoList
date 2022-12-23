@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TodoListItemView: View {
-  @StateObject var vm: HomeViewModel
+  @EnvironmentObject var vm: HomeViewModel
   let entity: TodoEntity
   @Binding var showToast: Bool
   
@@ -100,6 +100,6 @@ struct TodoListItemView: View {
 
 struct TodoListItemView_Previews: PreviewProvider {
   static var previews: some View {
-    TodoListItemView(vm: HomeViewModel(), entity: TodoEntity(context: PersistenceController.shared.container.viewContext), showToast: .constant(true))
+    TodoListItemView(entity: TodoEntity(context: PersistenceController.shared.container.viewContext), showToast: .constant(true))
   }
 }
