@@ -38,7 +38,34 @@ struct ToastView: View {
           self.show = false
         }
       }
+      .onAppear{
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+          withAnimation {
+            self.show = false
+          }
+        }
+      }
     }
+}
+
+struct Overlay<T: View>: ViewModifier {
+  @Binding var show: Bool
+  let overlayView: T
+  
+  func body(content: Content) -> some View {
+    ZStack {
+      content
+      if show {
+        overlayView
+      }
+    }
+  }
+}
+
+extension View {
+  func overlay<T: View>(overlayView: T, show: Binding<Bool>) -> some View {
+    self.modifier(Overlay(show: show, overlayView: overlayView))
+  }
 }
 
 struct ToastView_Previews: PreviewProvider {
