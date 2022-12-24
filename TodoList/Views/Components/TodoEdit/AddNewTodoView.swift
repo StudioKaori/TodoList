@@ -79,7 +79,7 @@ struct AddNewTodoView: View {
         }
         
         Button {
-          dueDate = Date()
+          dueDate = Date() + 10
         } label: {
           Text("Tomorrow")
         }

@@ -22,13 +22,6 @@ struct HomeView: View {
           .font(.headline)
           .padding(.bottom, 30)
         
-        Button {
-          sendNotificationRequest()
-        } label: {
-          Text("NOTIFICATION")
-        }
-        .padding(.bottom, 20)
-        
         HorizontalListsView()
         
         TodoListView()
@@ -43,17 +36,7 @@ struct HomeView: View {
       }
     } // END: Zstack
   }
-  
-  func sendNotificationRequest(){
-    let content = UNMutableNotificationContent()
-    content.title = "通知のタイトル"
-    content.body = "通知の内容です"
-    
-    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-    
-    let request = UNNotificationRequest(identifier: UUID().uuidString , content: content, trigger: trigger)
-    UNUserNotificationCenter.current().add(request)
-  }
+
 }
 
 struct HomeView_Previews: PreviewProvider {

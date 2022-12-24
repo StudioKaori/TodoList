@@ -54,6 +54,7 @@
 		43F4FD102954B1BF008A4C5B /* TodoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */; };
 		43F4FD122954C9FA008A4C5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD112954C9FA008A4C5B /* AppDelegate.swift */; };
 		43F4FD142955B3DC008A4C5B /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD132955B3DC008A4C5B /* ToastView.swift */; };
+		43F4FD182956F8B3008A4C5B /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F4FD172956F8B3008A4C5B /* NotificationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,7 @@
 		43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoImageView.swift; sourceTree = "<group>"; };
 		43F4FD112954C9FA008A4C5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43F4FD132955B3DC008A4C5B /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		43F4FD172956F8B3008A4C5B /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				43C512482949D9B100019DEC /* PersistenceController.swift */,
+				43F4FD172956F8B3008A4C5B /* NotificationController.swift */,
 				43149593294AEA9A00068F8A /* TodoDataManager.swift */,
 				431DD21B29544F6D00F9832F /* WidgetDataManager.swift */,
 				43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */,
@@ -444,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43F4FD182956F8B3008A4C5B /* NotificationController.swift in Sources */,
 				43F4FD0D29549941008A4C5B /* LocalisedDateFormatter.swift in Sources */,
 				43F4FD142955B3DC008A4C5B /* ToastView.swift in Sources */,
 				43149592294A6B8900068F8A /* TextFieldView.swift in Sources */,

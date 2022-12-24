@@ -86,26 +86,30 @@ class TodoDataManager: ObservableObject {
   
   func addTodo(todoTitle: String,
                dueDate: Date? = nil,
+               memo: String? = nil,
                incompleteOnly: Bool = false) {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
     newTodo.addedDate = Date()
     newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? defaultActiveListId)
     newTodo.title = todoTitle
-    newTodo.memo = ""
+    newTodo.memo = memo ?? ""
     newTodo.listId = userSettings?.activeListId ?? defaultActiveListId
     newTodo.completed = false
     newTodo.color = 0
-    newTodo.dueDate = dueDate
     newTodo.starred = false
     if imageData != nil {
       let newImageId = UUID().uuidString
       newTodo.imageId = newImageId
-      
       let newImageEntity = TodoImageEntity(context: container.viewContext)
       newImageEntity.id = newImageId
       newImageEntity.image = imageData
       newImageEntity.listId = userSettings?.activeListId ?? defaultActiveListId
+    }
+    
+    if let dueDateData: Date = dueDate {
+      newTodo.dueDate = dueDateData
+      NotificationController.sendNotificationRequest(todo: newTodo, date: dueDateData)
     }
     
     saveData(incompleteOnly: incompleteOnly)
