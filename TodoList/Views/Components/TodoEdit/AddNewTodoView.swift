@@ -18,7 +18,11 @@ struct AddNewTodoView: View {
   @State var isImagePicker = false
   @State var source:UIImagePickerController.SourceType = .photoLibrary
   
-  @State var dueDate: Date?
+  // Due Date
+  @State var dueDate: Date = Date()
+  @State var isDueDateDateOnly: Bool = true
+  @State var isDueDateReminderOn: Bool = false
+  @State var isDueDateActive: Bool = false
   @State var showDatePickerSheet: Bool = false
   
   private func addTodo() {
@@ -31,6 +35,13 @@ struct AddNewTodoView: View {
     addTodoString = ""
     imageData = .init(capacity:0)
     addTodoFieldFocus = false
+    
+    // Due date
+    dueDate = Date()
+    isDueDateDateOnly = true
+    isDueDateReminderOn = false
+    isDueDateActive = false
+    showDatePickerSheet = false
   }
   
   var body: some View {
@@ -68,8 +79,17 @@ struct AddNewTodoView: View {
       
       HStack(spacing: 6) {
         
-        if dueDate != nil {
-          Text("Due Date; \(LocalisedDateFormatter.getFormattedDate(date: dueDate!))")
+        if isDueDateActive {
+          Text("Due Date; \(LocalisedDateFormatter.getFormattedDate(date: dueDate))")
+        }
+        
+        Button {
+          if !isDueDateActive {
+            dueDate = Date()
+          }
+          showDatePickerSheet.toggle()
+        } label: {
+          Text("Pick due date")
         }
         
         Button {
@@ -95,6 +115,13 @@ struct AddNewTodoView: View {
     .padding()
     .onAppear {
       addTodoFieldFocus = false
+    } // END: main Vstack
+    .sheet(isPresented: $showDatePickerSheet) {
+      DueDatePickerView(dueDate: $dueDate,
+                        isDueDateDateOnly: $isDueDateDateOnly,
+                        isDueDateReminderOn: $isDueDateReminderOn,
+                        isDueDateActive: $isDueDateActive,
+                        showDatePickerSheet: $showDatePickerSheet)
     }
     
   }

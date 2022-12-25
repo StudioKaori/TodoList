@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct DueDatePickerView: View {
-  @Binding var showDatePickerSheet: Bool
   @Binding var dueDate: Date
+  @Binding var isDueDateDateOnly: Bool
+  @Binding var isDueDateReminderOn: Bool
+  @Binding var isDueDateActive: Bool
+  @Binding var showDatePickerSheet: Bool
   
   var body: some View {
     VStack {
@@ -27,10 +30,14 @@ struct DueDatePickerView: View {
       )
       
       Button {
-        showDatePickerSheet.toggle()
+        isDueDateActive = true
+        showDatePickerSheet = false
       } label: {
-        Image(systemName: "x.circle")
-          .font(.largeTitle)
+        HStack {
+          Image(systemName: "x.circle")
+            .font(.largeTitle)
+          Text("Save")
+        }
       }
     }
     .padding()
@@ -39,6 +46,10 @@ struct DueDatePickerView: View {
 
 struct DueDatePickerView_Previews: PreviewProvider {
   static var previews: some View {
-    DueDatePickerView(showDatePickerSheet: .constant(true), dueDate: .constant(Date()))
+    DueDatePickerView(dueDate: .constant(Date()),
+                      isDueDateDateOnly: .constant(true),
+                      isDueDateReminderOn: .constant(false),
+                      isDueDateActive: .constant(false),
+                      showDatePickerSheet: .constant(true))
   }
 }
