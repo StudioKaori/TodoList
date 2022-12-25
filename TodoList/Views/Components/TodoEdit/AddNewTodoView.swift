@@ -18,7 +18,8 @@ struct AddNewTodoView: View {
   @State var isImagePicker = false
   @State var source:UIImagePickerController.SourceType = .photoLibrary
   
-  @State private var dueDate: Date?
+  @State var dueDate: Date?
+  @State var showDatePickerSheet: Bool = false
   
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
@@ -29,7 +30,6 @@ struct AddNewTodoView: View {
   private func resetFields() {
     addTodoString = ""
     imageData = .init(capacity:0)
-    dueDate = nil
     addTodoFieldFocus = false
   }
   

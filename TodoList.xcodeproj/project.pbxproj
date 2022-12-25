@@ -26,6 +26,7 @@
 		431495B0294C954700068F8A /* WidgetTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431495AF294C954700068F8A /* WidgetTitleView.swift */; };
 		431DD21C29544F6D00F9832F /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431DD21B29544F6D00F9832F /* WidgetDataManager.swift */; };
 		431DD21D295450AB00F9832F /* WidgetDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431DD21B29544F6D00F9832F /* WidgetDataManager.swift */; };
+		4346F3DF2958F96C00557D3B /* DueDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4346F3DE2958F96C00557D3B /* DueDatePickerView.swift */; };
 		435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F3FA429488D4A00099512 /* TodoListApp.swift */; };
 		435F3FA929488D4B00099512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FA829488D4B00099512 /* Assets.xcassets */; };
 		435F3FAC29488D4B00099512 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435F3FAB29488D4B00099512 /* Preview Assets.xcassets */; };
@@ -97,6 +98,7 @@
 		431495AB294C920600068F8A /* WidgetTodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTodoListView.swift; sourceTree = "<group>"; };
 		431495AF294C954700068F8A /* WidgetTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTitleView.swift; sourceTree = "<group>"; };
 		431DD21B29544F6D00F9832F /* WidgetDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataManager.swift; sourceTree = "<group>"; };
+		4346F3DE2958F96C00557D3B /* DueDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueDatePickerView.swift; sourceTree = "<group>"; };
 		435F3FA129488D4A00099512 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		435F3FA429488D4A00099512 /* TodoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListApp.swift; sourceTree = "<group>"; };
 		435F3FA829488D4B00099512 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				43F4FD152955BE7B008A4C5B /* TodoList */,
 				43F4FD162955BEB0008A4C5B /* TodoEdit */,
 				43F4FD132955B3DC008A4C5B /* ToastView.swift */,
+				4346F3DE2958F96C00557D3B /* DueDatePickerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				43149592294A6B8900068F8A /* TextFieldView.swift in Sources */,
 				43C0723529541E48000BA4CB /* TodoModel.swift in Sources */,
 				43C0722A29532FE2000BA4CB /* AttachTodoImageView.swift in Sources */,
+				4346F3DF2958F96C00557D3B /* DueDatePickerView.swift in Sources */,
 				43149599294AEFB800068F8A /* HomeViewModel.swift in Sources */,
 				43F4FD102954B1BF008A4C5B /* TodoImageView.swift in Sources */,
 				435F3FA529488D4A00099512 /* TodoListApp.swift in Sources */,
