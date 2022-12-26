@@ -37,6 +37,12 @@ struct TodoListItemView: View {
             Text("\(LocalisedDateFormatter.getFormattedDate(date: entity.dueDate!))")
               .font(.caption2)
               .foregroundColor(Color.theme.secondaryText)
+            
+            if entity.isDueDateReminderOn {
+              Image(systemName: "bell.fill")
+                .font(.caption2)
+                .foregroundColor(Color.theme.secondaryText)
+            }
           }
         }
         .onTapGesture {

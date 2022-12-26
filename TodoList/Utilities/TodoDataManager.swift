@@ -117,6 +117,7 @@ class TodoDataManager: ObservableObject {
       }
       newTodo.dueDate = dueDateData
       newTodo.isDueDateDateOnly = isDueDateDateOnly
+      newTodo.isDueDateReminderOn = isDueDateReminderOn
       if isDueDateReminderOn {
         NotificationController.sendNotificationRequest(todo: newTodo, date: dueDateData)
       }

@@ -89,7 +89,11 @@ struct AddNewTodoView: View {
       HStack(spacing: 6) {
         
         if isDueDateActive {
-          Text("Due Date; \(LocalisedDateFormatter.getFormattedDate(date: dueDate))")
+          Text("Due Date: \(LocalisedDateFormatter.getFormattedDate(date: dueDate))")
+          
+          if isDueDateReminderOn {
+            Image(systemName: "bell.fill")
+          }
         }
         
         Button {
