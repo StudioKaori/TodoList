@@ -30,6 +30,7 @@ struct AddNewTodoView: View {
     guard !addTodoString.isEmpty else { return }
     todoDataManager.addTodo(
       todoTitle: addTodoString,
+      isDueDateActive: isDueDateActive,
       dueDate: dueDate,
       isDueDateDateOnly: isDueDateDateOnly,
       isDueDateReminderOn: isDueDateReminderOn,
