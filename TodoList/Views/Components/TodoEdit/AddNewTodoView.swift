@@ -11,6 +11,7 @@ struct AddNewTodoView: View {
   @State private var addTodoString: String = ""
   @FocusState private var addTodoFieldFocus: Bool
   @StateObject private var todoDataManager = TodoDataManager.shared
+  @State var memoString: String = ""
   
   // For image picker
   @State private var image = Image(systemName: "photo")
@@ -27,7 +28,14 @@ struct AddNewTodoView: View {
   
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
-    todoDataManager.addTodo(todoTitle: addTodoString, dueDate: dueDate)
+    todoDataManager.addTodo(
+      todoTitle: addTodoString,
+      dueDate: dueDate,
+      isDueDateDateOnly: isDueDateDateOnly,
+      isDueDateReminderOn: isDueDateReminderOn,
+      memo: memoString
+    )
+    
     resetFields()
   }
   

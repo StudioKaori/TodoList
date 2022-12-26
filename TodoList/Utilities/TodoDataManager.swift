@@ -85,8 +85,11 @@ class TodoDataManager: ObservableObject {
   }
   
   func addTodo(todoTitle: String,
-               dueDate: Date? = nil,
-               memo: String? = nil,
+               isDueDateActive: Bool = false,
+               dueDate: Date?,
+               isDueDateDateOnly: Bool = false,
+               isDueDateReminderOn: Bool = false,
+               memo: String?,
                incompleteOnly: Bool = false) {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
@@ -107,9 +110,16 @@ class TodoDataManager: ObservableObject {
       newImageEntity.listId = userSettings?.activeListId ?? defaultActiveListId
     }
     
-    if let dueDateData: Date = dueDate {
+    if isDueDateActive {
+      guard let dueDateData: Date = dueDate else {
+        print("AddTodo Error: Due date is active but the due date is nil.")
+        return
+      }
       newTodo.dueDate = dueDateData
-      NotificationController.sendNotificationRequest(todo: newTodo, date: dueDateData)
+      newTodo.isDueDateDateOnly = isDueDateDateOnly
+      if isDueDateReminderOn {
+        NotificationController.sendNotificationRequest(todo: newTodo, date: dueDateData)
+      }
     }
     
     saveData(incompleteOnly: incompleteOnly)
