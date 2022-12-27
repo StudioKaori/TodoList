@@ -81,40 +81,6 @@ struct AttachTodoImageView: View {
         
       }
       
-      //      Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
-      //        .resizable()
-      //        .aspectRatio(contentMode: .fill)
-      //        .frame(width: 20, height: 20)
-      //        .cornerRadius(10)
-      //        .onAppear {
-      //          if imageData.count != 0 {
-      //            todoDataManager.imageData = imageData
-      //          }
-      //        }
-      
-//      NavigationLink(
-//        destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
-//        isActive:$isImagePicker) {
-//          Button(action: {
-//            self.source = .photoLibrary
-//            self.isImagePicker.toggle()
-//
-//          }, label: {
-//            Text("Upload")
-//          })
-//        }
-//
-//      NavigationLink(
-//        destination: Imagepicker(show: $isImagePicker, image: $imageData, sourceType: source),
-//        isActive:$isImagePicker) {
-//          Button(action: {
-//            self.source = .camera
-//            self.isImagePicker.toggle()
-//          }, label: {
-//            Text("Take Photo")
-//          })
-//        }
-      
     }
   }
 }
@@ -158,7 +124,8 @@ struct Imagepicker : UIViewControllerRepresentable {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
       
       let image = info[.originalImage] as! UIImage
-      let data = image.pngData()
+      // png doesn't save orientation date, use jpegdata instead
+      let data = image.jpegData(compressionQuality: 1)
       
       self.parent.image = data!
       self.parent.show.toggle()
