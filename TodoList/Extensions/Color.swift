@@ -29,7 +29,9 @@ struct ColorTheme {
 
 struct TodoBgTheme {
   
-  let red = Color("TodoBgRed")
-  let blue = Color("TodoBgBlue")
+  let colors: Dictionary<String, Color> = [
+    "red": Color("TodoBgRed"),
+    "blue": Color("TodoBgBlue")
+  ]
   
 }
