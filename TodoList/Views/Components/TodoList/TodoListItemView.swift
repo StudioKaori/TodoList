@@ -34,7 +34,7 @@ struct TodoListItemView: View {
           if entity.dueDate != nil {
             HStack(spacing: 2) {
               Image(systemName: "calendar.badge.clock")
-              Text("\(LocalisedDateFormatter.getFormattedDate(date: entity.dueDate!))")
+              Text(entity.isDueDateDateOnly ? LocalisedDateFormatter.getFormattedDate(date: entity.dueDate!) : LocalisedDateFormatter.getFormattedDateAndTime(date: entity.dueDate!))
               
               if entity.isDueDateReminderOn {
                 Image(systemName: "bell.fill")

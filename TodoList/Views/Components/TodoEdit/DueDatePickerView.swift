@@ -16,7 +16,8 @@ struct DueDatePickerView: View {
   
   private func resetBindingValues() {
     dueDate = Date()
-    isDueDateDateOnly = false
+    isDueDateActive = false
+    isDueDateDateOnly = true
     isDueDateReminderOn = false
     isDueDateActive = false
     showDatePickerSheet = false
@@ -26,10 +27,7 @@ struct DueDatePickerView: View {
     VStack {
       
       List {
-        Section(header: Text("Reminder")) {
-          Toggle("Set reminder", isOn: $isDueDateReminderOn)
-        }
-        
+       
         Section(header: Text("Date")) {
           DatePicker(
             "Due Date",
@@ -40,13 +38,18 @@ struct DueDatePickerView: View {
           
           
           HStack {
-            Button {
-              isDueDateDateOnly.toggle()
-            } label: {
-              Text(isDueDateDateOnly ? "Add time" : "Delete time")
-            }
-            
-            if !isDueDateDateOnly {
+            if isDueDateDateOnly {
+              Button {
+                isDueDateDateOnly = false
+              } label: {
+                Text("Add time")
+              }
+            } else {
+              Button {
+                isDueDateDateOnly = true
+              } label: {
+                Text("Delete time")
+              }
               Spacer()
               
               DatePicker("Time",
@@ -56,39 +59,29 @@ struct DueDatePickerView: View {
               .labelsHidden()
             }
           } // END: Hstack
-          
         } // END: Date Section
         
+        Section(header: Text("Reminder")) {
+          Toggle("Set reminder", isOn: $isDueDateReminderOn)
+        }
+        
+        Section(header: Text("Delete")) {
+          Button {
+            self.resetBindingValues()
+          } label: {
+            Text("Delete due date")
+          }
+
+        }
       }
-      
-      
       
       HStack(spacing: 18) {
         Button {
           showDatePickerSheet = false
         } label: {
           HStack(spacing: 0) {
-            Image(systemName: "x.circle")
-            Text("Cancel")
-          }
-        }
-        
-        Button {
-          resetBindingValues()
-        } label: {
-          HStack(spacing: 0) {
-            Image(systemName: "trash.circle")
-            Text("Delete")
-          }
-        }
-        
-        Button {
-          isDueDateActive = true
-          showDatePickerSheet = false
-        } label: {
-          HStack(spacing: 0) {
             Image(systemName: "checkmark.circle")
-            Text("Save")
+            Text("Close")
           }
         }
         

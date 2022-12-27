@@ -91,11 +91,13 @@ struct AddNewTodoView: View {
           if !isDueDateActive {
             dueDate = Date()
           }
+          
+          isDueDateActive = true
           showDatePickerSheet.toggle()
         } label: {
           if isDueDateActive {
             HStack {
-              Text("\(LocalisedDateFormatter.getFormattedDate(date: dueDate))")
+              Text(isDueDateDateOnly ? LocalisedDateFormatter.getFormattedDate(date: dueDate) : LocalisedDateFormatter.getFormattedDateAndTime(date: dueDate))
               
               if isDueDateReminderOn {
                 Image(systemName: "bell.fill")
@@ -109,14 +111,18 @@ struct AddNewTodoView: View {
               .modifier(Border(color: Color.theme.primaryText))
             
             Button {
+              isDueDateActive = true
               dueDate = Date()
+              isDueDateDateOnly = true
             } label: {
               Text("Today")
                 .modifier(Border(color: Color.theme.primaryText))
             }
             
             Button {
-              dueDate = Date() + 10
+              isDueDateActive = true
+              dueDate = Calendar.current.date(byAdding: .day,value: 1, to: Date())!
+              isDueDateDateOnly = true
             } label: {
               Text("Tomorrow")
                 .modifier(Border(color: Color.theme.primaryText))

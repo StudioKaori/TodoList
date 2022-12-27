@@ -9,7 +9,7 @@ import Foundation
 
 class LocalisedDateFormatter {
   
-  static func getFormattedDate(date: Date) -> String {
+  static func getFormattedDateAndTime(date: Date) -> String {
     let locale = Locale.current
     let localeId = locale.identifier
 
@@ -20,6 +20,21 @@ class LocalisedDateFormatter {
       df.dateFormat = "MM/dd E HH:mm"
     default:
       df.dateFormat = "E dd MMM HH:mm"
+    }
+    return df.string(from: date)
+  }
+  
+  static func getFormattedDate(date: Date) -> String {
+    let locale = Locale.current
+    let localeId = locale.identifier
+
+    let df = DateFormatter()
+    //df.locale = Locale(identifier: localeId)
+    switch(String(localeId.prefix(2))) {
+    case "ja":
+      df.dateFormat = "MM/dd E"
+    default:
+      df.dateFormat = "E dd MMM"
     }
     return df.string(from: date)
   }

@@ -87,7 +87,7 @@ class TodoDataManager: ObservableObject {
   func addTodo(todoTitle: String,
                isDueDateActive: Bool = false,
                dueDate: Date?,
-               isDueDateDateOnly: Bool = false,
+               isDueDateDateOnly: Bool = true,
                isDueDateReminderOn: Bool = false,
                memo: String?,
                incompleteOnly: Bool = false) {
@@ -115,10 +115,11 @@ class TodoDataManager: ObservableObject {
         print("AddTodo Error: Due date is active but the due date is nil.")
         return
       }
-      newTodo.dueDate = dueDateData
+      newTodo.dueDate = isDueDateDateOnly ? Calendar.current.startOfDay(for: dueDateData) : dueDateData
       newTodo.isDueDateDateOnly = isDueDateDateOnly
       newTodo.isDueDateReminderOn = isDueDateReminderOn
       if isDueDateReminderOn {
+        // Todo add dateonly reminder notification
         NotificationController.sendNotificationRequest(todo: newTodo, date: dueDateData)
       }
     }

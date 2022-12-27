@@ -167,7 +167,6 @@
 				43F4FD152955BE7B008A4C5B /* TodoList */,
 				43F4FD162955BEB0008A4C5B /* TodoEdit */,
 				43F4FD132955B3DC008A4C5B /* ToastView.swift */,
-				4346F3DE2958F96C00557D3B /* DueDatePickerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -342,6 +341,7 @@
 				43149591294A6B8900068F8A /* TextFieldView.swift */,
 				43C0722929532FE2000BA4CB /* AttachTodoImageView.swift */,
 				43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */,
+				4346F3DE2958F96C00557D3B /* DueDatePickerView.swift */,
 			);
 			path = TodoEdit;
 			sourceTree = "<group>";
