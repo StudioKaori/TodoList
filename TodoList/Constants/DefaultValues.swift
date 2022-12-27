@@ -14,3 +14,6 @@ let textBorderCornerRadius: CGFloat = 6
 // MARK: - Core data default values
 let defaultActiveListId = "0"
 let defaultWidgetListId = "0"
+
+// MARK: - User settings
+let userSettingsDefaultReminderTime = "09:00"

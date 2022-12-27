@@ -20,7 +20,7 @@ struct TodoListItemView: View {
         .foregroundColor(entity.completed ? Color.theme.accent : Color.theme.secondaryText)
         .onTapGesture {
           withAnimation{
-            TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed)
+            TodoDataManager.shared.updateCompleted(todo: entity, completed: !entity.completed)
             self.showToast.toggle()
           }
         }
@@ -70,7 +70,7 @@ struct TodoListItemView: View {
     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
       Button {
         withAnimation {
-          TodoDataManager.shared.updateCompleted(entity: entity, completed: !entity.completed)
+          TodoDataManager.shared.updateCompleted(todo: entity, completed: !entity.completed)
           self.showToast.toggle()
         }
       } label: {

@@ -84,6 +84,20 @@ class TodoDataManager: ObservableObject {
     }
   }
   
+  fileprivate func checkAndRegisterReminder(todoEntity: TodoEntity) {
+    guard todoEntity.isDueDateReminderOn,
+          var reminderDueDate = todoEntity.dueDate else {
+      print("Reminser is not set")
+      return
+    }
+    
+    if todoEntity.isDueDateDateOnly {
+      let reminderTime = userSettings?.reminderTime ?? userSettingsDefaultReminderTime
+      reminderDueDate = Calendar.current.date(bySettingHour: Int(reminderTime.split(separator: ":")[0])!, minute: Int(reminderTime.split(separator: ":")[1])!, second: 0, of: todoEntity.dueDate!)!
+    }
+    NotificationController.sendNotificationRequest(todo: todoEntity, date: reminderDueDate)
+  }
+  
   func addTodo(todoTitle: String,
                isDueDateActive: Bool = false,
                dueDate: Date?,
@@ -118,10 +132,7 @@ class TodoDataManager: ObservableObject {
       newTodo.dueDate = isDueDateDateOnly ? Calendar.current.startOfDay(for: dueDateData) : dueDateData
       newTodo.isDueDateDateOnly = isDueDateDateOnly
       newTodo.isDueDateReminderOn = isDueDateReminderOn
-      if isDueDateReminderOn {
-        // Todo add dateonly reminder notification
-        NotificationController.sendNotificationRequest(todo: newTodo, date: dueDateData)
-      }
+      checkAndRegisterReminder(todoEntity: newTodo)
     }
     
     saveData(incompleteOnly: incompleteOnly)
@@ -131,8 +142,15 @@ class TodoDataManager: ObservableObject {
     saveData(incompleteOnly: incompleteOnly)
   } // END: updateTodo
   
-  func updateCompleted(entity: TodoEntity, completed: Bool, incompleteOnly: Bool = false) {
-    entity.completed = completed
+  func updateCompleted(todo: TodoEntity, completed: Bool, incompleteOnly: Bool = false) {
+    todo.completed = completed
+    if completed {
+      // Cancel notification
+      UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [todo.id!])
+    } else {
+      // Add notification again
+      checkAndRegisterReminder(todoEntity: todo)
+    }
     saveData(incompleteOnly: incompleteOnly)
   }
   
@@ -149,6 +167,17 @@ class TodoDataManager: ObservableObject {
   }
   
   // MARK: -UserSettings
+  fileprivate func generateNewUserSettings() {
+    // Generate the userSettings if not exist
+    generateDefaultList()
+    let newUserSettings = UserSettingsEntity(context: container.viewContext)
+    newUserSettings.activeListId = defaultActiveListId
+    newUserSettings.widgetListId = defaultWidgetListId
+    newUserSettings.reminderTime = userSettingsDefaultReminderTime
+    WidgetDataManager.shared.widgetListId = defaultWidgetListId
+    saveData()
+  }
+  
   func fetchUserSettings() {
     let request = NSFetchRequest<UserSettingsEntity>(entityName: "UserSettingsEntity")
     
@@ -156,13 +185,7 @@ class TodoDataManager: ObservableObject {
       let userSettingsArray = try container.viewContext.fetch(request)
       
       if userSettingsArray.count == 0 {
-        // Generate the userSettings if not exist
-        generateDefaultList()
-        let newUserSettings = UserSettingsEntity(context: container.viewContext)
-        newUserSettings.activeListId = defaultActiveListId
-        newUserSettings.widgetListId = defaultWidgetListId
-        WidgetDataManager.shared.widgetListId = defaultWidgetListId
-        saveData()
+        generateNewUserSettings()
       } else {
         userSettings = userSettingsArray[0]
       }

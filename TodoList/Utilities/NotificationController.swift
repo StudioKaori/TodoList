@@ -17,7 +17,7 @@ final class NotificationController {
     dateComponent.second! += 3
     print(dateComponent)  // 以下に表示
     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
-    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+    let request = UNNotificationRequest(identifier: todo.id!, content: content, trigger: trigger)
     UNUserNotificationCenter.current().add(request)
   }
   
