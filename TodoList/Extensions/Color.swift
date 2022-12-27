@@ -29,15 +29,21 @@ struct ColorTheme {
 
 struct BgColor: Identifiable {
   let id = UUID()
-  let key: String
-  let value: Color
+  let colorName: String
+  let colorValue: Color
 }
 
 struct TodoBgTheme {
   
-  let colors: [BgColor] = [
-    BgColor(key: "red", value: Color("TodoBgRed")),
-    BgColor(key: "blue", value: Color("TodoBgBlue"))
-  ]
+//  let colors: [BgColor] = [
+//    BgColor(key: "red", value: Color("TodoBgRed")),
+//    BgColor(key: "blue", value: Color("TodoBgBlue"))
+//  ]
   
+    let colors: [BgColor] = [
+      BgColor(colorName: "none", colorValue: Color.theme.background),
+      BgColor(colorName: "red", colorValue: Color("TodoBgRed")),
+      BgColor(colorName: "blue", colorValue: Color("TodoBgBlue"))
+    ]
+    
 }

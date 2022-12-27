@@ -27,12 +27,13 @@ struct AddNewTodoView: View {
   @State var showDatePickerSheet: Bool = false
   
   // Bg color
-  @State var todoBgColor: String = "none"
+  @State var todoBgColor: Int = 0
   
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
     todoDataManager.addTodo(
       todoTitle: addTodoString,
+      todoBgColor: todoBgColor,
       isDueDateActive: isDueDateActive,
       dueDate: dueDate,
       isDueDateDateOnly: isDueDateDateOnly,
@@ -150,20 +151,20 @@ struct AddNewTodoView: View {
           AttachTodoImageView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
           
           Button {
-            todoBgColor = "none"
+            todoBgColor = 0
           } label: {
             Image(systemName: "slash.circle")
               .foregroundColor(Color.theme.secondaryText)
-              .modifier(IconBorder(borderWidth: todoBgColor == "none" ? 1 : 0))
+              .modifier(IconBorder(borderWidth: todoBgColor == 0 ? 1 : 0))
           }
           
-          ForEach(Color.todoBgTheme.colors) { color in
+          ForEach(1 ..< Color.todoBgTheme.colors.count) { index in
             Button {
-              todoBgColor = color.key
+              todoBgColor = index
             } label: {
               Image(systemName: "circle.fill")
-                .foregroundColor(color.value)
-                .modifier(IconBorder(borderWidth: todoBgColor == color.key ? 1 : 0))
+                .foregroundColor(Color.todoBgTheme.colors[index].colorValue)
+                .modifier(IconBorder(borderWidth: todoBgColor == index ? 1 : 0))
             }
           }
 

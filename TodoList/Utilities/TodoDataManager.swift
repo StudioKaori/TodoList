@@ -100,6 +100,7 @@ class TodoDataManager: ObservableObject {
   }
   
   func addTodo(todoTitle: String,
+               todoBgColor: Int = 0,
                isDueDateActive: Bool = DefaultValues.todoDefaultIsDueDateActive,
                dueDate: Date?,
                isDueDateDateOnly: Bool = DefaultValues.todoDefaultIsDueDateDateOnly,
@@ -114,7 +115,7 @@ class TodoDataManager: ObservableObject {
     newTodo.memo = memo ?? ""
     newTodo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
     newTodo.completed = false
-    newTodo.color = 0
+    newTodo.color = Int16(todoBgColor)
     newTodo.starred = false
     if imageData != nil {
       let newImageId = UUID().uuidString
