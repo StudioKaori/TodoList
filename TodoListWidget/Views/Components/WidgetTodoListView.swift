@@ -36,14 +36,15 @@ struct WidgetTodoListView: View {
               Spacer()
               Text(entry.todos[i].isDueDateDateOnly ? LocalisedDateFormatter.getFormattedDate(date: entry.todos[i].dueDate!) : LocalisedDateFormatter.getFormattedDateAndTime(date: entry.todos[i].dueDate!))
                 .font(.caption2)
-                .foregroundColor(Color.theme.secondaryText)
+                .foregroundColor(entry.todos[i].dueDate! > Date() ? Color.theme.secondaryText : Color.theme.warningText)
               
               if entry.todos[i].isDueDateReminderOn {
                 Image(systemName: "bell.fill")
                   .font(.caption2)
-                  .foregroundColor(Color.theme.secondaryText)
+                  .foregroundColor(entry.todos[i].dueDate! > Date() ? Color.theme.secondaryText : Color.theme.warningText)
               }
-            }
+              
+            } // END: if
           }
           
           if i != (todosLength - 1) {
