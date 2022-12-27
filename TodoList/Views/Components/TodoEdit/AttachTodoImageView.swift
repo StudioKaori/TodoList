@@ -32,7 +32,7 @@ struct AttachTodoImageView: View {
           Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(maxWidth: 20, maxHeight: 20)
+            .frame(maxWidth: DefaultValues.editTodoIconSize, maxHeight: DefaultValues.editTodoIconSize)
             .cornerRadius(3)
             .onAppear {
               if imageData.count != 0 {
@@ -56,8 +56,8 @@ struct AttachTodoImageView: View {
           isShowingActionSheet = true
         } label: {
           Image(systemName: "photo")
+            .font(.system(size: DefaultValues.editTodoIconSize))
             .foregroundColor(Color.theme.primaryText)
-            .frame(maxHeight: 20)
         }
         .actionSheet(isPresented: $isShowingActionSheet) {
           ActionSheet(title: Text("Attach image"),

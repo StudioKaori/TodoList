@@ -11,6 +11,7 @@ struct DefaultValues {
   // MARK: - Font sizes
   static let bulletSymbolFontSize: CGFloat = 8
   static let textBorderCornerRadius: CGFloat = 6
+  static let editTodoIconSize: CGFloat = 24
 
   // MARK: - Core data default values
   static let defaultActiveListId = "0"

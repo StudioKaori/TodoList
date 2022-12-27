@@ -54,7 +54,7 @@ struct AddNewTodoView: View {
   }
   
   var body: some View {
-    VStack(alignment: .leading, spacing: 12) {
+    VStack(alignment: .leading) {
       HStack {
         TextField("Add new todo...", text: $addTodoString)
           .focused($addTodoFieldFocus)
@@ -85,8 +85,9 @@ struct AddNewTodoView: View {
           }
         }
       } // END: Hstack AddTask Text field
+      .padding(.bottom, 14)
       
-      HStack(spacing: 6) {
+      HStack(spacing: 12) {
         Button {
           if !isDueDateActive {
             dueDate = Date()
@@ -104,11 +105,11 @@ struct AddNewTodoView: View {
               }
             }
             .foregroundColor(Color.theme.accent)
-            .modifier(Border(color: Color.theme.accent))
+            .modifier(TextBorder(color: Color.theme.accent))
             
           } else {
             Text("Add due date")
-              .modifier(Border(color: Color.theme.primaryText))
+              .modifier(TextBorder(color: Color.theme.primaryText))
             
             Button {
               isDueDateActive = true
@@ -116,7 +117,7 @@ struct AddNewTodoView: View {
               isDueDateDateOnly = true
             } label: {
               Text("Today")
-                .modifier(Border(color: Color.theme.primaryText))
+                .modifier(TextBorder(color: Color.theme.primaryText))
             }
             
             Button {
@@ -125,7 +126,7 @@ struct AddNewTodoView: View {
               isDueDateDateOnly = true
             } label: {
               Text("Tomorrow")
-                .modifier(Border(color: Color.theme.primaryText))
+                .modifier(TextBorder(color: Color.theme.primaryText))
             }
           }
         }
@@ -135,8 +136,38 @@ struct AddNewTodoView: View {
       .font(.footnote)
       
       ScrollView(.horizontal, showsIndicators: false) {
-        AttachTodoImageView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
-      } // END: camera
+        HStack(spacing: 12) {
+          Button {
+            
+          } label: {
+            Image(systemName: "note.text")
+              .foregroundColor(Color.theme.primaryText)
+          }
+          
+          AttachTodoImageView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
+          
+          Button {
+            
+          } label: {
+            Image(systemName: "slash.circle")
+              .foregroundColor(Color.theme.secondaryText)
+              .modifier(IconBorder(borderWidth: 1))
+          }
+          
+          Button {
+            
+          } label: {
+            Image(systemName: "circle.fill")
+              .foregroundColor(Color.theme.accent)
+              .modifier(IconBorder(borderWidth: 0))
+          }
+          
+          
+        }
+        .padding(.vertical, 12)
+      } // END: scroll view
+      .font(.system(size: DefaultValues.editTodoIconSize))
+      
     } // END: Vstack
     .padding()
     .onAppear {
@@ -159,7 +190,7 @@ struct AddNewTodoView_Previews: PreviewProvider {
   }
 }
 
-struct Border: ViewModifier {
+struct TextBorder: ViewModifier {
   let color: Color
   
   func body(content: Content) -> some View {
@@ -168,6 +199,18 @@ struct Border: ViewModifier {
       .overlay(
         RoundedRectangle(cornerRadius: DefaultValues.textBorderCornerRadius)
           .stroke(color, lineWidth: 1)
+      )
+  }
+}
+
+struct IconBorder: ViewModifier {
+  let borderWidth: CGFloat
+  
+  func body(content: Content) -> some View {
+    content
+      .overlay(
+        RoundedRectangle(cornerRadius: 16)
+          .stroke(Color.theme.primaryText, lineWidth: borderWidth)
       )
   }
 }
