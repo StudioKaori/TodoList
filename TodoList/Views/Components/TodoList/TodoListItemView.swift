@@ -27,22 +27,21 @@ struct TodoListItemView: View {
       
       VStack(alignment: .leading) {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 4) {
           Text(entity.title ?? "")
             .strikethrough(entity.completed ? true : false)
           
           if entity.dueDate != nil {
-            HStack {
+            HStack(spacing: 2) {
+              Image(systemName: "calendar.badge.clock")
               Text("\(LocalisedDateFormatter.getFormattedDate(date: entity.dueDate!))")
-                .font(.caption2)
-                .foregroundColor(Color.theme.secondaryText)
               
               if entity.isDueDateReminderOn {
                 Image(systemName: "bell.fill")
-                  .font(.caption2)
-                  .foregroundColor(Color.theme.secondaryText)
               }
             }
+            .font(.caption)
+            .foregroundColor(Color.theme.secondaryText)
           }
           
         }
@@ -105,8 +104,8 @@ struct TodoListItemView: View {
   }
 }
 
-struct TodoListItemView_Previews: PreviewProvider {
-  static var previews: some View {
-    TodoListItemView(entity: TodoEntity(context: PersistenceController.shared.container.viewContext), showToast: .constant(true))
-  }
-}
+//struct TodoListItemView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    TodoListItemView(entity: TodoEntity(context: PersistenceController.shared.container.viewContext), showToast: .constant(true))
+//  }
+//}
