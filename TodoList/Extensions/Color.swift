@@ -27,11 +27,17 @@ struct ColorTheme {
   
 }
 
+struct BgColor: Identifiable {
+  let id = UUID()
+  let key: String
+  let value: Color
+}
+
 struct TodoBgTheme {
   
-  let colors: Dictionary<String, Color> = [
-    "red": Color("TodoBgRed"),
-    "blue": Color("TodoBgBlue")
+  let colors: [BgColor] = [
+    BgColor(key: "red", value: Color("TodoBgRed")),
+    BgColor(key: "blue", value: Color("TodoBgBlue"))
   ]
   
 }

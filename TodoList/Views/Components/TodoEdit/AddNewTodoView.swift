@@ -26,6 +26,9 @@ struct AddNewTodoView: View {
   @State var isDueDateActive: Bool = DefaultValues.todoDefaultIsDueDateActive
   @State var showDatePickerSheet: Bool = false
   
+  // Bg color
+  @State var todoBgColor: String = "none"
+  
   private func addTodo() {
     guard !addTodoString.isEmpty else { return }
     todoDataManager.addTodo(
@@ -147,22 +150,23 @@ struct AddNewTodoView: View {
           AttachTodoImageView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
           
           Button {
-            
+            todoBgColor = "none"
           } label: {
             Image(systemName: "slash.circle")
               .foregroundColor(Color.theme.secondaryText)
-              .modifier(IconBorder(borderWidth: 1))
+              .modifier(IconBorder(borderWidth: todoBgColor == "none" ? 1 : 0))
           }
           
-          Button {
-            
-          } label: {
-            Image(systemName: "circle.fill")
-              .foregroundColor(Color.theme.accent)
-              .modifier(IconBorder(borderWidth: 0))
+          ForEach(Color.todoBgTheme.colors) { color in
+            Button {
+              todoBgColor = color.key
+            } label: {
+              Image(systemName: "circle.fill")
+                .foregroundColor(color.value)
+                .modifier(IconBorder(borderWidth: todoBgColor == color.key ? 1 : 0))
+            }
           }
-          
-          
+
         }
         .padding(.vertical, 12)
       } // END: scroll view
