@@ -54,7 +54,7 @@ struct AddNewTodoView: View {
   }
   
   var body: some View {
-    VStack {
+    VStack(alignment: .leading, spacing: 12) {
       HStack {
         TextField("Add new todo...", text: $addTodoString)
           .focused($addTodoFieldFocus)
@@ -65,7 +65,7 @@ struct AddNewTodoView: View {
           .padding(.leading)
           .frame(height: 55)
           .background(Color.theme.textFieldBackground)
-          .cornerRadius(10)
+          .cornerRadius(textBorderCornerRadius)
         
         Button {
           addTodo()
@@ -158,9 +158,9 @@ struct Border: ViewModifier {
   
   func body(content: Content) -> some View {
     content
-      .padding(5)
+      .padding(4)
       .overlay(
-        RoundedRectangle(cornerRadius: 4)
+        RoundedRectangle(cornerRadius: textBorderCornerRadius)
           .stroke(color, lineWidth: 1)
       )
   }

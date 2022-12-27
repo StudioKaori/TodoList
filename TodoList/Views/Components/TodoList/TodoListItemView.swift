@@ -27,23 +27,24 @@ struct TodoListItemView: View {
       
       VStack(alignment: .leading) {
         
-        HStack {
+        VStack(alignment: .leading) {
           Text(entity.title ?? "")
             .strikethrough(entity.completed ? true : false)
           
           if entity.dueDate != nil {
-            Spacer()
-            
-            Text("\(LocalisedDateFormatter.getFormattedDate(date: entity.dueDate!))")
-              .font(.caption2)
-              .foregroundColor(Color.theme.secondaryText)
-            
-            if entity.isDueDateReminderOn {
-              Image(systemName: "bell.fill")
+            HStack {
+              Text("\(LocalisedDateFormatter.getFormattedDate(date: entity.dueDate!))")
                 .font(.caption2)
                 .foregroundColor(Color.theme.secondaryText)
+              
+              if entity.isDueDateReminderOn {
+                Image(systemName: "bell.fill")
+                  .font(.caption2)
+                  .foregroundColor(Color.theme.secondaryText)
+              }
             }
           }
+          
         }
         .onTapGesture {
           vm.showTodoEdit(entity: entity)
@@ -58,10 +59,10 @@ struct TodoListItemView: View {
               .aspectRatio(contentMode: .fill)
               .frame(maxWidth: .infinity)
               .frame(height: 120)
-              .cornerRadius(10)
+              .cornerRadius(6)
           }
           .buttonStyle(BorderlessButtonStyle())
-
+          
         } // END: Image
         
       }
