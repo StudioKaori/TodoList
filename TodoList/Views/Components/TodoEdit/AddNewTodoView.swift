@@ -87,36 +87,43 @@ struct AddNewTodoView: View {
       } // END: Hstack AddTask Text field
       
       HStack(spacing: 6) {
-        
-        if isDueDateActive {
-          Text("Due Date: \(LocalisedDateFormatter.getFormattedDate(date: dueDate))")
-          
-          if isDueDateReminderOn {
-            Image(systemName: "bell.fill")
-          }
-        }
-        
         Button {
           if !isDueDateActive {
             dueDate = Date()
           }
           showDatePickerSheet.toggle()
         } label: {
-          Text("Pick due date")
+          if isDueDateActive {
+            HStack {
+              Text("\(LocalisedDateFormatter.getFormattedDate(date: dueDate))")
+              
+              if isDueDateReminderOn {
+                Image(systemName: "bell.fill")
+              }
+            }
+            .foregroundColor(Color.theme.accent)
+            .modifier(Border(color: Color.theme.accent))
+            
+          } else {
+            Text("Add due date")
+              .modifier(Border(color: Color.theme.primaryText))
+            
+            Button {
+              dueDate = Date()
+            } label: {
+              Text("Today")
+                .modifier(Border(color: Color.theme.primaryText))
+            }
+            
+            Button {
+              dueDate = Date() + 10
+            } label: {
+              Text("Tomorrow")
+                .modifier(Border(color: Color.theme.primaryText))
+            }
+          }
         }
         
-        Button {
-          dueDate = Date()
-        } label: {
-          Text("Today")
-        }
-        
-        Button {
-          dueDate = Date() + 10
-        } label: {
-          Text("Tomorrow")
-        }
-
       }
       .foregroundColor(Color.theme.primaryText)
       .font(.footnote)
@@ -143,5 +150,18 @@ struct AddNewTodoView: View {
 struct AddNewTodoView_Previews: PreviewProvider {
   static var previews: some View {
     AddNewTodoView()
+  }
+}
+
+struct Border: ViewModifier {
+  let color: Color
+  
+  func body(content: Content) -> some View {
+    content
+      .padding(5)
+      .overlay(
+        RoundedRectangle(cornerRadius: 4)
+          .stroke(color, lineWidth: 1)
+      )
   }
 }
