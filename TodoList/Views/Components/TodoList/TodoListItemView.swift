@@ -9,7 +9,8 @@ import SwiftUI
 
 struct TodoListItemView: View {
   @EnvironmentObject var vm: HomeViewModel
-  let entity: TodoEntity
+  @StateObject var todoDataManager = TodoDataManager.shared
+  var entity: TodoEntity
   @Binding var showToast: Bool
   
   @State var isShowingImageSheet = false
@@ -20,7 +21,7 @@ struct TodoListItemView: View {
         .foregroundColor(entity.completed ? Color.theme.accent : Color.theme.secondaryText)
         .onTapGesture {
           withAnimation{
-            TodoDataManager.shared.updateCompleted(todo: entity, completed: !entity.completed)
+            todoDataManager.updateCompleted(todo: entity, completed: !entity.completed)
             self.showToast.toggle()
           }
         }
@@ -53,7 +54,7 @@ struct TodoListItemView: View {
           Button {
             isShowingImageSheet = true
           } label: {
-            Image(uiImage: UIImage(data: TodoDataManager.shared.todoImages[imageId] ?? Data.init())!)
+            Image(uiImage: UIImage(data: todoDataManager.todoImages[imageId] ?? Data.init())!)
               .resizable()
               .aspectRatio(contentMode: .fill)
               .frame(maxWidth: .infinity)
@@ -70,7 +71,7 @@ struct TodoListItemView: View {
     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
       Button {
         withAnimation {
-          TodoDataManager.shared.updateCompleted(todo: entity, completed: !entity.completed)
+          todoDataManager.updateCompleted(todo: entity, completed: !entity.completed)
           self.showToast.toggle()
         }
       } label: {
@@ -81,7 +82,7 @@ struct TodoListItemView: View {
     .swipeActions(edge: .leading, allowsFullSwipe: false) {
       Button {
         withAnimation {
-          TodoDataManager.shared.deleteTodo(entity: entity)
+          todoDataManager.deleteTodo(entity: entity)
         }
       } label: {
         Image(systemName: "trash")

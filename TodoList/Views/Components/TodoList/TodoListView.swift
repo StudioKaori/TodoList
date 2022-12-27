@@ -29,7 +29,7 @@ struct TodoListView: View {
         } // END: Foreach
         .onMove(perform: updateTodosOrder)
       } // END: list
-      .overlay(overlayView: ToastView(toast: Toast(title: "Completed!", image: "checkmark.circle"), show: $showToast), show: $showToast)
+      .overlay(overlayView: ToastView(toast: Toast(title: "Updated!", image: "checkmark.circle"), show: $showToast), show: $showToast)
       
       HStack {
         Spacer()
