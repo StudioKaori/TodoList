@@ -84,8 +84,9 @@ class TodoDataManager: ObservableObject {
     }
   }
   
-  fileprivate func checkAndRegisterReminder(todoEntity: TodoEntity) {
-    guard todoEntity.isDueDateReminderOn,
+  fileprivate func checkAndSetReminder(todoEntity: TodoEntity) {
+    guard todoEntity.isDueDateActive,
+          todoEntity.isDueDateReminderOn,
           var reminderDueDate = todoEntity.dueDate else {
       print("Reminser is not set")
       return
@@ -124,6 +125,7 @@ class TodoDataManager: ObservableObject {
       newImageEntity.listId = userSettings?.activeListId ?? defaultActiveListId
     }
     
+    newTodo.isDueDateActive = isDueDateActive
     if isDueDateActive {
       guard let dueDateData: Date = dueDate else {
         print("AddTodo Error: Due date is active but the due date is nil.")
@@ -132,7 +134,7 @@ class TodoDataManager: ObservableObject {
       newTodo.dueDate = isDueDateDateOnly ? Calendar.current.startOfDay(for: dueDateData) : dueDateData
       newTodo.isDueDateDateOnly = isDueDateDateOnly
       newTodo.isDueDateReminderOn = isDueDateReminderOn
-      checkAndRegisterReminder(todoEntity: newTodo)
+      checkAndSetReminder(todoEntity: newTodo)
     }
     
     saveData(incompleteOnly: incompleteOnly)
@@ -149,7 +151,7 @@ class TodoDataManager: ObservableObject {
       UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [todo.id!])
     } else {
       // Add notification again
-      checkAndRegisterReminder(todoEntity: todo)
+      checkAndSetReminder(todoEntity: todo)
     }
     saveData(incompleteOnly: incompleteOnly)
   }

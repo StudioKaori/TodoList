@@ -12,6 +12,7 @@
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="imageId" optional="YES" attributeType="String"/>
+        <attribute name="isDueDateActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isDueDateDateOnly" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isDueDateReminderOn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="listId" optional="YES" attributeType="String"/>
