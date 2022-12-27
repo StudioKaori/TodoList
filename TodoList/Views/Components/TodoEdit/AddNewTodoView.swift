@@ -22,8 +22,8 @@ struct AddNewTodoView: View {
   // Due Date
   @State var dueDate: Date = Date()
   @State var isDueDateDateOnly: Bool = true
-  @State var isDueDateReminderOn: Bool = todoDefaultIsDueDateReminderOn
-  @State var isDueDateActive: Bool = todoDefaultIsDueDateActive
+  @State var isDueDateReminderOn: Bool = DefaultValues.todoDefaultIsDueDateReminderOn
+  @State var isDueDateActive: Bool = DefaultValues.todoDefaultIsDueDateActive
   @State var showDatePickerSheet: Bool = false
   
   private func addTodo() {
@@ -47,9 +47,9 @@ struct AddNewTodoView: View {
     
     // Due date
     dueDate = Date()
-    isDueDateDateOnly = todoDefaultIsDueDateDateOnly
-    isDueDateReminderOn = todoDefaultIsDueDateReminderOn
-    isDueDateActive = todoDefaultIsDueDateActive
+    isDueDateDateOnly = DefaultValues.todoDefaultIsDueDateDateOnly
+    isDueDateReminderOn = DefaultValues.todoDefaultIsDueDateReminderOn
+    isDueDateActive = DefaultValues.todoDefaultIsDueDateActive
     showDatePickerSheet = false
   }
   
@@ -65,7 +65,7 @@ struct AddNewTodoView: View {
           .padding(.leading)
           .frame(height: 55)
           .background(Color.theme.textFieldBackground)
-          .cornerRadius(textBorderCornerRadius)
+          .cornerRadius(DefaultValues.textBorderCornerRadius)
         
         Button {
           addTodo()
@@ -166,7 +166,7 @@ struct Border: ViewModifier {
     content
       .padding(4)
       .overlay(
-        RoundedRectangle(cornerRadius: textBorderCornerRadius)
+        RoundedRectangle(cornerRadius: DefaultValues.textBorderCornerRadius)
           .stroke(color, lineWidth: 1)
       )
   }

@@ -25,7 +25,7 @@ struct WidgetTodoListView: View {
         VStack(alignment: .leading, spacing: 6) {
           HStack {
             Image(systemName: "circle.fill")
-              .font(.system(size: bulletSymbolFontSize))
+              .font(.system(size: DefaultValues.bulletSymbolFontSize))
               .foregroundColor(Color.theme.accent)
             
             Text(entry.todos[i].title)

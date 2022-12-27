@@ -14,7 +14,7 @@ class WidgetDataManager: ObservableObject {
   static let shared = WidgetDataManager()
   var widgetListId: String
   
-  private init(widgetListId: String = defaultWidgetListId) {
+  private init(widgetListId: String = DefaultValues.defaultWidgetListId) {
     self.widgetListId = widgetListId
   }
   

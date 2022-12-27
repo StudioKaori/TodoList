@@ -54,7 +54,7 @@ struct TextFieldView: View {
             .padding(.leading)
             .frame(height: 55)
             .background(Color.theme.textFieldBackground)
-            .cornerRadius(textBorderCornerRadius)
+            .cornerRadius(DefaultValues.textBorderCornerRadius)
           
           Button {
             submitChange()

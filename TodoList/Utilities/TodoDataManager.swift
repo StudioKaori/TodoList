@@ -58,7 +58,7 @@ class TodoDataManager: ObservableObject {
   
   func fetchTodoImages() {
     let request = NSFetchRequest<TodoImageEntity>(entityName: "TodoImageEntity")
-    let listIdPredicate = NSPredicate(format: "listId = %@", userSettings?.activeListId ?? defaultActiveListId)
+    let listIdPredicate = NSPredicate(format: "listId = %@", userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
     let predicates: [NSPredicate] = [listIdPredicate]
     request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
     
@@ -93,26 +93,26 @@ class TodoDataManager: ObservableObject {
     }
     
     if todoEntity.isDueDateDateOnly {
-      let reminderTime = userSettings?.reminderTime ?? userSettingsDefaultReminderTime
+      let reminderTime = userSettings?.reminderTime ?? DefaultValues.userSettingsDefaultReminderTime
       reminderDueDate = Calendar.current.date(bySettingHour: Int(reminderTime.split(separator: ":")[0])!, minute: Int(reminderTime.split(separator: ":")[1])!, second: 0, of: todoEntity.dueDate!)!
     }
     NotificationController.sendNotificationRequest(todo: todoEntity, date: reminderDueDate)
   }
   
   func addTodo(todoTitle: String,
-               isDueDateActive: Bool = todoDefaultIsDueDateActive,
+               isDueDateActive: Bool = DefaultValues.todoDefaultIsDueDateActive,
                dueDate: Date?,
-               isDueDateDateOnly: Bool = todoDefaultIsDueDateDateOnly,
-               isDueDateReminderOn: Bool = todoDefaultIsDueDateReminderOn,
+               isDueDateDateOnly: Bool = DefaultValues.todoDefaultIsDueDateDateOnly,
+               isDueDateReminderOn: Bool = DefaultValues.todoDefaultIsDueDateReminderOn,
                memo: String?,
                incompleteOnly: Bool = false) {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
     newTodo.addedDate = Date()
-    newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? defaultActiveListId)
+    newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
     newTodo.title = todoTitle
     newTodo.memo = memo ?? ""
-    newTodo.listId = userSettings?.activeListId ?? defaultActiveListId
+    newTodo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
     newTodo.completed = false
     newTodo.color = 0
     newTodo.starred = false
@@ -122,7 +122,7 @@ class TodoDataManager: ObservableObject {
       let newImageEntity = TodoImageEntity(context: container.viewContext)
       newImageEntity.id = newImageId
       newImageEntity.image = imageData
-      newImageEntity.listId = userSettings?.activeListId ?? defaultActiveListId
+      newImageEntity.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
     }
     
     newTodo.isDueDateActive = isDueDateActive
@@ -173,10 +173,10 @@ class TodoDataManager: ObservableObject {
     // Generate the userSettings if not exist
     generateDefaultList()
     let newUserSettings = UserSettingsEntity(context: container.viewContext)
-    newUserSettings.activeListId = defaultActiveListId
-    newUserSettings.widgetListId = defaultWidgetListId
-    newUserSettings.reminderTime = userSettingsDefaultReminderTime
-    WidgetDataManager.shared.widgetListId = defaultWidgetListId
+    newUserSettings.activeListId = DefaultValues.defaultActiveListId
+    newUserSettings.widgetListId = DefaultValues.defaultWidgetListId
+    newUserSettings.reminderTime = DefaultValues.userSettingsDefaultReminderTime
+    WidgetDataManager.shared.widgetListId = DefaultValues.defaultWidgetListId
     saveData()
   }
   
@@ -193,7 +193,7 @@ class TodoDataManager: ObservableObject {
       }
       
       fetchLists()
-      fetchTodos(activeListId: userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: false)
+      fetchTodos(activeListId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId, incompleteOnly: false)
     } catch let error {
       print("Error fetching user settings: \(error)")
     }
@@ -247,7 +247,7 @@ class TodoDataManager: ObservableObject {
   
   func generateDefaultList() {
     let defaultList = ListEntity(context: container.viewContext)
-    defaultList.id = defaultActiveListId
+    defaultList.id = DefaultValues.defaultActiveListId
     defaultList.title = "Todos"
     saveData()
   }
@@ -259,7 +259,7 @@ class TodoDataManager: ObservableObject {
       try container.viewContext.save()
       imageData = nil
       fetchLists()
-      fetchTodos(activeListId: userSettings?.activeListId ?? defaultActiveListId, incompleteOnly: incompleteOnly)
+      fetchTodos(activeListId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId, incompleteOnly: incompleteOnly)
     } catch let error {
       print("Error saving: \(error)")
     }

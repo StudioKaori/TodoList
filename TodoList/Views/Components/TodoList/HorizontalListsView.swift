@@ -18,7 +18,7 @@ struct HorizontalListsView: View {
         
         ForEach(todoDataManager.todoLists) { list in
           Button {
-            todoDataManager.updateActiveListId(id: list.id ?? defaultActiveListId)
+            todoDataManager.updateActiveListId(id: list.id ?? DefaultValues.defaultActiveListId)
           } label: {
             VStack {
               Text(list.title ?? "No name list")

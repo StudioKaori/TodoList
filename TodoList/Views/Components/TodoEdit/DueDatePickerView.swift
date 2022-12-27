@@ -16,9 +16,9 @@ struct DueDatePickerView: View {
   
   private func resetBindingValues() {
     dueDate = Date()
-    isDueDateActive = todoDefaultIsDueDateActive
-    isDueDateDateOnly = todoDefaultIsDueDateDateOnly
-    isDueDateReminderOn = todoDefaultIsDueDateReminderOn
+    isDueDateActive = DefaultValues.todoDefaultIsDueDateActive
+    isDueDateDateOnly = DefaultValues.todoDefaultIsDueDateDateOnly
+    isDueDateReminderOn = DefaultValues.todoDefaultIsDueDateReminderOn
     showDatePickerSheet = false
   }
   
