@@ -32,10 +32,17 @@ struct WidgetTodoListView: View {
               .foregroundColor(Color.theme.primaryText)
               .font(.footnote)
             
-            if entry.todos[i].dueDate != nil {
-              Text("\(LocalisedDateFormatter.getFormattedDate(date: entry.todos[i].dueDate!))")
+            if entry.todos[i].dueDate != nil && entry.todos[i].isDueDateActive {
+              Spacer()
+              Text(entry.todos[i].isDueDateDateOnly ? LocalisedDateFormatter.getFormattedDate(date: entry.todos[i].dueDate!) : LocalisedDateFormatter.getFormattedDateAndTime(date: entry.todos[i].dueDate!))
                 .font(.caption2)
                 .foregroundColor(Color.theme.secondaryText)
+              
+              if entry.todos[i].isDueDateReminderOn {
+                Image(systemName: "bell.fill")
+                  .font(.caption2)
+                  .foregroundColor(Color.theme.secondaryText)
+              }
             }
           }
           

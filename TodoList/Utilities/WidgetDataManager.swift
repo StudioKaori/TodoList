@@ -36,7 +36,14 @@ class WidgetDataManager: ObservableObject {
     do {
       let results = try container.viewContext.fetch(request)
       results.forEach { todoEntity in
-        todos.append(TodoModel(title: todoEntity.title ?? "", completed: false, dueDate: todoEntity.dueDate))
+        todos.append(TodoModel(
+          title: todoEntity.title ?? "",
+          completed: false,
+          isDueDateActive: todoEntity.isDueDateActive,
+          dueDate: todoEntity.dueDate,
+          isDueDateDateOnly: todoEntity.isDueDateDateOnly,
+          isDueDateReminderOn: todoEntity.isDueDateReminderOn
+        ))
       }
     } catch let error {
       print("Error fetching: \(error)")

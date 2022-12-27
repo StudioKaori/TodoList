@@ -11,11 +11,21 @@ struct TodoModel: Identifiable {
   let id: String = UUID().uuidString
   let title: String
   let completed: Bool
+  let isDueDateActive: Bool
   let dueDate: Date?
+  let isDueDateDateOnly: Bool
+  let isDueDateReminderOn: Bool
 }
 
 extension TodoModel {
   static func placeholder(_ id: Int) -> TodoModel {
-    TodoModel(title: "My Todo\(id)", completed: .random(), dueDate: Date())
+    TodoModel(
+      title: "My Todo\(id)",
+      completed: .random(),
+      isDueDateActive: true,
+      dueDate: Date(),
+      isDueDateDateOnly: false,
+      isDueDateReminderOn: true
+    )
   }
 }
