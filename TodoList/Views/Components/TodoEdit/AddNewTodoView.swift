@@ -22,8 +22,8 @@ struct AddNewTodoView: View {
   // Due Date
   @State var dueDate: Date = Date()
   @State var isDueDateDateOnly: Bool = true
-  @State var isDueDateReminderOn: Bool = false
-  @State var isDueDateActive: Bool = false
+  @State var isDueDateReminderOn: Bool = todoDefaultIsDueDateReminderOn
+  @State var isDueDateActive: Bool = todoDefaultIsDueDateActive
   @State var showDatePickerSheet: Bool = false
   
   private func addTodo() {
@@ -47,9 +47,9 @@ struct AddNewTodoView: View {
     
     // Due date
     dueDate = Date()
-    isDueDateDateOnly = true
-    isDueDateReminderOn = false
-    isDueDateActive = false
+    isDueDateDateOnly = todoDefaultIsDueDateDateOnly
+    isDueDateReminderOn = todoDefaultIsDueDateReminderOn
+    isDueDateActive = todoDefaultIsDueDateActive
     showDatePickerSheet = false
   }
   

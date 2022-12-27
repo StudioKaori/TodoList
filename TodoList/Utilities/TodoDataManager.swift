@@ -100,10 +100,10 @@ class TodoDataManager: ObservableObject {
   }
   
   func addTodo(todoTitle: String,
-               isDueDateActive: Bool = false,
+               isDueDateActive: Bool = todoDefaultIsDueDateActive,
                dueDate: Date?,
-               isDueDateDateOnly: Bool = true,
-               isDueDateReminderOn: Bool = false,
+               isDueDateDateOnly: Bool = todoDefaultIsDueDateDateOnly,
+               isDueDateReminderOn: Bool = todoDefaultIsDueDateReminderOn,
                memo: String?,
                incompleteOnly: Bool = false) {
     let newTodo = TodoEntity(context: container.viewContext)
