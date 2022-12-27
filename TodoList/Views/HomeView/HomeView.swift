@@ -32,7 +32,7 @@ struct HomeView: View {
       } // END: Vstack Main container
       
       if vm.showingEditSheet {
-        TextFieldView(editMode: vm.editMode, ieEditMode: true)
+        TextFieldView()
       }
     } // END: Zstack
   }

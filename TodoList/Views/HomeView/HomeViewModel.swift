@@ -9,8 +9,8 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
   @Published var showingEditSheet: Bool = false
-  @Published var editTargetTodo: TodoEntity?
   @Published var showAllTodos: Bool = false
+  var editTargetTodo: TodoEntity?
   
   var editMode: TextFieldEditMode = .todo
   

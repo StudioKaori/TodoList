@@ -14,25 +14,12 @@ enum TextFieldEditMode: String {
 
 struct TextFieldView: View {
   @EnvironmentObject var vm: HomeViewModel
-  let editMode: TextFieldEditMode
-  let ieEditMode: Bool
   @StateObject var todoDataManager = TodoDataManager.shared
   @State private var textFieldString = ""
   @FocusState private var editFieldFocused: Bool
   
-  init(editMode: TextFieldEditMode, ieEditMode: Bool) {
-    self.editMode = editMode
-    self.ieEditMode = ieEditMode
-    switch(editMode) {
-    case .todo:
-      self._textFieldString = State(initialValue: vm.editTargetTodo?.title ?? "")
-    case .list:
-      self._textFieldString = State(initialValue: "")
-    }
-  }
-  
   private func submitChange() {
-    switch(editMode) {
+    switch(vm.editMode) {
     case .todo:
       if textFieldString.isEmpty { return }
       if vm.editTargetTodo == nil { return }
@@ -58,7 +45,7 @@ struct TextFieldView: View {
         Spacer()
         
         HStack {
-          TextField("Input \(editMode.rawValue) title...", text: $textFieldString)
+          TextField("Input \(vm.editMode.rawValue) title...", text: $textFieldString)
             .focused($editFieldFocused)
             .onSubmit {
               submitChange()
@@ -91,11 +78,19 @@ struct TextFieldView: View {
         } // END: Hstack main container
       } // END: Vstack
     }
+    .onAppear {
+      switch(vm.editMode) {
+      case .todo:
+        textFieldString = vm.editTargetTodo?.title ?? ""
+      case .list:
+        textFieldString = ""
+      }
+    }
   }
 }
 
 struct TodoEditView_Previews: PreviewProvider {
   static var previews: some View {
-    TextFieldView(editMode: .list, ieEditMode: false)
+    TextFieldView()
   }
 }
