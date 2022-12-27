@@ -10,6 +10,7 @@ import SwiftUI
 
 extension Color {
   static let theme = ColorTheme()
+  static let todoBgTheme = TodoBgTheme()
 }
 
 struct ColorTheme {
@@ -23,5 +24,12 @@ struct ColorTheme {
   let primaryText = Color("PrimaryTextColor")
   let secondaryText = Color("SecondaryTextColor")
   let warningText = Color("WarningTextColor")
+  
+}
+
+struct TodoBgTheme {
+  
+  let red = Color("TodoBgRed")
+  let blue = Color("TodoBgBlue")
   
 }
