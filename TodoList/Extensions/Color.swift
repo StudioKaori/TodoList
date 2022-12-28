@@ -23,7 +23,6 @@ struct ColorTheme {
   
   let primaryText = Color("PrimaryTextColor")
   let secondaryText = Color("SecondaryTextColor")
-  let warningText = Color("WarningTextColor")
   
 }
 

@@ -55,6 +55,8 @@ struct AddNewTodoView: View {
     isDueDateReminderOn = DefaultValues.todoDefaultIsDueDateReminderOn
     isDueDateActive = DefaultValues.todoDefaultIsDueDateActive
     showDatePickerSheet = false
+    
+    todoBgColor = 0
   }
   
   var body: some View {

@@ -42,7 +42,7 @@ struct TodoListItemView: View {
               }
             }
             .font(.caption)
-            .foregroundColor(entity.dueDate! > Date() ? Color.theme.secondaryText : Color.theme.warningText)
+            .foregroundColor(entity.dueDate! > Date() ? Color.theme.secondaryText : Color.theme.accent)
           }
           
         }
