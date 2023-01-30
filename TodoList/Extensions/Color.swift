@@ -42,7 +42,10 @@ struct TodoBgTheme {
     let colors: [BgColor] = [
       BgColor(colorName: "none", colorValue: Color.theme.background),
       BgColor(colorName: "red", colorValue: Color("TodoBgRed")),
-      BgColor(colorName: "blue", colorValue: Color("TodoBgBlue"))
+      BgColor(colorName: "yellow", colorValue: Color("TodoBgYellow")),
+      BgColor(colorName: "orange", colorValue: Color("TodoBgOrange")),
+      BgColor(colorName: "blue", colorValue: Color("TodoBgBlue")),
+      BgColor(colorName: "purple", colorValue: Color("TodoBgPurple"))
     ]
     
 }
