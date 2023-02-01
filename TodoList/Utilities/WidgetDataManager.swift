@@ -42,7 +42,8 @@ class WidgetDataManager: ObservableObject {
           isDueDateActive: todoEntity.isDueDateActive,
           dueDate: todoEntity.dueDate,
           isDueDateDateOnly: todoEntity.isDueDateDateOnly,
-          isDueDateReminderOn: todoEntity.isDueDateReminderOn
+          isDueDateReminderOn: todoEntity.isDueDateReminderOn,
+          color: Int(todoEntity.color)
         ))
       }
     } catch let error {

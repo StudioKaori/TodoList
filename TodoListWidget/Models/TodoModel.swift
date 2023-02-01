@@ -15,6 +15,7 @@ struct TodoModel: Identifiable {
   let dueDate: Date?
   let isDueDateDateOnly: Bool
   let isDueDateReminderOn: Bool
+  let color: Int
 }
 
 extension TodoModel {
@@ -25,7 +26,8 @@ extension TodoModel {
       isDueDateActive: true,
       dueDate: Date(),
       isDueDateDateOnly: false,
-      isDueDateReminderOn: true
+      isDueDateReminderOn: true,
+      color: 0
     )
   }
 }
