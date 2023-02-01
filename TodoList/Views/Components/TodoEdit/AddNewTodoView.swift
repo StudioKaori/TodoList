@@ -11,7 +11,7 @@ struct AddNewTodoView: View {
   @State private var addTodoString: String = ""
   @FocusState private var addTodoFieldFocus: Bool
   @StateObject private var todoDataManager = TodoDataManager.shared
-  @State var memoString: String = ""
+  @State var todoDescription: String = ""
   
   // For image picker
   @State private var image = Image(systemName: "photo")
@@ -25,6 +25,7 @@ struct AddNewTodoView: View {
   @State var isDueDateReminderOn: Bool = DefaultValues.todoDefaultIsDueDateReminderOn
   @State var isDueDateActive: Bool = DefaultValues.todoDefaultIsDueDateActive
   @State var showDatePickerSheet: Bool = false
+  @State var showDescriptionSheet: Bool = false
   
   // Bg color
   @State var todoBgColor: Int = 0
@@ -38,7 +39,7 @@ struct AddNewTodoView: View {
       dueDate: dueDate,
       isDueDateDateOnly: isDueDateDateOnly,
       isDueDateReminderOn: isDueDateReminderOn,
-      memo: memoString
+      memo: todoDescription
     )
     
     resetFields()
@@ -55,6 +56,7 @@ struct AddNewTodoView: View {
     isDueDateReminderOn = DefaultValues.todoDefaultIsDueDateReminderOn
     isDueDateActive = DefaultValues.todoDefaultIsDueDateActive
     showDatePickerSheet = false
+    showDescriptionSheet = false
     
     todoBgColor = 0
   }
@@ -144,10 +146,10 @@ struct AddNewTodoView: View {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(spacing: 12) {
           Button {
-            
+            showDescriptionSheet.toggle()
           } label: {
             Image(systemName: "note.text")
-              .foregroundColor(Color.theme.primaryText)
+              .foregroundColor(todoDescription == "" ? Color.theme.primaryText : Color.theme.accent)
           }
           
           AttachTodoImageView(imageData: $imageData, source: $source, image: $image, isImagePicker: $isImagePicker)
@@ -186,6 +188,9 @@ struct AddNewTodoView: View {
                         isDueDateReminderOn: $isDueDateReminderOn,
                         isDueDateActive: $isDueDateActive,
                         showDatePickerSheet: $showDatePickerSheet)
+    }
+    .sheet(isPresented: $showDescriptionSheet) {
+      TodoDescriptionView(todoDescription: $todoDescription, showDescriptionSheet: $showDescriptionSheet)
     }
     
   }

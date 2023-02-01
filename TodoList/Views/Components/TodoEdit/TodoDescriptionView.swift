@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TodoDescriptionView: View {
   @Binding var todoDescription: String
-  @Binding var showDatePickerSheet: Bool
+  @Binding var showDescriptionSheet: Bool
   
   var body: some View {
     VStack {
@@ -25,7 +25,7 @@ struct TodoDescriptionView: View {
       
       HStack(spacing: 18) {
         Button {
-          showDatePickerSheet = false
+          showDescriptionSheet = false
         } label: {
           HStack(spacing: 0) {
             Image(systemName: "checkmark.circle")
@@ -41,6 +41,6 @@ struct TodoDescriptionView: View {
 struct TodoDescriptionView_Previews: PreviewProvider {
   static var previews: some View {
     TodoDescriptionView(todoDescription: .constant("My todo description"),
-                        showDatePickerSheet: .constant(true))
+                        showDescriptionSheet: .constant(true))
   }
 }
