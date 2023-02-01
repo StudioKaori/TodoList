@@ -47,6 +47,7 @@ struct AddNewTodoView: View {
   
   private func resetFields() {
     addTodoString = ""
+    todoDescription = ""
     imageData = .init(capacity:0)
     addTodoFieldFocus = false
     
