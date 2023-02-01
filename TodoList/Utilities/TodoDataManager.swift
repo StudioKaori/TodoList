@@ -105,14 +105,14 @@ class TodoDataManager: ObservableObject {
                dueDate: Date?,
                isDueDateDateOnly: Bool = DefaultValues.todoDefaultIsDueDateDateOnly,
                isDueDateReminderOn: Bool = DefaultValues.todoDefaultIsDueDateReminderOn,
-               memo: String?,
+               memo: String,
                incompleteOnly: Bool = false) {
     let newTodo = TodoEntity(context: container.viewContext)
     newTodo.id = UUID().uuidString
     newTodo.addedDate = Date()
     newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
     newTodo.title = todoTitle
-    newTodo.memo = memo ?? ""
+    newTodo.memo = memo
     newTodo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
     newTodo.completed = false
     newTodo.color = Int16(todoBgColor)

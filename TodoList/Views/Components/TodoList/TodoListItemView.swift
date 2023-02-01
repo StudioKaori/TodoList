@@ -45,6 +45,12 @@ struct TodoListItemView: View {
             .foregroundColor(entity.dueDate! > Date() ? Color.theme.secondaryText : Color.theme.accent)
           }
           
+          if entity.memo != nil && entity.memo != "" {
+            Text(entity.memo!)
+              .font(.caption)
+              .foregroundColor(Color.theme.secondaryText)
+          }
+          
         }
         .onTapGesture {
           vm.showTodoEdit(entity: entity)
