@@ -17,8 +17,8 @@ struct TodoListItemView: View {
   
   var body: some View {
     HStack {
-      Image(systemName: entity.completed ? "checkmark.circle" : "circle")
-        .foregroundColor(entity.completed ? Color.theme.accent : Color.theme.secondaryText)
+      Image(systemName: entity.completed ? "checkmark.circle" : "circle.fill")
+        .foregroundColor(Color.todoBgTheme.colors[Int(entity.color )].colorValue)
         .onTapGesture {
           withAnimation{
             todoDataManager.updateCompleted(todo: entity, completed: !entity.completed)

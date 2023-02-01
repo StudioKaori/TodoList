@@ -25,7 +25,7 @@ struct TodoListView: View {
         ForEach(todoDataManager.savedTodos) { entity in
           if !entity.completed || vm.showAllTodos {
             TodoListItemView(entity: entity, showToast: $showToast)
-              .listRowBackground(Color.todoBgTheme.colors[Int(entity.color )].colorValue)
+              //.listRowBackground(Color.todoBgTheme.colors[Int(entity.color )].colorValue)
           }
         } // END: Foreach
         .onMove(perform: updateTodosOrder)
