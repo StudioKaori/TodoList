@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct AddNewTodoView: View {
-  @State private var addTodoString: String = ""
-  @FocusState private var addTodoFieldFocus: Bool
   @StateObject private var todoDataManager = TodoDataManager.shared
+  @FocusState private var addTodoFieldFocus: Bool
+  
+  let isEditMode: Bool
+  
+  // MARK: - Task attributes
+  
+  // Strings
+  @State private var addTodoString: String = ""
   @State var todoDescription: String = ""
   
   // For image picker
@@ -30,7 +36,8 @@ struct AddNewTodoView: View {
   // Bg color
   @State var todoBgColor: Int = 0
   
-  private func addTodo() {
+  // MARK: - functions
+  private func tappedSubmit() {
     guard !addTodoString.isEmpty else { return }
     todoDataManager.addTodo(
       todoTitle: addTodoString,
@@ -68,7 +75,7 @@ struct AddNewTodoView: View {
         TextField("Add new todo...", text: $addTodoString)
           .focused($addTodoFieldFocus)
           .onSubmit {
-            addTodo()
+            tappedSubmit()
           }
           .font(.body)
           .padding(.leading)
@@ -77,7 +84,7 @@ struct AddNewTodoView: View {
           .cornerRadius(DefaultValues.textBorderCornerRadius)
         
         Button {
-          addTodo()
+          tappedSubmit()
         } label: {
           Image(systemName: "plus.circle")
             .font(.largeTitle)
@@ -199,7 +206,7 @@ struct AddNewTodoView: View {
 
 struct AddNewTodoView_Previews: PreviewProvider {
   static var previews: some View {
-    AddNewTodoView()
+    AddNewTodoView(isEditMode: true)
   }
 }
 

@@ -28,7 +28,7 @@ struct HomeView: View {
         
         Spacer()
         
-        AddNewTodoView()
+        AddNewTodoView(isEditMode: false)
       } // END: Vstack Main container
       
       if vm.showingEditSheet {
