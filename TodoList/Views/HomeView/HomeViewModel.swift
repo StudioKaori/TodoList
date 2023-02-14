@@ -17,6 +17,6 @@ class HomeViewModel: ObservableObject {
   func showTodoEdit(entity: TodoEntity) {
     self.editTargetTodo = entity
     self.editMode = .todo
-    self.showingEditSheet.toggle()
+    self.showingEditSheet = true
   }
 }
