@@ -141,9 +141,49 @@ class TodoDataManager: ObservableObject {
     saveData(incompleteOnly: incompleteOnly)
   } // END: addTodo
   
-  func updateTodo(entity: TodoEntity, incompleteOnly: Bool = false) {
+  func editTodo(todoEntity: TodoEntity,
+               todoTitle: String,
+               todoBgColor: Int = 0,
+               isDueDateActive: Bool = DefaultValues.todoDefaultIsDueDateActive,
+               dueDate: Date?,
+               isDueDateDateOnly: Bool = DefaultValues.todoDefaultIsDueDateDateOnly,
+               isDueDateReminderOn: Bool = DefaultValues.todoDefaultIsDueDateReminderOn,
+               memo: String,
+               incompleteOnly: Bool = false) {
+    // need refacter
+    let newTodo = todoEntity
+    newTodo.id = UUID().uuidString
+    newTodo.addedDate = Date()
+    newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
+    newTodo.title = todoTitle
+    newTodo.memo = memo
+    newTodo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
+    newTodo.completed = false
+    newTodo.color = Int16(todoBgColor)
+    newTodo.starred = false
+    if imageData != nil {
+      let newImageId = UUID().uuidString
+      newTodo.imageId = newImageId
+      let newImageEntity = TodoImageEntity(context: container.viewContext)
+      newImageEntity.id = newImageId
+      newImageEntity.image = imageData
+      newImageEntity.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
+    }
+    
+    newTodo.isDueDateActive = isDueDateActive
+    if isDueDateActive {
+      guard let dueDateData: Date = dueDate else {
+        print("AddTodo Error: Due date is active but the due date is nil.")
+        return
+      }
+      newTodo.dueDate = isDueDateDateOnly ? Calendar.current.startOfDay(for: dueDateData) : dueDateData
+      newTodo.isDueDateDateOnly = isDueDateDateOnly
+      newTodo.isDueDateReminderOn = isDueDateReminderOn
+      checkAndSetReminder(todoEntity: newTodo)
+    }
+    
     saveData(incompleteOnly: incompleteOnly)
-  } // END: updateTodo
+  } // END: editTodo
   
   func updateCompleted(todo: TodoEntity, completed: Bool, incompleteOnly: Bool = false) {
     todo.completed = completed
