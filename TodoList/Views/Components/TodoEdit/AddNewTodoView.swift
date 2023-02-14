@@ -12,6 +12,7 @@ struct AddNewTodoView: View {
   @FocusState private var addTodoFieldFocus: Bool
   
   let isEditMode: Bool
+  var todoEntity: TodoEntity?
   
   // MARK: - Task attributes
   
@@ -52,21 +53,53 @@ struct AddNewTodoView: View {
     resetFields()
   }
   
+  private func initialiseTodoAttributes(todoEntity: TodoEntity?) {
+    if todoEntity == nil {
+      addTodoString = ""
+      todoDescription = ""
+      imageData = .init(capacity:0)
+      addTodoFieldFocus = false
+      
+      // Due date
+      dueDate = Date()
+      isDueDateDateOnly = DefaultValues.todoDefaultIsDueDateDateOnly
+      isDueDateReminderOn = DefaultValues.todoDefaultIsDueDateReminderOn
+      isDueDateActive = DefaultValues.todoDefaultIsDueDateActive
+      showDatePickerSheet = false
+      showDescriptionSheet = false
+      
+      todoBgColor = 0
+    } else {
+      guard let todo = todoEntity else { return }
+      
+      addTodoString = todo.title ?? ""
+      todoDescription = todo.memo ?? ""
+      imageData = .init(capacity:0)
+      addTodoFieldFocus = true
+      
+      // Due date
+      dueDate = todo.dueDate ?? Date()
+      isDueDateDateOnly = todo.isDueDateDateOnly
+      isDueDateReminderOn = todo.isDueDateReminderOn
+      isDueDateActive = todo.isDueDateActive
+      showDatePickerSheet = false
+      showDescriptionSheet = false
+      
+      todoBgColor = Int(todo.color)
+    }
+    
+  }
+  
   private func resetFields() {
-    addTodoString = ""
-    todoDescription = ""
-    imageData = .init(capacity:0)
-    addTodoFieldFocus = false
-    
-    // Due date
-    dueDate = Date()
-    isDueDateDateOnly = DefaultValues.todoDefaultIsDueDateDateOnly
-    isDueDateReminderOn = DefaultValues.todoDefaultIsDueDateReminderOn
-    isDueDateActive = DefaultValues.todoDefaultIsDueDateActive
-    showDatePickerSheet = false
-    showDescriptionSheet = false
-    
-    todoBgColor = 0
+    initialiseTodoAttributes(todoEntity: nil)
+  }
+  
+  private func initialiseEditMode() {
+    if isEditMode {
+      guard let todo = todoEntity else { return }
+      
+      
+    }
   }
   
   var body: some View {
@@ -189,6 +222,7 @@ struct AddNewTodoView: View {
     .padding()
     .onAppear {
       addTodoFieldFocus = false
+      initialiseEditMode()
     } // END: main Vstack
     .sheet(isPresented: $showDatePickerSheet) {
       DueDatePickerView(dueDate: $dueDate,
