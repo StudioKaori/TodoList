@@ -18,7 +18,7 @@ struct EditTodoView: View {
         }
         .ignoresSafeArea()
       
-      AddNewTodoView(isEditMode: true, todoEntity: vm.editTargetTodo)
+      TodoInputFieldsView(isEditMode: true, todoEntity: vm.editTargetTodo)
     }
   }
 }

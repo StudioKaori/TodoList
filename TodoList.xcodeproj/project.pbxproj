@@ -48,7 +48,7 @@
 		43C0720329524D07000BA4CB /* HorizontalListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0720229524D07000BA4CB /* HorizontalListsView.swift */; };
 		43C0720629530201000BA4CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43C0720829530201000BA4CB /* Localizable.strings */; };
 		43C0722A29532FE2000BA4CB /* AttachTodoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C0722929532FE2000BA4CB /* AttachTodoImageView.swift */; };
-		43C072342953A096000BA4CB /* AddNewTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C072332953A096000BA4CB /* AddNewTodoView.swift */; };
+		43C072342953A096000BA4CB /* TodoInputFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C072332953A096000BA4CB /* TodoInputFieldsView.swift */; };
 		43C0723529541E48000BA4CB /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314958E2949EF7100068F8A /* TodoModel.swift */; };
 		43C512492949D9B100019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
 		43C5124A2949D9E800019DEC /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C512482949D9B100019DEC /* PersistenceController.swift */; };
@@ -125,7 +125,7 @@
 		43C0720729530201000BA4CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43C0720929530272000BA4CB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43C0722929532FE2000BA4CB /* AttachTodoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachTodoImageView.swift; sourceTree = "<group>"; };
-		43C072332953A096000BA4CB /* AddNewTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTodoView.swift; sourceTree = "<group>"; };
+		43C072332953A096000BA4CB /* TodoInputFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputFieldsView.swift; sourceTree = "<group>"; };
 		43C512482949D9B100019DEC /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		43E738D129543262007BA734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		43F4FD0C29549941008A4C5B /* LocalisedDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisedDateFormatter.swift; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 		43F4FD162955BEB0008A4C5B /* TodoEdit */ = {
 			isa = PBXGroup;
 			children = (
-				43C072332953A096000BA4CB /* AddNewTodoView.swift */,
+				43C072332953A096000BA4CB /* TodoInputFieldsView.swift */,
 				436C02BD299BD49B00D6B575 /* EditTodoView.swift */,
 				436C02BB2988134700D6B575 /* TodoDescriptionView.swift */,
 				43149591294A6B8900068F8A /* TextFieldView.swift */,
@@ -479,7 +479,7 @@
 				435F3FBC29488E0300099512 /* HomeView.swift in Sources */,
 				43C0720129523D51000BA4CB /* TodoListItemView.swift in Sources */,
 				435F3FC9294897F800099512 /* Color.swift in Sources */,
-				43C072342953A096000BA4CB /* AddNewTodoView.swift in Sources */,
+				43C072342953A096000BA4CB /* TodoInputFieldsView.swift in Sources */,
 				435F3FC62948908D00099512 /* TodoContainer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

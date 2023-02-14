@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddNewTodoView: View {
+struct TodoInputFieldsView: View {
   @StateObject private var todoDataManager = TodoDataManager.shared
   @FocusState private var addTodoFieldFocus: Bool
   
@@ -246,7 +246,7 @@ struct AddNewTodoView: View {
 
 struct AddNewTodoView_Previews: PreviewProvider {
   static var previews: some View {
-    AddNewTodoView(isEditMode: true)
+    TodoInputFieldsView(isEditMode: true)
   }
 }
 
