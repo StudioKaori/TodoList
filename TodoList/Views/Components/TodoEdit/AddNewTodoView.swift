@@ -55,6 +55,7 @@ struct AddNewTodoView: View {
   
   private func initialiseTodoAttributes(todoEntity: TodoEntity?) {
     if todoEntity == nil {
+      // reset all attributes
       addTodoString = ""
       todoDescription = ""
       imageData = .init(capacity:0)
@@ -96,9 +97,12 @@ struct AddNewTodoView: View {
   
   private func initialiseEditMode() {
     if isEditMode {
-      guard let todo = todoEntity else { return }
+      guard let todo = todoEntity else {
+        // todo implement error handling in case the todoEntity is nil for the edit mode
+        return
+      }
       
-      
+      initialiseTodoAttributes(todoEntity: todo)
     }
   }
   
