@@ -11,12 +11,15 @@ struct TodoDescriptionView: View {
   @Binding var todoDescription: String
   @Binding var showDescriptionSheet: Bool
   
+  @FocusState private var isForcused: Bool
+  
   var body: some View {
     VStack {
       
       List{
         Section(header: Text("Todo Description")) {
           TextEditor(text: $todoDescription)
+            .focused($isForcused)
             .frame(maxHeight: .infinity)
         }
         .frame(maxHeight: .infinity)
@@ -34,6 +37,9 @@ struct TodoDescriptionView: View {
         }
         
       } // END: Fotter Hstack
+    }
+    .onAppear {
+      isForcused = true
     }
   }
 }
