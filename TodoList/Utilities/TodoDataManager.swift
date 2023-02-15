@@ -107,41 +107,50 @@ class TodoDataManager: ObservableObject {
                isDueDateReminderOn: Bool = DefaultValues.todoDefaultIsDueDateReminderOn,
                memo: String,
                incompleteOnly: Bool = false) {
-    let newTodo = TodoEntity(context: container.viewContext)
-    newTodo.id = UUID().uuidString
-    newTodo.addedDate = Date()
-    newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
-    newTodo.title = todoTitle
-    newTodo.memo = memo
-    newTodo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
-    newTodo.completed = false
-    newTodo.color = Int16(todoBgColor)
-    newTodo.starred = false
-    if imageData != nil {
-      let newImageId = UUID().uuidString
-      newTodo.imageId = newImageId
-      let newImageEntity = TodoImageEntity(context: container.viewContext)
-      newImageEntity.id = newImageId
-      newImageEntity.image = imageData
-      newImageEntity.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
-    }
-    
-    newTodo.isDueDateActive = isDueDateActive
-    if isDueDateActive {
-      guard let dueDateData: Date = dueDate else {
-        print("AddTodo Error: Due date is active but the due date is nil.")
-        return
-      }
-      newTodo.dueDate = isDueDateDateOnly ? Calendar.current.startOfDay(for: dueDateData) : dueDateData
-      newTodo.isDueDateDateOnly = isDueDateDateOnly
-      newTodo.isDueDateReminderOn = isDueDateReminderOn
-      checkAndSetReminder(todoEntity: newTodo)
-    }
-    
-    saveData(incompleteOnly: incompleteOnly)
+    editTodo(todoTitle: todoTitle,
+             todoBgColor: todoBgColor,
+             isDueDateActive: isDueDateActive,
+             dueDate: dueDate,
+             isDueDateDateOnly: isDueDateDateOnly,
+             isDueDateReminderOn: isDueDateReminderOn,
+             memo: memo,
+             incompleteOnly: incompleteOnly)
+//    let newTodo = TodoEntity(context: container.viewContext)
+//    newTodo.id = UUID().uuidString
+//    newTodo.addedDate = Date()
+//    newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
+//    newTodo.title = todoTitle
+//    newTodo.memo = memo
+//    newTodo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
+//    newTodo.completed = false
+//    newTodo.color = Int16(todoBgColor)
+//    newTodo.starred = false
+//    if imageData != nil {
+//      let newImageId = UUID().uuidString
+//      newTodo.imageId = newImageId
+//      let newImageEntity = TodoImageEntity(context: container.viewContext)
+//      newImageEntity.id = newImageId
+//      newImageEntity.image = imageData
+//      newImageEntity.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
+//    }
+//
+//    newTodo.isDueDateActive = isDueDateActive
+//    if isDueDateActive {
+//      guard let dueDateData: Date = dueDate else {
+//        print("AddTodo Error: Due date is active but the due date is nil.")
+//        return
+//      }
+//      newTodo.dueDate = isDueDateDateOnly ? Calendar.current.startOfDay(for: dueDateData) : dueDateData
+//      newTodo.isDueDateDateOnly = isDueDateDateOnly
+//      newTodo.isDueDateReminderOn = isDueDateReminderOn
+//      checkAndSetReminder(todoEntity: newTodo)
+//    }
+//
+//    saveData(incompleteOnly: incompleteOnly)
   } // END: addTodo
   
-  func editTodo(todoEntity: TodoEntity,
+  func editTodo(isEditMode: Bool = false,
+               todoEntity: TodoEntity? = nil,
                todoTitle: String,
                todoBgColor: Int = 0,
                isDueDateActive: Bool = DefaultValues.todoDefaultIsDueDateActive,
@@ -151,35 +160,44 @@ class TodoDataManager: ObservableObject {
                memo: String,
                incompleteOnly: Bool = false) {
     // need refacter
-    let newTodo = todoEntity
-    newTodo.id = UUID().uuidString
-    newTodo.addedDate = Date()
-    newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
-    newTodo.title = todoTitle
-    newTodo.memo = memo
-    newTodo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
-    newTodo.completed = false
-    newTodo.color = Int16(todoBgColor)
-    newTodo.starred = false
+    
+    var todo: TodoEntity
+    
+    if isEditMode {
+      guard let editedTodo = todoEntity else { return }
+      todo = editedTodo
+    } else {
+      todo = TodoEntity(context: container.viewContext)
+    }
+    
+    todo.id = UUID().uuidString
+    todo.addedDate = Date()
+    todo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
+    todo.title = todoTitle
+    todo.memo = memo
+    todo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
+    todo.completed = false
+    todo.color = Int16(todoBgColor)
+    todo.starred = false
     if imageData != nil {
       let newImageId = UUID().uuidString
-      newTodo.imageId = newImageId
+      todo.imageId = newImageId
       let newImageEntity = TodoImageEntity(context: container.viewContext)
       newImageEntity.id = newImageId
       newImageEntity.image = imageData
       newImageEntity.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
     }
     
-    newTodo.isDueDateActive = isDueDateActive
+    todo.isDueDateActive = isDueDateActive
     if isDueDateActive {
       guard let dueDateData: Date = dueDate else {
         print("AddTodo Error: Due date is active but the due date is nil.")
         return
       }
-      newTodo.dueDate = isDueDateDateOnly ? Calendar.current.startOfDay(for: dueDateData) : dueDateData
-      newTodo.isDueDateDateOnly = isDueDateDateOnly
-      newTodo.isDueDateReminderOn = isDueDateReminderOn
-      checkAndSetReminder(todoEntity: newTodo)
+      todo.dueDate = isDueDateDateOnly ? Calendar.current.startOfDay(for: dueDateData) : dueDateData
+      todo.isDueDateDateOnly = isDueDateDateOnly
+      todo.isDueDateReminderOn = isDueDateReminderOn
+      checkAndSetReminder(todoEntity: todo)
     }
     
     saveData(incompleteOnly: incompleteOnly)

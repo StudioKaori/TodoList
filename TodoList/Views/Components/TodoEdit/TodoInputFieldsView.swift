@@ -44,6 +44,7 @@ struct TodoInputFieldsView: View {
       guard !addTodoString.isEmpty else { return }
       guard let editedEntity = todoEntity else { return }
       todoDataManager.editTodo(
+        isEditMode: true,
         todoEntity: editedEntity,
         todoTitle: addTodoString,
         todoBgColor: todoBgColor,
