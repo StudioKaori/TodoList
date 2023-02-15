@@ -172,7 +172,7 @@ class TodoDataManager: ObservableObject {
     
     todo.id = UUID().uuidString
     todo.addedDate = Date()
-    todo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
+    todo.order = isEditMode ? todo.order : getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
     todo.title = todoTitle
     todo.memo = memo
     todo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
