@@ -29,16 +29,21 @@ struct AttachTodoImageView: View {
           Image(systemName: "photo")
             .font(.system(size: DefaultValues.editTodoIconSize))
             .foregroundColor(Color.theme.accent)
-//          Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
-//            .resizable()
-//            .aspectRatio(contentMode: .fill)
-//            .frame(maxWidth: DefaultValues.editTodoIconSize, maxHeight: DefaultValues.editTodoIconSize)
-//            .cornerRadius(3)
-//            .onAppear {
-//              if imageData.count != 0 {
-//                todoDataManager.imageData = imageData
-//              }
-//            }
+            .onAppear {
+              if imageData.count != 0 {
+                todoDataManager.imageData = imageData
+              }
+              
+              //          Image(uiImage: UIImage(data: imageData) ?? UIImage(systemName: "photo")!)
+              //            .resizable()
+              //            .aspectRatio(contentMode: .fill)
+              //            .frame(maxWidth: DefaultValues.editTodoIconSize, maxHeight: DefaultValues.editTodoIconSize)
+              //            .cornerRadius(3)
+//                          .onAppear {
+//                            if imageData.count != 0 {
+//                              todoDataManager.imageData = imageData
+//                            }
+            }
         }
         .actionSheet(isPresented: $isShowingActionSheet) {
           ActionSheet(title: Text("Delete the image"),
