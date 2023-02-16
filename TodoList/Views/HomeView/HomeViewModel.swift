@@ -10,6 +10,11 @@ import Foundation
 class HomeViewModel: ObservableObject {
   @Published var showingEditSheet: Bool = false
   @Published var showAllTodos: Bool = false
+  @Published var showToast: Bool = false
+  
+  // For toast
+  var toastText = ""
+  var toastIconName = ""
   
   var editTargetTodo: TodoEntity?
   
@@ -19,5 +24,12 @@ class HomeViewModel: ObservableObject {
     self.editTargetTodo = entity
     self.editMode = .todo
     self.showingEditSheet = true
+  }
+  
+  func showToast(text: String, iconName: String) {
+    print(text)
+    self.toastText = text
+    self.toastIconName = iconName
+    self.showToast.toggle()
   }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Toast {
   var title: String
-  var image: String
+  var iconName: String
 }
 
 struct ToastView: View {
@@ -22,16 +22,17 @@ struct ToastView: View {
         Spacer()
         
         HStack {
-          Image(systemName: toast.image)
+          Image(systemName: toast.iconName)
           Text(toast.title)
         }
         .font(.headline)
         .foregroundColor(Color.theme.primaryText)
         .padding(.vertical, 20)
         .padding(.horizontal, 40)
-        .background(Color.theme.textFieldBackground.opacity(0.4), in: Capsule())
+        .background(Color.theme.primaryText.opacity(0.6), in: Capsule())
       }
       .frame(width: UIScreen.main.bounds.width / 1.25)
+      .padding(.vertical, 100)
       .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
       .onTapGesture {
         withAnimation {
@@ -70,6 +71,6 @@ extension View {
 
 struct ToastView_Previews: PreviewProvider {
     static var previews: some View {
-      ToastView(toast: Toast(title: "test", image: "image"), show: .constant(true))
+      ToastView(toast: Toast(title: "test", iconName: "image"), show: .constant(true))
     }
 }

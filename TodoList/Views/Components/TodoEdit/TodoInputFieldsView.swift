@@ -58,6 +58,9 @@ struct TodoInputFieldsView: View {
     )
     
     resetFields()
+    vm.showToast(text: isEditMode ? "Todo updated!" : "Todo added!",
+                 iconName: "checkmark.circle")
+    
     if isEditMode {
       vm.showingEditSheet.toggle()
     }

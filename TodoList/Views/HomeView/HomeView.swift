@@ -35,6 +35,7 @@ struct HomeView: View {
         EditTodoView()
       }
     } // END: Zstack
+    .overlay(overlayView: ToastView(toast: Toast(title: vm.toastText, iconName: vm.toastIconName), show: $vm.showToast), show: $vm.showToast)
   }
 
 }

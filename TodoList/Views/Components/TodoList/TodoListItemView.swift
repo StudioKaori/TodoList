@@ -11,7 +11,6 @@ struct TodoListItemView: View {
   @EnvironmentObject var vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   var entity: TodoEntity
-  @Binding var showToast: Bool
   
   @State var isShowingImageSheet = false
   
@@ -22,7 +21,7 @@ struct TodoListItemView: View {
         .onTapGesture {
           withAnimation{
             todoDataManager.updateCompleted(todo: entity, completed: !entity.completed)
-            self.showToast.toggle()
+            vm.showToast.toggle()
           }
         }
       
@@ -78,7 +77,7 @@ struct TodoListItemView: View {
       Button {
         withAnimation {
           todoDataManager.updateCompleted(todo: entity, completed: !entity.completed)
-          self.showToast.toggle()
+          vm.showToast.toggle()
         }
       } label: {
         Image(systemName: entity.completed ? "circle" : "checkmark.circle.fill")
