@@ -16,7 +16,6 @@ struct TextFieldView: View {
   @EnvironmentObject var vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   @State private var textFieldString = ""
-  @FocusState private var editFieldFocused: Bool
   
   private func submitChange() {
     switch(vm.editMode) {
@@ -46,7 +45,6 @@ struct TextFieldView: View {
         
         HStack {
           TextField("Input \(vm.editMode.rawValue) title...", text: $textFieldString)
-            .focused($editFieldFocused)
             .onSubmit {
               submitChange()
             }
@@ -73,9 +71,7 @@ struct TextFieldView: View {
           }
         } // END: Hstack AddTask Text field
         .padding()
-        .onAppear {
-          editFieldFocused = true
-        } // END: Hstack main container
+        // END: Hstack main container
       } // END: Vstack
     }
     .onAppear {

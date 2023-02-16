@@ -32,7 +32,7 @@ struct ToastView: View {
         .background(Color.theme.primaryText.opacity(0.6), in: Capsule())
       }
       .frame(width: UIScreen.main.bounds.width / 1.25)
-      .padding(.vertical, 100)
+      .padding(.bottom, 200)
       .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
       .onTapGesture {
         withAnimation {
