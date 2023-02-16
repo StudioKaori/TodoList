@@ -31,7 +31,7 @@ class HomeViewModel: ObservableObject {
     self.showingEditSheet = true
   }
   
-  func showToast(text: String, iconName: String) {
+  func showToast(text: String, iconName: String = "checkmark.circle") {
     print(text)
     self.toastText = text
     self.toastIconName = iconName

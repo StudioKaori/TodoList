@@ -16,6 +16,7 @@ struct EditListNameView: View {
     if textFieldString.isEmpty { return }
     todoDataManager.addNewList(listTitle: textFieldString)
     vm.showingEditSheet.toggle()
+    vm.showToast(text: "The list added!")
   }
   
   var body: some View {
@@ -54,6 +55,9 @@ struct EditListNameView: View {
           }
         } // END: Hstack AddTask Text field
         .padding()
+        
+        Spacer()
+        
         // END: Hstack main container
       } // END: Vstack
     }
