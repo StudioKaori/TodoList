@@ -1,30 +1,21 @@
 //
-//  TodoEditView.swift
+//  EditListNameView.swift
 //  TodoList
 //
-//  Created by Kaori Persson on 2022-12-14.
+//  Created by Kaori Persson on 2023-02-16.
 //
 
 import SwiftUI
 
-struct TextFieldView: View {
+struct EditListNameView: View {
   @EnvironmentObject var vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
   @State private var textFieldString = ""
   
   private func submitChange() {
-    switch(vm.editMode) {
-    case .todo:
-      if textFieldString.isEmpty { return }
-      if vm.editTargetTodo == nil { return }
-      vm.editTargetTodo?.title = textFieldString
-      todoDataManager.saveData()
-      vm.showingEditSheet.toggle()
-    case .list:
-      if textFieldString.isEmpty { return }
-      todoDataManager.addNewList(listTitle: textFieldString)
-      vm.showingEditSheet.toggle()
-    }
+    if textFieldString.isEmpty { return }
+    todoDataManager.addNewList(listTitle: textFieldString)
+    vm.showingEditSheet.toggle()
   }
   
   var body: some View {
@@ -39,10 +30,7 @@ struct TextFieldView: View {
         Spacer()
         
         HStack {
-          TextField("Input \(vm.editMode.rawValue) title...", text: $textFieldString)
-//            .onSubmit {
-//              submitChange()
-//            }
+          TextField("Input list title...", text: $textFieldString)
             .font(.body)
             .padding(.leading)
             .frame(height: 55)
@@ -69,19 +57,11 @@ struct TextFieldView: View {
         // END: Hstack main container
       } // END: Vstack
     }
-    .onAppear {
-      switch(vm.editMode) {
-      case .todo:
-        textFieldString = vm.editTargetTodo?.title ?? ""
-      case .list:
-        textFieldString = ""
-      }
-    }
   }
 }
 
-struct TodoEditView_Previews: PreviewProvider {
+struct EditListNameView_Previews: PreviewProvider {
   static var previews: some View {
-    TextFieldView()
+    EditListNameView()
   }
 }

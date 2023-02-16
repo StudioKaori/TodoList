@@ -32,7 +32,12 @@ struct HomeView: View {
       } // END: Vstack Main container
       
       if vm.showingEditSheet {
-        EditTodoView()
+        switch(vm.editMode) {
+        case .todo:
+          EditTodoView()
+        case .list:
+          EditListNameView()
+        }
       }
     } // END: Zstack
     .overlay(overlayView: ToastView(toast: Toast(title: vm.toastText, iconName: vm.toastIconName), show: $vm.showToast), show: $vm.showToast)

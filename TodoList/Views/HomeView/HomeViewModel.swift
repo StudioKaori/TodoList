@@ -18,11 +18,16 @@ class HomeViewModel: ObservableObject {
   
   var editTargetTodo: TodoEntity?
   
-  var editMode: TextFieldEditMode = .todo
+  var editMode: EditTarget = .todo
   
   func showTodoEdit(entity: TodoEntity) {
     self.editTargetTodo = entity
     self.editMode = .todo
+    self.showingEditSheet = true
+  }
+  
+  func showListNameEdit() {
+    self.editMode = .list
     self.showingEditSheet = true
   }
   
@@ -34,7 +39,7 @@ class HomeViewModel: ObservableObject {
   }
 }
 
-enum TextFieldEditMode: String {
+enum EditTarget: String {
   case todo = "todo"
   case list = "list"
 }

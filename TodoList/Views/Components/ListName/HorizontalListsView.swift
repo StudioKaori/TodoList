@@ -32,8 +32,7 @@ struct HorizontalListsView: View {
         
         VStack {
           Button {
-            vm.editMode = .list
-            vm.showingEditSheet = true
+            vm.showListNameEdit()
           } label: {
             Image(systemName: "plus.circle")
               .foregroundColor(Color.theme.primaryText)
