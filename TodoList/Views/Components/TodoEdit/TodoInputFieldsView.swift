@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TodoInputFieldsView: View {
+  @EnvironmentObject var vm: HomeViewModel
   @StateObject private var todoDataManager = TodoDataManager.shared
   @FocusState private var addTodoFieldFocus: Bool
   
@@ -57,6 +58,9 @@ struct TodoInputFieldsView: View {
     )
     
     resetFields()
+    if isEditMode {
+      vm.showingEditSheet.toggle()
+    }
   }
   
   private func initialiseTodoAttributes(todoEntity: TodoEntity?) {
