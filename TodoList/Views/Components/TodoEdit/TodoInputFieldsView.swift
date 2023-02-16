@@ -39,37 +39,24 @@ struct TodoInputFieldsView: View {
   
   // MARK: - functions
   private func tappedSubmit() {
-    // Todo need refacter
-    if isEditMode {
-      guard !addTodoString.isEmpty else { return }
-      guard let editedEntity = todoEntity else { return }
-      todoDataManager.editTodo(
-        isEditMode: true,
-        todoEntity: editedEntity,
-        todoTitle: addTodoString,
-        todoBgColor: todoBgColor,
-        isDueDateActive: isDueDateActive,
-        dueDate: dueDate,
-        isDueDateDateOnly: isDueDateDateOnly,
-        isDueDateReminderOn: isDueDateReminderOn,
-        memo: todoDescription
-      )
-      
-      resetFields()
-    } else {
-      guard !addTodoString.isEmpty else { return }
-      todoDataManager.addTodo(
-        todoTitle: addTodoString,
-        todoBgColor: todoBgColor,
-        isDueDateActive: isDueDateActive,
-        dueDate: dueDate,
-        isDueDateDateOnly: isDueDateDateOnly,
-        isDueDateReminderOn: isDueDateReminderOn,
-        memo: todoDescription
-      )
-      
-      resetFields()
-    }
+    guard !addTodoString.isEmpty else { return }
+    submitTodo()
+  }
+  
+  private func submitTodo() {
+    todoDataManager.editTodo(
+      isEditMode: isEditMode,
+      todoEntity: todoEntity,
+      todoTitle: addTodoString,
+      todoBgColor: todoBgColor,
+      isDueDateActive: isDueDateActive,
+      dueDate: dueDate,
+      isDueDateDateOnly: isDueDateDateOnly,
+      isDueDateReminderOn: isDueDateReminderOn,
+      memo: todoDescription
+    )
+    
+    resetFields()
   }
   
   private func initialiseTodoAttributes(todoEntity: TodoEntity?) {
