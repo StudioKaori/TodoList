@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-enum TextFieldEditMode: String {
-  case todo = "todo"
-  case list = "list"
-}
-
 struct TextFieldView: View {
   @EnvironmentObject var vm: HomeViewModel
   @StateObject var todoDataManager = TodoDataManager.shared
@@ -45,9 +40,9 @@ struct TextFieldView: View {
         
         HStack {
           TextField("Input \(vm.editMode.rawValue) title...", text: $textFieldString)
-            .onSubmit {
-              submitChange()
-            }
+//            .onSubmit {
+//              submitChange()
+//            }
             .font(.body)
             .padding(.leading)
             .frame(height: 55)

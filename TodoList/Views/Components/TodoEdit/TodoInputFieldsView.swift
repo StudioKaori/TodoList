@@ -10,7 +10,6 @@ import SwiftUI
 struct TodoInputFieldsView: View {
   @EnvironmentObject var vm: HomeViewModel
   @StateObject private var todoDataManager = TodoDataManager.shared
-  @FocusState private var addTodoFieldFocus: Bool
   
   let isEditMode: Bool
   var todoEntity: TodoEntity?
@@ -72,7 +71,6 @@ struct TodoInputFieldsView: View {
       addTodoString = ""
       todoDescription = ""
       imageData = .init(capacity:0)
-      addTodoFieldFocus = false
       
       // Due date
       dueDate = Date()
@@ -93,7 +91,6 @@ struct TodoInputFieldsView: View {
       } else {
         imageData = .init(capacity:0)
       }
-      addTodoFieldFocus = true
       
       // Due date
       dueDate = todo.dueDate ?? Date()
@@ -129,7 +126,6 @@ struct TodoInputFieldsView: View {
     VStack(alignment: .leading) {
       HStack {
         TextField("Add new todo...", text: $addTodoString)
-          .focused($addTodoFieldFocus)
           .onSubmit {
             tappedSubmit()
           }
@@ -147,15 +143,6 @@ struct TodoInputFieldsView: View {
             .foregroundColor(Color.theme.accent)
         }
         
-        if addTodoFieldFocus {
-          Button {
-            resetFields()
-          } label: {
-            Image(systemName: "arrow.down.circle")
-              .font(.largeTitle)
-              .foregroundColor(Color.theme.secondaryText)
-          }
-        }
       } // END: Hstack AddTask Text field
       .padding(.bottom, 14)
       
@@ -244,7 +231,6 @@ struct TodoInputFieldsView: View {
     } // END: Vstack
     .padding()
     .onAppear {
-      addTodoFieldFocus = false
       initialiseEditMode()
     } // END: main Vstack
     .sheet(isPresented: $showDatePickerSheet) {

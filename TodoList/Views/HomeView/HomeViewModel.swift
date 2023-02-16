@@ -33,3 +33,8 @@ class HomeViewModel: ObservableObject {
     self.showToast.toggle()
   }
 }
+
+enum TextFieldEditMode: String {
+  case todo = "todo"
+  case list = "list"
+}
