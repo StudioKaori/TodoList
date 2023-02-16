@@ -94,7 +94,11 @@ struct TodoInputFieldsView: View {
       
       addTodoString = todo.title ?? ""
       todoDescription = todo.memo ?? ""
-      imageData = .init(capacity:0)
+      if let imageId = todo.imageId {
+        imageData = TodoDataManager.shared.todoImages[imageId] ?? .init(capacity:0)
+      } else {
+        imageData = .init(capacity:0)
+      }
       addTodoFieldFocus = true
       
       // Due date

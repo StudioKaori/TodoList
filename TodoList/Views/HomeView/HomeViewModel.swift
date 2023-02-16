@@ -16,9 +16,6 @@ class HomeViewModel: ObservableObject {
   var editMode: TextFieldEditMode = .todo
   
   func showTodoEdit(entity: TodoEntity) {
-    if let imageId = entity.imageId {
-      TodoDataManager.shared.imageData = TodoDataManager.shared.todoImages[imageId]
-    }
     self.editTargetTodo = entity
     self.editMode = .todo
     self.showingEditSheet = true
