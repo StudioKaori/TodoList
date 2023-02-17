@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AttachTodoImageView: View {
-  
+  @EnvironmentObject var vm: HomeViewModel
   @ObservedObject var todoDataManager = TodoDataManager.shared
   @State private var isShowingActionSheet = false
   
@@ -16,6 +16,14 @@ struct AttachTodoImageView: View {
   @Binding var source:UIImagePickerController.SourceType
   @Binding var image:Image
   @Binding var isImagePicker:Bool
+  
+  private func deleteImage() {
+    imageData = Data()
+    if vm.showingEditSheet {
+      todoDataManager.imageData = nil
+      vm.editTargetTodo?.imageId = nil
+    }
+  }
   
   var body: some View {
     
@@ -39,7 +47,7 @@ struct AttachTodoImageView: View {
           ActionSheet(title: Text("Delete the image"),
                       buttons: [
                         .destructive(Text("Delete"), action: {
-                          imageData = Data()
+                          deleteImage()
                         }),
                         .cancel(Text("Cancel"))
                       ]
