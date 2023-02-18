@@ -73,6 +73,21 @@ class TodoDataManager: ObservableObject {
     }
   }
   
+  func fetchTodoImageEntityByImageId(imageId: String) -> TodoImageEntity? {
+    let request = NSFetchRequest<TodoImageEntity>(entityName: "TodoImageEntity")
+    let predicate = NSPredicate(format: "id = %@", imageId)
+    var predicates: [NSPredicate] = [predicate]
+    
+    request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+    do {
+      let imageData = try container.viewContext.fetch(request)
+      return imageData[0]
+    } catch let error {
+      print("Error fetching: \(error)")
+      return nil
+    }
+  }
+  
   func getNextTodoOrder(listId: String) -> Int16 {
     do {
       let todos = try container.viewContext.fetch(getTodoRequest(listId: listId, incompleteOnly: false))
@@ -160,8 +175,6 @@ class TodoDataManager: ObservableObject {
                isDueDateReminderOn: Bool = DefaultValues.todoDefaultIsDueDateReminderOn,
                memo: String,
                incompleteOnly: Bool = false) {
-    // need refacter
-    
     var todo: TodoEntity
     
     if isEditMode {
@@ -216,8 +229,17 @@ class TodoDataManager: ObservableObject {
     saveData(incompleteOnly: incompleteOnly)
   }
   
+  func deleteTodoImageEntity(imageId: String) {
+    if let todoImageEntity = fetchTodoImageEntityByImageId(imageId: imageId) {
+      container.viewContext.delete(todoImageEntity)
+    }
+  }
+  
   func deleteTodo(entity: TodoEntity, incompleteOnly: Bool = false) {
     container.viewContext.delete(entity)
+    if let imageId = entity.imageId {
+      deleteTodoImageEntity(imageId: imageId)
+    }
     saveData(incompleteOnly: incompleteOnly)
   }
   
