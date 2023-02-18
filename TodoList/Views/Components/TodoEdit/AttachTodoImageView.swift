@@ -21,7 +21,10 @@ struct AttachTodoImageView: View {
     imageData = Data()
     if vm.showingEditSheet {
       todoDataManager.imageData = nil
-      vm.editTargetTodo?.imageId = nil
+      if let imageId = vm.editTargetTodo?.imageId {
+        todoDataManager.deleteTodoImageEntity(imageId: imageId)
+        vm.editTargetTodo?.imageId = nil
+      }
     }
   }
   
