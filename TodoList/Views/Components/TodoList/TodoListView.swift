@@ -13,14 +13,14 @@ struct TodoListView: View {
   
   private func updateTodosOrder(from: IndexSet, to: Int) {
     print("from:\(from) to: \(to)")
-    todoDataManager.savedTodos.move(fromOffsets: from, toOffset: to)
+    todoDataManager.incompletedTodos.move(fromOffsets: from, toOffset: to)
     todoDataManager.updateTodosOrder()
   }
   
   var body: some View {
     ZStack(alignment: .topLeading) {
       List {
-        ForEach(todoDataManager.savedTodos) { entity in
+        ForEach(todoDataManager.incompletedTodos) { entity in
           if !entity.completed || vm.showAllTodos {
             TodoListItemView(entity: entity)
               //.listRowBackground(Color.todoBgTheme.colors[Int(entity.color )].colorValue)

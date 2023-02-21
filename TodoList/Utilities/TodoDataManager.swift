@@ -14,7 +14,8 @@ class TodoDataManager: ObservableObject {
   static let shared = TodoDataManager()
   
   let container: NSPersistentContainer = PersistenceController.shared.container
-  @Published var savedTodos: [TodoEntity] = []
+  @Published var incompletedTodos: [TodoEntity] = []
+  @Published var completedTodos: [TodoEntity] = []
   @Published var todoImages: [String: Data] = [:]
   @Published var todoLists: [ListEntity] = []
   @Published var userSettings: UserSettingsEntity?
@@ -26,14 +27,20 @@ class TodoDataManager: ObservableObject {
     fetchUserSettings()
   } // END: init
   
-  func getTodoRequest(listId: String, incompleteOnly: Bool = false) -> NSFetchRequest<TodoEntity> {
+  func getTodoRequest(listId: String, todoStatus: TodoStatus) -> NSFetchRequest<TodoEntity> {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
     let listIdPredicate = NSPredicate(format: "listId = %@", listId)
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
     request.sortDescriptors = [sort]
     var predicates: [NSPredicate] = [listIdPredicate]
     
-    if incompleteOnly {
+    switch(todoStatus) {
+    case .all:
+      break
+    case .completed:
+      let incompletePredicate = NSPredicate(format: "completed == %d", true)
+      predicates.append(incompletePredicate)
+    case .incompleted:
       let incompletePredicate = NSPredicate(format: "completed == %d", false)
       predicates.append(incompletePredicate)
     }
@@ -42,10 +49,10 @@ class TodoDataManager: ObservableObject {
     return request
   }
   
-  func fetchTodos(activeListId: String, incompleteOnly: Bool = false) {
+  func fetchTodos(activeListId: String) {
     do {
-      savedTodos = try container.viewContext.fetch(getTodoRequest(listId: activeListId, incompleteOnly: incompleteOnly))
-      //print("saved Todos: \(savedTodos)")
+      incompletedTodos = try container.viewContext.fetch(getTodoRequest(listId: activeListId, todoStatus: .incompleted))
+      completedTodos =  try container.viewContext.fetch(getTodoRequest(listId: activeListId, todoStatus: .completed))
       
       // reload the widget
       WidgetCenter.shared.reloadTimelines(ofKind: "TodoListWidget")
@@ -76,7 +83,7 @@ class TodoDataManager: ObservableObject {
   func fetchTodoImageEntityByImageId(imageId: String) -> TodoImageEntity? {
     let request = NSFetchRequest<TodoImageEntity>(entityName: "TodoImageEntity")
     let predicate = NSPredicate(format: "id = %@", imageId)
-    var predicates: [NSPredicate] = [predicate]
+    let predicates: [NSPredicate] = [predicate]
     
     request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
     do {
@@ -90,7 +97,7 @@ class TodoDataManager: ObservableObject {
   
   func getNextTodoOrder(listId: String) -> Int16 {
     do {
-      let todos = try container.viewContext.fetch(getTodoRequest(listId: listId, incompleteOnly: false))
+      let todos = try container.viewContext.fetch(getTodoRequest(listId: listId, todoStatus: .all))
       return (todos.first?.order ?? 0) + 1
     } catch let error {
       print("Error fetching: \(error)")
@@ -130,39 +137,6 @@ class TodoDataManager: ObservableObject {
              isDueDateReminderOn: isDueDateReminderOn,
              memo: memo,
              incompleteOnly: incompleteOnly)
-    
-//    let newTodo = TodoEntity(context: container.viewContext)
-//    newTodo.id = UUID().uuidString
-//    newTodo.addedDate = Date()
-//    newTodo.order = getNextTodoOrder(listId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
-//    newTodo.title = todoTitle
-//    newTodo.memo = memo
-//    newTodo.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
-//    newTodo.completed = false
-//    newTodo.color = Int16(todoBgColor)
-//    newTodo.starred = false
-//    if imageData != nil {
-//      let newImageId = UUID().uuidString
-//      newTodo.imageId = newImageId
-//      let newImageEntity = TodoImageEntity(context: container.viewContext)
-//      newImageEntity.id = newImageId
-//      newImageEntity.image = imageData
-//      newImageEntity.listId = userSettings?.activeListId ?? DefaultValues.defaultActiveListId
-//    }
-//
-//    newTodo.isDueDateActive = isDueDateActive
-//    if isDueDateActive {
-//      guard let dueDateData: Date = dueDate else {
-//        print("AddTodo Error: Due date is active but the due date is nil.")
-//        return
-//      }
-//      newTodo.dueDate = isDueDateDateOnly ? Calendar.current.startOfDay(for: dueDateData) : dueDateData
-//      newTodo.isDueDateDateOnly = isDueDateDateOnly
-//      newTodo.isDueDateReminderOn = isDueDateReminderOn
-//      checkAndSetReminder(todoEntity: newTodo)
-//    }
-//
-//    saveData(incompleteOnly: incompleteOnly)
   } // END: addTodo
   
   func editTodo(isEditMode: Bool = false,
@@ -214,7 +188,7 @@ class TodoDataManager: ObservableObject {
       checkAndSetReminder(todoEntity: todo)
     }
     
-    saveData(incompleteOnly: incompleteOnly)
+    saveData()
   } // END: editTodo
   
   func updateCompleted(todo: TodoEntity, completed: Bool, incompleteOnly: Bool = false) {
@@ -226,7 +200,7 @@ class TodoDataManager: ObservableObject {
       // Add notification again
       checkAndSetReminder(todoEntity: todo)
     }
-    saveData(incompleteOnly: incompleteOnly)
+    saveData()
   }
   
   func deleteTodoImageEntity(imageId: String) {
@@ -240,11 +214,11 @@ class TodoDataManager: ObservableObject {
     if let imageId = entity.imageId {
       deleteTodoImageEntity(imageId: imageId)
     }
-    saveData(incompleteOnly: incompleteOnly)
+    saveData()
   }
   
   func updateTodosOrder() {
-    savedTodos.reversed().enumerated().forEach { (index, todo) in
+    incompletedTodos.reversed().enumerated().forEach { (index, todo) in
       todo.order = Int16(index)
     }
     saveData()
@@ -275,7 +249,7 @@ class TodoDataManager: ObservableObject {
       }
       
       fetchLists()
-      fetchTodos(activeListId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId, incompleteOnly: false)
+      fetchTodos(activeListId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
     } catch let error {
       print("Error fetching user settings: \(error)")
     }
@@ -305,7 +279,7 @@ class TodoDataManager: ObservableObject {
     newList.title = listTitle
     newList.order = getNextListOrder()
     userSettings?.activeListId = newList.id
-    saveData(incompleteOnly: incompleteOnly)
+    saveData()
   }
   
   func getNextListOrder() -> Int16 {
@@ -336,14 +310,20 @@ class TodoDataManager: ObservableObject {
   
   
   // MARK: - General
-  func saveData(incompleteOnly: Bool = false) {
+  func saveData() {
     do {
       try container.viewContext.save()
       imageData = nil
       fetchLists()
-      fetchTodos(activeListId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId, incompleteOnly: incompleteOnly)
+      fetchTodos(activeListId: userSettings?.activeListId ?? DefaultValues.defaultActiveListId)
     } catch let error {
       print("Error saving: \(error)")
     }
   } // END: saveData
+}
+
+enum TodoStatus {
+  case all
+  case completed
+  case incompleted
 }
