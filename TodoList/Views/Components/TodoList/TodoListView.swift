@@ -13,20 +13,30 @@ struct TodoListView: View {
   
   private func updateTodosOrder(from: IndexSet, to: Int) {
     print("from:\(from) to: \(to)")
-    todoDataManager.incompletedTodos.move(fromOffsets: from, toOffset: to)
+    todoDataManager.savedTodos.move(fromOffsets: from, toOffset: to)
     todoDataManager.updateTodosOrder()
   }
   
   var body: some View {
     ZStack(alignment: .topLeading) {
       List {
-        ForEach(todoDataManager.incompletedTodos) { entity in
-          if !entity.completed || vm.showAllTodos {
-            TodoListItemView(entity: entity)
-              //.listRowBackground(Color.todoBgTheme.colors[Int(entity.color )].colorValue)
-          }
-        } // END: Foreach
-        .onMove(perform: updateTodosOrder)
+        Section {
+          ForEach(todoDataManager.savedTodos) { entity in
+            if !entity.completed {
+              TodoListItemView(entity: entity)
+            }
+          } // END: Foreach
+          .onMove(perform: updateTodosOrder)
+        }
+        
+        Section(header: Text("Completed todos")) {
+          ForEach(todoDataManager.savedTodos) { entity in
+            if entity.completed {
+              TodoListItemView(entity: entity)
+            }
+          } // END: Foreach
+          .onMove(perform: updateTodosOrder)
+        }
       } // END: list
       
       HStack {

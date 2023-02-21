@@ -14,8 +14,7 @@ class TodoDataManager: ObservableObject {
   static let shared = TodoDataManager()
   
   let container: NSPersistentContainer = PersistenceController.shared.container
-  @Published var incompletedTodos: [TodoEntity] = []
-  @Published var completedTodos: [TodoEntity] = []
+  @Published var savedTodos: [TodoEntity] = []
   @Published var todoImages: [String: Data] = [:]
   @Published var todoLists: [ListEntity] = []
   @Published var userSettings: UserSettingsEntity?
@@ -27,23 +26,15 @@ class TodoDataManager: ObservableObject {
     fetchUserSettings()
   } // END: init
   
-  func getTodoRequest(listId: String, todoStatus: TodoStatus) -> NSFetchRequest<TodoEntity> {
+  func getTodoRequest(listId: String) -> NSFetchRequest<TodoEntity> {
     let request = NSFetchRequest<TodoEntity>(entityName: "TodoEntity")
     let listIdPredicate = NSPredicate(format: "listId = %@", listId)
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
     request.sortDescriptors = [sort]
     var predicates: [NSPredicate] = [listIdPredicate]
     
-    switch(todoStatus) {
-    case .all:
-      break
-    case .completed:
-      let incompletePredicate = NSPredicate(format: "completed == %d", true)
-      predicates.append(incompletePredicate)
-    case .incompleted:
-      let incompletePredicate = NSPredicate(format: "completed == %d", false)
-      predicates.append(incompletePredicate)
-    }
+//    let incompletePredicate = NSPredicate(format: "completed == %d", true)
+//    predicates.append(incompletePredicate)
     
     request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
     return request
@@ -51,8 +42,7 @@ class TodoDataManager: ObservableObject {
   
   func fetchTodos(activeListId: String) {
     do {
-      incompletedTodos = try container.viewContext.fetch(getTodoRequest(listId: activeListId, todoStatus: .incompleted))
-      completedTodos =  try container.viewContext.fetch(getTodoRequest(listId: activeListId, todoStatus: .completed))
+      savedTodos = try container.viewContext.fetch(getTodoRequest(listId: activeListId))
       
       // reload the widget
       WidgetCenter.shared.reloadTimelines(ofKind: "TodoListWidget")
@@ -97,7 +87,7 @@ class TodoDataManager: ObservableObject {
   
   func getNextTodoOrder(listId: String) -> Int16 {
     do {
-      let todos = try container.viewContext.fetch(getTodoRequest(listId: listId, todoStatus: .all))
+      let todos = try container.viewContext.fetch(getTodoRequest(listId: listId))
       return (todos.first?.order ?? 0) + 1
     } catch let error {
       print("Error fetching: \(error)")
@@ -218,7 +208,7 @@ class TodoDataManager: ObservableObject {
   }
   
   func updateTodosOrder() {
-    incompletedTodos.reversed().enumerated().forEach { (index, todo) in
+    savedTodos.reversed().enumerated().forEach { (index, todo) in
       todo.order = Int16(index)
     }
     saveData()
@@ -322,8 +312,3 @@ class TodoDataManager: ObservableObject {
   } // END: saveData
 }
 
-enum TodoStatus {
-  case all
-  case completed
-  case incompleted
-}
