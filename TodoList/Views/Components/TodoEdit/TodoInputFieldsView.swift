@@ -14,6 +14,8 @@ struct TodoInputFieldsView: View {
   let isEditMode: Bool
   var todoEntity: TodoEntity?
   
+  var submitHandler: () -> Void = {}
+  
   // MARK: - Task attributes
   
   // Strings
@@ -40,6 +42,7 @@ struct TodoInputFieldsView: View {
   // MARK: - functions
   private func tappedSubmit() {
     guard !addTodoString.isEmpty else { return }
+    submitHandler()
     submitTodo()
   }
   

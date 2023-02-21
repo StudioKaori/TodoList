@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
   
   @EnvironmentObject var vm: HomeViewModel
+  @State private var isShowingTodoInputField = false
 
   var body: some View {
     ZStack {
@@ -26,9 +27,14 @@ struct HomeView: View {
         
         TodoListView()
         
-        Spacer()
+        Button {
+          withAnimation(.easeInOut) {
+            self.isShowingTodoInputField.toggle()
+          }
+        } label: {
+          Image(systemName: "circle.fill")
+        }
         
-        TodoInputFieldsView(isEditMode: false)
       } // END: Vstack Main container
       
       if vm.showingEditSheet {
@@ -38,6 +44,10 @@ struct HomeView: View {
         case .list:
           EditListNameView()
         }
+      }
+      
+      if isShowingTodoInputField {
+        AddTodoView(isShowingTodoInputField: $isShowingTodoInputField)
       }
     } // END: Zstack
     .overlay(overlayView: ToastView(toast: Toast(title: vm.toastText, iconName: vm.toastIconName), show: $vm.showToast), show: $vm.showToast)

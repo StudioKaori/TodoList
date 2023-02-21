@@ -18,7 +18,12 @@ struct EditTodoView: View {
         }
         .ignoresSafeArea()
       
-      TodoInputFieldsView(isEditMode: true, todoEntity: vm.editTargetTodo)
+      VStack {
+        Spacer()
+        TodoInputFieldsView(isEditMode: true, todoEntity: vm.editTargetTodo)
+          .background(Color.theme.background)
+      }
+      
     }
   }
 }
