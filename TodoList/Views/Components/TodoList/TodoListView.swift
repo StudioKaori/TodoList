@@ -29,14 +29,17 @@ struct TodoListView: View {
           .onMove(perform: updateTodosOrder)
         }
         
-        Section(header: Text("Completed todos")) {
-          ForEach(todoDataManager.savedTodos) { entity in
-            if entity.completed {
-              TodoListItemView(entity: entity)
-            }
-          } // END: Foreach
-          .onMove(perform: updateTodosOrder)
+        if vm.showAllTodos {
+          Section(header: Text("Completed todos")) {
+            ForEach(todoDataManager.savedTodos) { entity in
+              if entity.completed {
+                TodoListItemView(entity: entity)
+              }
+            } // END: Foreach
+            .onMove(perform: updateTodosOrder)
+          }
         }
+        
       } // END: list
       
       HStack {

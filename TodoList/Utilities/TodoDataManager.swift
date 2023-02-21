@@ -31,7 +31,7 @@ class TodoDataManager: ObservableObject {
     let listIdPredicate = NSPredicate(format: "listId = %@", listId)
     let sort = NSSortDescriptor(key: #keyPath(TodoEntity.order), ascending: false)
     request.sortDescriptors = [sort]
-    var predicates: [NSPredicate] = [listIdPredicate]
+    let predicates: [NSPredicate] = [listIdPredicate]
     
 //    let incompletePredicate = NSPredicate(format: "completed == %d", true)
 //    predicates.append(incompletePredicate)
