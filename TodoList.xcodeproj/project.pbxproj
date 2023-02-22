@@ -176,7 +176,7 @@
 				43F4FD152955BE7B008A4C5B /* TodoList */,
 				43F4FD162955BEB0008A4C5B /* TodoEdit */,
 				436C02C0299E722E00D6B575 /* Toast */,
-				436C02DF29A65A1600D6B575 /* BottomMenuView.swift */,
+				436C02E129A65AA400D6B575 /* BottomMenu */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -339,6 +339,14 @@
 			path = Toast;
 			sourceTree = "<group>";
 		};
+		436C02E129A65AA400D6B575 /* BottomMenu */ = {
+			isa = PBXGroup;
+			children = (
+				436C02DF29A65A1600D6B575 /* BottomMenuView.swift */,
+			);
+			path = BottomMenu;
+			sourceTree = "<group>";
+		};
 		43C5124B2949DA1E00019DEC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,9 +372,9 @@
 			isa = PBXGroup;
 			children = (
 				43C072332953A096000BA4CB /* TodoInputFieldsView.swift */,
-				436C02BD299BD49B00D6B575 /* EditTodoView.swift */,
 				436C02DD29A5129800D6B575 /* AddTodoView.swift */,
 				436C02BB2988134700D6B575 /* TodoDescriptionView.swift */,
+				436C02BD299BD49B00D6B575 /* EditTodoView.swift */,
 				43C0722929532FE2000BA4CB /* AttachTodoImageView.swift */,
 				43F4FD0F2954B1BF008A4C5B /* TodoImageView.swift */,
 				4346F3DE2958F96C00557D3B /* DueDatePickerView.swift */,

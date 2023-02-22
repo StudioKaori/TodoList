@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BottomMenuView: View {
+  @EnvironmentObject var vm: HomeViewModel
   @Binding var isShowingTodoInputField: Bool
   
   var body: some View {
@@ -15,10 +16,16 @@ struct BottomMenuView: View {
       Spacer()
       
       VStack(alignment: .center) {
-        Button {
-          withAnimation(.easeInOut) {
-            //
+        
+        // More menu button
+        Menu {
+          Button {
+            vm.showAllTodos.toggle()
+          } label: {
+            Label(vm.showAllTodos ? "Hide Completed Todos" : "Show All Todos", systemImage: vm.showAllTodos ? "eye.slash" : "eye.fill")
           }
+          Button("Item2", action: {})
+          Button("Item3", action: {})
         } label: {
           Image(systemName: "ellipsis.circle")
             .resizable()
@@ -31,6 +38,7 @@ struct BottomMenuView: View {
         }
         .padding(.bottom, 10)
         
+        // Add todo button
         Button {
           withAnimation(.easeInOut) {
             self.isShowingTodoInputField.toggle()

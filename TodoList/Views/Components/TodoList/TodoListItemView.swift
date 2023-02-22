@@ -21,7 +21,7 @@ struct TodoListItemView: View {
         .onTapGesture {
           withAnimation{
             todoDataManager.updateCompleted(todo: entity, completed: !entity.completed)
-            vm.showToast.toggle()
+            vm.showToast(text: "Updated!")
           }
         }
       
@@ -77,7 +77,7 @@ struct TodoListItemView: View {
       Button {
         withAnimation {
           todoDataManager.updateCompleted(todo: entity, completed: !entity.completed)
-          vm.showToast.toggle()
+          vm.showToast(text: "Updated!")
         }
       } label: {
         Image(systemName: entity.completed ? "circle" : "checkmark.circle.fill")

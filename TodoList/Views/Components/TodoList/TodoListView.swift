@@ -41,23 +41,24 @@ struct TodoListView: View {
         }
         
       } // END: list
-      
-      HStack {
-        Spacer()
-        
-        Button {
-          vm.showAllTodos.toggle()
-        } label: {
-          HStack {
-            Image(systemName: vm.showAllTodos ? "eye.slash" : "eye.fill")
-            Text(vm.showAllTodos ? "Hide Completed Todos" : "Show All Todos")
-          }
-          .font(.caption)
-        }
-      }
-      .padding(.horizontal, 24)
-      .padding(.vertical,12)
-      .background(Color.theme.listBackground)
+      .listStyle(InsetGroupedListStyle())
+//
+//      HStack {
+//        Spacer()
+//
+//        Button {
+//          vm.showAllTodos.toggle()
+//        } label: {
+//          HStack {
+//            Image(systemName: vm.showAllTodos ? "eye.slash" : "eye.fill")
+//            Text(vm.showAllTodos ? "Hide Completed Todos" : "Show All Todos")
+//          }
+//          .font(.caption)
+//        }
+//      }
+//      .padding(.horizontal, 24)
+//      .padding(.vertical,12)
+//      .background(Color.theme.listBackground)
       
     }
   }
