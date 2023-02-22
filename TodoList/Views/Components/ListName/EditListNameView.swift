@@ -12,6 +12,8 @@ struct EditListNameView: View {
   @StateObject var todoDataManager = TodoDataManager.shared
   @State private var textFieldString = ""
   
+  @FocusState private var focus: Bool
+  
   private func submitChange() {
     if textFieldString.isEmpty { return }
     todoDataManager.addNewList(listTitle: textFieldString)
@@ -32,6 +34,7 @@ struct EditListNameView: View {
         
         HStack {
           TextField("Input list title...", text: $textFieldString)
+            .focused($focus)
             .font(.body)
             .padding(.leading)
             .frame(height: 55)
@@ -41,7 +44,7 @@ struct EditListNameView: View {
           Button {
             submitChange()
           } label: {
-            Image(systemName: "pencil.circle")
+            Image(systemName: "plus.circle")
               .font(.largeTitle)
               .foregroundColor(Color.theme.accent)
           }
@@ -56,10 +59,11 @@ struct EditListNameView: View {
         } // END: Hstack AddTask Text field
         .padding()
         
-        Spacer()
-        
         // END: Hstack main container
       } // END: Vstack
+      .onAppear {
+        self.focus = true
+      }
     }
   }
 }
