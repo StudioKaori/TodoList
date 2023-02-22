@@ -11,6 +11,8 @@ struct TodoInputFieldsView: View {
   @EnvironmentObject var vm: HomeViewModel
   @StateObject private var todoDataManager = TodoDataManager.shared
   
+  @FocusState private var textFieldFocus: Bool
+  
   let isEditMode: Bool
   var todoEntity: TodoEntity?
   
@@ -129,6 +131,7 @@ struct TodoInputFieldsView: View {
     VStack(alignment: .leading) {
       HStack {
         TextField("Add new todo...", text: $addTodoString)
+          .focused($textFieldFocus)
           .onSubmit {
             tappedSubmit()
           }
@@ -235,6 +238,7 @@ struct TodoInputFieldsView: View {
     .padding()
     .onAppear {
       initialiseEditMode()
+      textFieldFocus = true
     } // END: main Vstack
     .sheet(isPresented: $showDatePickerSheet) {
       DueDatePickerView(dueDate: $dueDate,
