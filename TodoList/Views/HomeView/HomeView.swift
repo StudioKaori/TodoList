@@ -13,7 +13,7 @@ struct HomeView: View {
   @State private var isShowingTodoInputField = false
 
   var body: some View {
-    ZStack {
+    ZStack(alignment: .bottom) {
       
       Color.theme.background
         .ignoresSafeArea()
@@ -26,16 +26,9 @@ struct HomeView: View {
         HorizontalListsView()
         
         TodoListView()
-        
-        Button {
-          withAnimation(.easeInOut) {
-            self.isShowingTodoInputField.toggle()
-          }
-        } label: {
-          Image(systemName: "circle.fill")
-        }
-        
       } // END: Vstack Main container
+      
+      BottomMenuView(isShowingTodoInputField: $isShowingTodoInputField)
       
       if vm.showingEditSheet {
         switch(vm.editMode) {
