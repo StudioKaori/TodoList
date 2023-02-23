@@ -22,7 +22,7 @@ struct HomeView: View {
         Text("Todos")
           .font(.headline)
           .padding(.top, 60)
-          .padding(.bottom, 20)
+          .padding(.bottom, 30)
         
         HorizontalListsView()
         

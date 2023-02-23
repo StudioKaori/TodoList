@@ -42,7 +42,7 @@ struct BottomMenuView: View {
               .frame(width: 50, height: 50)
               .foregroundColor(Color.theme.accent)
               .background(Color.theme.background)
-              .cornerRadius(50)
+              .cornerRadius(60)
               .shadow(radius: 6, x: 3, y: 3)
           }
         }
