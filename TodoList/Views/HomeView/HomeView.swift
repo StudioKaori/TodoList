@@ -21,11 +21,13 @@ struct HomeView: View {
       VStack(spacing: 0) {
         Text("Todos")
           .font(.headline)
-          .padding(.bottom, 30)
+          .padding(.top, 60)
+          .padding(.bottom, 20)
         
         HorizontalListsView()
         
         TodoListView()
+          .padding(.bottom, 60)
       } // END: Vstack Main container
       
       BottomMenuView(isShowingTodoInputField: $isShowingTodoInputField)
@@ -43,6 +45,7 @@ struct HomeView: View {
         AddTodoView(isShowingTodoInputField: $isShowingTodoInputField)
       }
     } // END: Zstack
+    .ignoresSafeArea()
     .overlay(overlayView: ToastView(toast: Toast(title: vm.toastText, iconName: vm.toastIconName), show: $vm.showToast), show: $vm.showToast)
   }
 

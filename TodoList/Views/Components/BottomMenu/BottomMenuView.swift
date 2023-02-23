@@ -12,10 +12,49 @@ struct BottomMenuView: View {
   @Binding var isShowingTodoInputField: Bool
   
   var body: some View {
-    HStack {
-      Spacer()
+    
+    ZStack {
+      VStack(spacing: 0) {
+        ZStack {
+          // BG
+          Color.theme.accent.opacity(0.3)
+            .overlay() {
+              ZStack(alignment: .top) {
+                Rectangle()
+                  .frame(height: 30)
+                Circle()
+                  .frame(height: 60)
+              }
+              .blendMode(.destinationOut)
+            }
+            .frame(height: 60)
+            .compositingGroup()
+          
+          // Add todo button
+          Button {
+            withAnimation(.easeInOut) {
+              self.isShowingTodoInputField.toggle()
+            }
+          } label: {
+            Image(systemName: "plus.circle.fill")
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(width: 50, height: 50)
+              .foregroundColor(Color.theme.accent)
+              .background(Color.theme.background)
+              .cornerRadius(50)
+              .shadow(radius: 6, x: 3, y: 3)
+          }
+        }
+        
+        Color.theme.accent.opacity(0.3)
+          .frame(height: 30)
+        
+      }
+      .frame(height: 90)
       
-      VStack(alignment: .center) {
+      HStack {
+        Spacer()
         
         // More menu button
         Menu {
@@ -27,36 +66,20 @@ struct BottomMenuView: View {
           Button("Item2", action: {})
           Button("Item3", action: {})
         } label: {
-          Image(systemName: "ellipsis.circle")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 30, height: 30)
+          Image(systemName: "ellipsis")
+            .font(.system(size: 24))
             .foregroundColor(Color.theme.accent)
-            .background(Color.theme.background)
-            .cornerRadius(50)
-            .shadow(radius: 6, x: 3, y: 3)
-        }
-        .padding(.bottom, 10)
-        
-        // Add todo button
-        Button {
-          withAnimation(.easeInOut) {
-            self.isShowingTodoInputField.toggle()
-          }
-        } label: {
-          Image(systemName: "plus.circle.fill")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 50, height: 50)
-            .foregroundColor(Color.theme.accent)
-            .background(Color.theme.background)
-            .cornerRadius(50)
-            .shadow(radius: 6, x: 3, y: 3)
+
         }
       }
-    }// END: Hstack
-    .padding(.bottom,20)
-    .padding(.trailing, 20)
+      .padding(.horizontal, 30)
+      .padding(.bottom, 30)
+      .padding(.top, 30)
+      
+    }
+    .frame(height: 90)
+    
+    
   }
 }
 
