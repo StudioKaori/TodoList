@@ -72,9 +72,7 @@ struct BottomMenuView: View {
 
         }
       }
-      .padding(.horizontal, 30)
-      .padding(.bottom, 30)
-      .padding(.top, 30)
+      .padding(30)
       
     }
     .frame(height: 90)

@@ -30,7 +30,13 @@ struct HomeView: View {
           .padding(.bottom, 60)
       } // END: Vstack Main container
       
-      BottomMenuView(isShowingTodoInputField: $isShowingTodoInputField)
+      ZStack(alignment: .bottom) {
+        Color.theme.listBackground
+          .frame(height: 60)
+        
+        BottomMenuView(isShowingTodoInputField: $isShowingTodoInputField)
+      }
+      .frame(height: 90)
       
       if vm.showingEditSheet {
         switch(vm.editMode) {
