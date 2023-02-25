@@ -256,7 +256,7 @@ class TodoDataManager: ObservableObject {
     let request = NSFetchRequest<ListEntity>(entityName: "ListEntity")
     do {
       todoLists = try container.viewContext.fetch(request)
-      //print("MyTodoLists: \(todoLists)")
+      print("MyTodoLists: \(todoLists)")
     } catch let error {
       print("Error fetching fetchlist: \(error)")
     }

@@ -18,7 +18,7 @@ struct HomeView: View {
       Color.theme.background
         .ignoresSafeArea()
       
-      VStack(spacing: 0) {
+      VStack {
         Text("Todos")
           .font(.headline)
           .padding(.top, 60)
@@ -27,7 +27,6 @@ struct HomeView: View {
         HorizontalListsView()
         
         TodoListView()
-          .padding(.bottom, 60)
       } // END: Vstack Main container
       
       ZStack(alignment: .bottom) {
